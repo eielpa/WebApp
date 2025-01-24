@@ -1,0 +1,29 @@
+<div class="input-group row mx-1 mb-2">
+
+  <p class="fs-8">
+    In questa sezione si può ricercare un libro tramite dei campi.
+    Almeno uno di essi deve essere riempito per eseguire la ricerca.
+  </p>
+
+  <div class="col-auto">
+    <input type="text" class="form-control" id="autore" placeholder="Nome Autore">
+  </div>
+
+  <div class="col-auto">
+    <input type="text" class="form-control" id="editore" placeholder="Editore">
+  </div>
+
+  <div class="col-auto">
+    <input type="text" class="form-control" id="genere" placeholder="Genere">
+  </div>
+
+  <div class="col-auto">
+    <button type="submit" class="btn btn-success" (click)="cambiaCampi()"
+        routerLink="visualizzaLibri" [queryParams]="{autoreCambiato: autore, editoreCambiato: editore, genereCambiato: genere}">
+        Cerca...
+    </button>
+  </div>
+</div>
+<app-visualizza-libri [autore]="autore" [editore]="editore" [genere]="genere"></app-visualizza-libri>
+
+
