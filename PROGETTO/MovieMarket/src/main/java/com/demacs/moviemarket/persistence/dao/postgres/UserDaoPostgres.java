@@ -2,6 +2,7 @@ package com.demacs.moviemarket.persistence.dao.postgres;
 
 import com.demacs.moviemarket.persistence.dao.UserDao;
 import com.demacs.moviemarket.persistence.model.User;
+import com.demacs.moviemarket.persistence.DBManager;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,8 +12,9 @@ public class UserDaoPostgres implements UserDao {
 
     private final Connection conn;
 
-    public UserDaoPostgres(Connection conn) {
-        this.conn = conn;
+    // Modifica del costruttore per ricevere DBManager
+    public UserDaoPostgres(DBManager dbManager) {
+        this.conn = dbManager.getConnection();  // Ottieni la connessione tramite DBManager
     }
 
     @Override
@@ -20,7 +22,7 @@ public class UserDaoPostgres implements UserDao {
         User user = null;
         String query = "SELECT * FROM users WHERE id = ?";
         try (PreparedStatement st = conn.prepareStatement(query)) {
-
+            st.setString(1, id);
             ResultSet rs = st.executeQuery();
 
             if (rs.next()) {
@@ -89,12 +91,10 @@ public class UserDaoPostgres implements UserDao {
 
     @Override
     public Boolean insert(User user) {
-        if (findById(user.getId()) == null){
+        if (findById(user.getId()) == null) {
             String insertStr = "INSERT INTO users (id, name, email, password, data_di_nascita) VALUES (?, ?, ?, ?, ?)";
 
-            PreparedStatement st;
-            try  {
-                st = conn.prepareStatement(insertStr);
+            try (PreparedStatement st = conn.prepareStatement(insertStr)) {
                 st.setString(1, user.getId());
                 st.setString(2, user.getName());
                 st.setString(3, user.getEmail());
@@ -119,7 +119,7 @@ public class UserDaoPostgres implements UserDao {
             st.setString(2, user.getEmail());
             st.setString(3, user.getPassword());
             long date = user.getDob().getTime();
-            st.setDate(5, new java.sql.Date(date));
+            st.setDate(4, new java.sql.Date(date));
             st.setString(5, user.getId());
             st.executeUpdate();
         } catch (SQLException exception) {

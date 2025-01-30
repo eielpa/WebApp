@@ -1,18 +1,21 @@
 package com.demacs.moviemarket.persistence.dao.postgres;
 
+import com.demacs.moviemarket.persistence.DBManager;
 import com.demacs.moviemarket.persistence.dao.MovieDao;
 import com.demacs.moviemarket.persistence.model.Movie;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class MovieDaoPostgres implements MovieDao {
 
     private final Connection conn;
 
-    public MovieDaoPostgres(Connection conn) {
-        this.conn = conn;
+    public MovieDaoPostgres(DBManager dbManager) {
+        this.conn = dbManager.getConnection();
     }
 
     @Override

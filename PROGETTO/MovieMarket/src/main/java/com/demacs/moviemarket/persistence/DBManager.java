@@ -7,16 +7,15 @@ import java.util.Properties;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-import com.demacs.moviemarket.persistence.dao.CategoryDao;
-import com.demacs.moviemarket.persistence.dao.MovieDao;
-import com.demacs.moviemarket.persistence.dao.PersonalLibraryDao;
-import com.demacs.moviemarket.persistence.dao.UserDao;
+import com.demacs.moviemarket.persistence.dao.*;
 import com.demacs.moviemarket.persistence.dao.postgres.UserDaoPostgres;
 import com.demacs.moviemarket.persistence.dao.postgres.PersonalLibraryDaoPostgres;
 import com.demacs.moviemarket.persistence.dao.postgres.MovieDaoPostgres;
 import com.demacs.moviemarket.persistence.dao.postgres.DownloadDaoPostgres;
 import com.demacs.moviemarket.persistence.dao.postgres.CategoryDaoPostgres;
+import org.springframework.stereotype.Component;
 
+@Component
 public class DBManager {
     private static DBManager instance = null;
     private String url;
@@ -32,7 +31,7 @@ public class DBManager {
 
     private DBManager() {
         // Carica il file di configurazione
-        try (FileInputStream fis = new FileInputStream("src/main/resources/application.properties")) {
+        try (FileInputStream fis = new FileInputStream("MovieMarket/src/main/resources/application.properties")) {
             Properties properties = new Properties();
             properties.load(fis);
             this.url = properties.getProperty("spring.datasource.url");
@@ -57,15 +56,18 @@ public class DBManager {
     }
 
     public MovieDao getMovieDao() {
-        return new MovieDaoPostgres(getConnection());
+        return new MovieDaoPostgres((DBManager) getConnection());
     }
     public CategoryDao getCategoryDao() {
-        return new CategoryDaoPostgres(getConnection());
+        return new CategoryDaoPostgres((DBManager) getConnection());
+    }
+    public DownloadDao getDownloadDao() {
+        return new DownloadDaoPostgres((DBManager) getConnection());
     }
     public PersonalLibraryDao getPersonalLibraryDao() {
-        return new PersonalLibraryDaoPostgres(getConnection());
+        return new PersonalLibraryDaoPostgres((DBManager) getConnection());
     }
     public UserDao getUserDao() {
-        return new UserDaoPostgres(getConnection());
+        return new UserDaoPostgres((DBManager) getConnection());
     }
 }

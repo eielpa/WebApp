@@ -2,6 +2,7 @@ package com.demacs.moviemarket.persistence.dao.postgres;
 
 import com.demacs.moviemarket.persistence.dao.PersonalLibraryDao;
 import com.demacs.moviemarket.persistence.model.PersonalLibrary;
+import com.demacs.moviemarket.persistence.DBManager;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,8 +12,9 @@ public class PersonalLibraryDaoPostgres implements PersonalLibraryDao {
 
     private final Connection conn;
 
-    public PersonalLibraryDaoPostgres(Connection conn) {
-        this.conn = conn;
+    // Modifica del costruttore per ricevere DBManager
+    public PersonalLibraryDaoPostgres(DBManager dbManager) {
+        this.conn = dbManager.getConnection();  // Ottieni la connessione tramite DBManager
     }
 
     @Override

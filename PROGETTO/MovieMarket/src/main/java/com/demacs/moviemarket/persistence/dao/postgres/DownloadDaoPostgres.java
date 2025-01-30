@@ -2,6 +2,7 @@ package com.demacs.moviemarket.persistence.dao.postgres;
 
 import com.demacs.moviemarket.persistence.dao.DownloadDao;
 import com.demacs.moviemarket.persistence.model.Download;
+import com.demacs.moviemarket.persistence.DBManager;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,8 +12,9 @@ public class DownloadDaoPostgres implements DownloadDao {
 
     private final Connection conn;
 
-    public DownloadDaoPostgres(Connection conn) {
-        this.conn = conn;
+    // Modifica del costruttore per ricevere DBManager
+    public DownloadDaoPostgres(DBManager dbManager) {
+        this.conn = dbManager.getConnection();  // Ottieni la connessione tramite DBManager
     }
 
     @Override

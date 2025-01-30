@@ -1,6 +1,7 @@
 package com.demacs.moviemarket.persistence.dao;
 
 import com.demacs.moviemarket.persistence.model.Movie;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
