@@ -1,4 +1,4 @@
-package com.demacs.moviemarket.controller;
+package com.demacs.moviemarket.service;
 
 import com.demacs.moviemarket.persistence.dao.MovieDao;
 import com.demacs.moviemarket.persistence.dao.MovieDaoProxy;

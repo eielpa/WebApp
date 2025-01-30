@@ -3,11 +3,13 @@ package com.demacs.moviemarket.persistence.dao.postgres;
 import com.demacs.moviemarket.persistence.dao.DownloadDao;
 import com.demacs.moviemarket.persistence.model.Download;
 import com.demacs.moviemarket.persistence.DBManager;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class DownloadDaoPostgres implements DownloadDao {
 
     private final Connection conn;

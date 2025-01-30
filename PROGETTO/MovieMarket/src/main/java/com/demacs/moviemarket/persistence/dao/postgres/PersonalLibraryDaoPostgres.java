@@ -3,11 +3,13 @@ package com.demacs.moviemarket.persistence.dao.postgres;
 import com.demacs.moviemarket.persistence.dao.PersonalLibraryDao;
 import com.demacs.moviemarket.persistence.model.PersonalLibrary;
 import com.demacs.moviemarket.persistence.DBManager;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class PersonalLibraryDaoPostgres implements PersonalLibraryDao {
 
     private final Connection conn;

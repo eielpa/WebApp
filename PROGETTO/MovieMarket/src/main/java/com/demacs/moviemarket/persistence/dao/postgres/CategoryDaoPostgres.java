@@ -3,11 +3,13 @@ package com.demacs.moviemarket.persistence.dao.postgres;
 import com.demacs.moviemarket.persistence.dao.CategoryDao;
 import com.demacs.moviemarket.persistence.model.Category;
 import com.demacs.moviemarket.persistence.DBManager;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class CategoryDaoPostgres implements CategoryDao {
 
     private final Connection conn;
