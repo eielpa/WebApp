@@ -1,0 +1,10 @@
+<div class="search-container">
+  <input
+    type="text"
+    [value]="searchQuery">
+    (input)="searchQuery = $event.target.value"  <!-- Aggiorna searchQuery al cambio dell'input -->
+  (keyup.enter)="searchMovies()"  <!-- Chiamata a searchMovies al pressing del tasto Enter -->
+  placeholder="Cerca un film..."
+  />
+  <button (click)="searchMovies()">🔍</button>  <!-- Chiamata a searchMovies al click -->
+</div>

@@ -1,0 +1,11 @@
+<div class="profile-container">
+  <h2 class="profile-header">Il tuo Profilo</h2>
+
+  <div class="profile-details">
+    <p><span class="profile-label">Nome:</span> <span class="profile-value">{{ userName }}</span></p>
+    <p><span class="profile-label">Email:</span> <span class="profile-value">{{ userEmail }}</span></p>
+    <p><span class="profile-label">Data di registrazione:</span> <span class="profile-value">{{ registrationDate }}</span></p>
+  </div>
+
+  <button class="profile-button" (click)="editProfile()">Modifica Profilo</button>
+</div>
