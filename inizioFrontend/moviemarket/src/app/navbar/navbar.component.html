@@ -1,0 +1,24 @@
+<nav class="navbar">
+  <div class="logo">SC</div>
+  <ul class="menu">
+    <li><a routerLink="/">Home</a></li>
+
+    <!-- Bottone Generi -->
+    <li class="dropdown">
+      <a (click)="toggleDropdown()">Generi ⌄</a>
+
+      <!-- Menu a tendina -->
+      <ul class="dropdown-menu" [class.open]="isDropdownOpen">
+        <li *ngFor="let genre of genres">
+          <a [routerLink]="['/genre', genre]">{{ genre }}</a>
+        </li>
+      </ul>
+    </li>
+
+    <li><a routerLink="/films">Film</a></li>
+    <li><a routerLink="/premium">Premium</a></li>
+  </ul>
+  <div class="actions">
+    <button class="login-btn">Accedi</button>
+  </div>
+</nav>

@@ -1,0 +1,36 @@
+.home {
+  background-color: #111;  /* leggermente più chiaro per la home */
+  color: white;
+  min-height: 100vh;
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.hero {
+  background: url('https://yourimageurl.com/banner.jpg') no-repeat center center/cover;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  padding: 50px;
+  color: white;
+}
+
+.hero-content {
+  max-width: 600px;
+}
+
+.play-btn, .info-btn {
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+}
+
+.play-btn {
+  background: white;
+  color: black;
+}
+
+.info-btn {
+  background: gray;
+  color: white;
+}
