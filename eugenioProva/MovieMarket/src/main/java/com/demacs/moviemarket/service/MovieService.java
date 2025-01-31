@@ -4,6 +4,7 @@ import com.demacs.moviemarket.persistence.dao.MovieDao;
 import com.demacs.moviemarket.persistence.dao.MovieDaoProxy;
 import com.demacs.moviemarket.persistence.model.Movie;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
@@ -33,5 +34,17 @@ public class MovieService {
 
     public void delete(Movie movie) {
         movieDao.delete(movie);
+    }
+
+    public List<Movie> findByRating(int rating) {
+        return movieDao.findByRating(rating);
+    }
+
+    public List<Movie> findByCategory(int categoryId) {
+        return movieDao.findByCategory(categoryId);
+    }
+
+    public List<Movie> findMostRecent(int limit) {
+        return movieDao.findMostRecent(limit);
     }
 }

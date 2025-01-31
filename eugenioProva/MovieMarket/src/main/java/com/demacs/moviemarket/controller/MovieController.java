@@ -70,4 +70,25 @@ public class MovieController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    // Endpoint per ottenere film con un determinato rating
+    @GetMapping("/rating/{rating}")
+    public ResponseEntity<List<Movie>> getMoviesByRating(@PathVariable int rating) {
+        List<Movie> movies = movieService.findByRating(rating);
+        return new ResponseEntity<>(movies, HttpStatus.OK);
+    }
+
+    // Endpoint per ottenere film di una categoria
+    @GetMapping("/category/{categoryId}")
+    public ResponseEntity<List<Movie>> getMoviesByCategory(@PathVariable int categoryId) {
+        List<Movie> movies = movieService.findByCategory(categoryId);
+        return new ResponseEntity<>(movies, HttpStatus.OK);
+    }
+
+    // Endpoint per ottenere i film più recenti
+    @GetMapping("/recent/{limit}")
+    public ResponseEntity<List<Movie>> getMostRecentMovies(@PathVariable int limit) {
+        List<Movie> movies = movieService.findMostRecent(limit);
+        return new ResponseEntity<>(movies, HttpStatus.OK);
+    }
 }

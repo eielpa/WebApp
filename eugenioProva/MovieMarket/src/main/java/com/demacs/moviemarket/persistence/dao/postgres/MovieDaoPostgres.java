@@ -33,6 +33,7 @@ public class MovieDaoPostgres implements MovieDao {
                 movie.setDescription(rs.getString("description"));
                 movie.setReleaseYear(rs.getInt("release_year"));
                 movie.setCategoryId(rs.getInt("category_id"));
+                movie.setRating((Integer) rs.getObject("rating")); // Usa getObject per gestire i null
             }
         } catch (SQLException exception) {
             exception.printStackTrace();
@@ -40,6 +41,7 @@ public class MovieDaoPostgres implements MovieDao {
 
         return movie;
     }
+
 
     @Override
     public List<Movie> findAll() {
@@ -55,6 +57,7 @@ public class MovieDaoPostgres implements MovieDao {
                 movie.setDescription(rs.getString("description"));
                 movie.setReleaseYear(rs.getInt("release_year"));
                 movie.setCategoryId(rs.getInt("category_id"));
+                movie.setRating((Integer) rs.getObject("rating")); // Gestisce i null
                 movies.add(movie);
             }
         } catch (SQLException exception) {
@@ -64,34 +67,47 @@ public class MovieDaoPostgres implements MovieDao {
         return movies;
     }
 
+
     @Override
     public void save(Movie movie) {
-        String insertStr = "INSERT INTO movies (title, description, release_year, category_id) VALUES (?, ?, ?, ?)";
+        String insertStr = "INSERT INTO movies (title, description, release_year, category_id, rating) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement st = conn.prepareStatement(insertStr)) {
             st.setString(1, movie.getTitle());
             st.setString(2, movie.getDescription());
             st.setInt(3, movie.getReleaseYear());
             st.setInt(4, movie.getCategoryId());
+            if (movie.getRating() != null) {
+                st.setInt(5, movie.getRating());
+            } else {
+                st.setNull(5, Types.INTEGER);
+            }
             st.executeUpdate();
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
     }
 
+
     @Override
     public void update(Movie movie) {
-        String updateStr = "UPDATE movies SET title = ?, description = ?, release_year = ?, category_id = ? WHERE id = ?";
+        String updateStr = "UPDATE movies SET title = ?, description = ?, release_year = ?, category_id = ?, rating = ? WHERE id = ?";
         try (PreparedStatement st = conn.prepareStatement(updateStr)) {
             st.setString(1, movie.getTitle());
             st.setString(2, movie.getDescription());
             st.setInt(3, movie.getReleaseYear());
             st.setInt(4, movie.getCategoryId());
-            st.setInt(5, movie.getId());
+            if (movie.getRating() != null) {
+                st.setInt(5, movie.getRating());
+            } else {
+                st.setNull(5, Types.INTEGER);
+            }
+            st.setInt(6, movie.getId());
             st.executeUpdate();
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
     }
+
 
     @Override
     public void delete(Movie movie) {
@@ -103,4 +119,84 @@ public class MovieDaoPostgres implements MovieDao {
             exception.printStackTrace();
         }
     }
+
+    @Override
+    public List<Movie> findByRating(int rating) {
+        List<Movie> movies = new ArrayList<>();
+        String query = "SELECT * FROM movies WHERE rating = ?";
+        try (PreparedStatement st = conn.prepareStatement(query)) {
+            st.setInt(1, rating);
+            ResultSet rs = st.executeQuery();
+
+            while (rs.next()) {
+                Movie movie = new Movie();
+                movie.setId(rs.getInt("id"));
+                movie.setTitle(rs.getString("title"));
+                movie.setDescription(rs.getString("description"));
+                movie.setReleaseYear(rs.getInt("release_year"));
+                movie.setCategoryId(rs.getInt("category_id"));
+                movie.setRating((Integer) rs.getObject("rating"));
+                movie.setAddedDate(rs.getTimestamp("added_date").toLocalDateTime());
+                movies.add(movie);
+            }
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+
+        return movies;
+    }
+
+    @Override
+    public List<Movie> findByCategory(int categoryId) {
+        List<Movie> movies = new ArrayList<>();
+        String query = "SELECT * FROM movies WHERE category_id = ?";
+        try (PreparedStatement st = conn.prepareStatement(query)) {
+            st.setInt(1, categoryId);
+            ResultSet rs = st.executeQuery();
+
+            while (rs.next()) {
+                Movie movie = new Movie();
+                movie.setId(rs.getInt("id"));
+                movie.setTitle(rs.getString("title"));
+                movie.setDescription(rs.getString("description"));
+                movie.setReleaseYear(rs.getInt("release_year"));
+                movie.setCategoryId(rs.getInt("category_id"));
+                movie.setRating((Integer) rs.getObject("rating"));
+                movie.setAddedDate(rs.getTimestamp("added_date").toLocalDateTime());
+                movies.add(movie);
+            }
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+
+        return movies;
+    }
+
+    @Override
+    public List<Movie> findMostRecent(int limit) {
+        List<Movie> movies = new ArrayList<>();
+        String query = "SELECT * FROM movies ORDER BY added_date DESC LIMIT ?";
+        try (PreparedStatement st = conn.prepareStatement(query)) {
+            st.setInt(1, limit);
+            ResultSet rs = st.executeQuery();
+
+            while (rs.next()) {
+                Movie movie = new Movie();
+                movie.setId(rs.getInt("id"));
+                movie.setTitle(rs.getString("title"));
+                movie.setDescription(rs.getString("description"));
+                movie.setReleaseYear(rs.getInt("release_year"));
+                movie.setCategoryId(rs.getInt("category_id"));
+                movie.setRating((Integer) rs.getObject("rating"));
+                movie.setAddedDate(rs.getTimestamp("added_date").toLocalDateTime());
+                movies.add(movie);
+            }
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+
+        return movies;
+    }
+
+
 }

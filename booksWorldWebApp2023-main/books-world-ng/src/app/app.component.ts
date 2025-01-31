@@ -2,10 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { ServerService } from './server.service';
 import { Utente } from './util';
 import { Location } from '@angular/common';
+import {AppModule} from "./app.module";
+import {RouterOutlet} from "@angular/router";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
+  standalone: true,
+  imports: [
+    AppModule,
+    RouterOutlet
+  ],
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {

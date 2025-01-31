@@ -14,31 +14,35 @@ import { VisualizzaBestsellerNytimesComponent } from './visualizza-bestseller-ny
 import { RecensioniComponent } from './recensioni/recensioni.component';
 import { DettagliLibriComponent } from './dettagli-libri/dettagli-libri.component';
 
-import { ProfiloComponent } from './profilo/profilo.component'; 
+import { ProfiloComponent } from './profilo/profilo.component';
 
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
+    declarations: [
+        AppComponent,
+        MenuBarComponent,
+        VisualizzaRicercaAvanzataComponent,
+        InfoComponent,
+        VisualizzaLibriComponent,
+        BooksCardComponent,
+        VisualizzaBestsellerNytimesComponent,
+        RecensioniComponent,
+        DettagliLibriComponent,
+        ProfiloComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        RouterModule.forRoot([]),
+        HttpClientModule,
+        HttpClientJsonpModule
+    ],
+    providers: [],
+  exports: [
     MenuBarComponent,
-    VisualizzaRicercaAvanzataComponent,
-    InfoComponent,
-    VisualizzaLibriComponent,
-    BooksCardComponent,
-    VisualizzaBestsellerNytimesComponent,
-    RecensioniComponent,
-    DettagliLibriComponent,
-    ProfiloComponent
+    VisualizzaBestsellerNytimesComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    RouterModule.forRoot([]),
-    HttpClientModule,
-    HttpClientJsonpModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

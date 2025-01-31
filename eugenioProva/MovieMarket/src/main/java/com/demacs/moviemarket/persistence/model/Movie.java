@@ -1,5 +1,7 @@
 package com.demacs.moviemarket.persistence.model;
 
+import java.time.LocalDateTime;
+
 public class Movie {
 
     private int id;
@@ -7,6 +9,8 @@ public class Movie {
     private String description;
     private int releaseYear;
     private int categoryId;
+    private Integer rating; // Usiamo Integer per permettere valori null
+    private LocalDateTime addedDate; // Data di aggiunta
 
     // Getter e setter per id
     public int getId() {
@@ -51,5 +55,26 @@ public class Movie {
 
     public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
+    }
+
+    // Getter e setter per rating
+    public Integer getRating() {
+        return rating;
+    }
+
+    public void setRating(Integer rating) {
+        if (rating != null && (rating < 0 || rating > 5)) {
+            throw new IllegalArgumentException("Rating must be between 0 and 5");
+        }
+        this.rating = rating;
+    }
+
+    // Getter e setter per addedDate
+    public LocalDateTime getAddedDate() {
+        return addedDate;
+    }
+
+    public void setAddedDate(LocalDateTime addedDate) {
+        this.addedDate = addedDate;
     }
 }
