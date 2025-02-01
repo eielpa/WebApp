@@ -1,0 +1,15 @@
+<div class="watchlist">
+    <h2>🎥 Watchlist</h2>
+
+    <div *ngIf="watchlist.length === 0">Nessun film aggiunto alla watchlist.</div>
+
+    <div class="movie-card" *ngFor="let movie of watchlist">
+        <img [src]="movie.poster" alt="{{ movie.title }}" class="movie-poster" />
+        <div class="movie-info">
+            <h3>{{ movie.title }}</h3>
+            <p>{{ movie.year }}</p>
+            <p>⭐ {{ movie.rating }}/10</p>
+            <button (click)="removeMovie(movie.id)">❌ Rimuovi</button>
+        </div>
+    </div>
+</div>
