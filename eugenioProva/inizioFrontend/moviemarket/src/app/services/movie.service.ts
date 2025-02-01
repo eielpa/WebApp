@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
     providedIn: 'root'
 })
 export class MovieService {
-    private apiUrl = 'http://localhost:8080/api/movies';  // Assicurati che l'URL corrisponda al tuo backend
+    private apiUrl = 'http://localhost:8080/movies';  // Assicurati che l'URL corrisponda al tuo backend
 
     constructor(private http: HttpClient) {}
 
@@ -17,25 +17,23 @@ export class MovieService {
 
     // Recupera un film specifico per ID
     getMovieById(id: number): Observable<any> {
-        const url = ` ${this.apiUrl}/${id}` ;
+        const url = `${this.apiUrl}/${id}` ;
         return this.http.get<any>(url);
     }
 
     // Recupera i film per rating
     getMoviesByRating(rating: number): Observable<any[]> {
-        const url = ` ${this.apiUrl}/rating/${rating}` ;
-        return this.http.get<any[]>(url);
+        return this.http.get<any[]>("http://localhost:8080/movies/rating/"+rating);
     }
 
     // Recupera i film per categoria (assicurati di passare l'ID della categoria)
     getMoviesByCategory(categoryId: number): Observable<any[]> {
-        const url = ` ${this.apiUrl}/category/${categoryId}` ;
+        const url = `${this.apiUrl}/category/${categoryId}` ;
         return this.http.get<any[]>(url);
     }
 
     // Recupera i film più recenti
     getMostRecentMovies(limit: number): Observable<any[]> {
-        const url = ` ${this.apiUrl}/recent/${limit}` ;
-        return this.http.get<any[]>(url);
+        return this.http.get<any[]>("http://localhost:8080/movies/recent/" + limit);
     }
 }

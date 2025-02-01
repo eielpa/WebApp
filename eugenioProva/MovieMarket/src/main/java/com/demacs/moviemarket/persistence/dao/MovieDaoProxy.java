@@ -23,6 +23,21 @@ public class MovieDaoProxy implements MovieDao {
     }
 
     @Override
+    public List<Movie> findByRating(int rating) {
+        return movieDao.findByRating(rating);
+    }
+
+    @Override
+    public List<Movie> findByCategory(int categoryId) {
+        return List.of();
+    }
+
+    @Override
+    public List<Movie> findMostRecent(int limit) {
+        return movieDao.findMostRecent(limit);
+    }
+
+    @Override
     public void save(Movie movie) {
         System.out.println("Saving movie: " + movie.getTitle());
         movieDao.save(movie);

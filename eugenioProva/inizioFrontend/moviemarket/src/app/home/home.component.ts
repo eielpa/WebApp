@@ -25,12 +25,12 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     // Recupera i film più recenti (ad esempio 10 film)
     this.movieService.getMostRecentMovies(10).subscribe((movies) => {
+      console.log(movies);
       this.recentMovies = movies;
     });
 
-    // Recupera i film con il rating più alto (ad esempio rating >= 8)
-    this.movieService.getMoviesByRating(8).subscribe((movies) => {
-      this.topRatedMovies = movies;
-    });
+    //this.movieService.getMoviesByRating(5.0).subscribe((movies) => {
+      //this.topRatedMovies = movies;console.log(movies);
+    //});
   }
 }

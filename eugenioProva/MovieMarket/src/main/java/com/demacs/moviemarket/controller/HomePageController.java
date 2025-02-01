@@ -8,9 +8,5 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class HomePageController {
 
-    @GetMapping("/")
-    public String redirectToAngular() {
-        // Il redirect va alla home page dell'app Angular
-        return "redirect:http://localhost:4200";
-    }
+
 }

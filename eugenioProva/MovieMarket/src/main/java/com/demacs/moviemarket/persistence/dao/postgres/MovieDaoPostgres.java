@@ -139,6 +139,7 @@ public class MovieDaoPostgres implements MovieDao {
                 movie.setAddedDate(rs.getTimestamp("added_date").toLocalDateTime());
                 movies.add(movie);
             }
+            System.out.println("suca sono il postgres");
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
@@ -176,6 +177,7 @@ public class MovieDaoPostgres implements MovieDao {
     public List<Movie> findMostRecent(int limit) {
         List<Movie> movies = new ArrayList<>();
         String query = "SELECT * FROM movies ORDER BY added_date DESC LIMIT ?";
+        System.out.println("Query most recent" + query);
         try (PreparedStatement st = conn.prepareStatement(query)) {
             st.setInt(1, limit);
             ResultSet rs = st.executeQuery();
@@ -187,7 +189,7 @@ public class MovieDaoPostgres implements MovieDao {
                 movie.setDescription(rs.getString("description"));
                 movie.setReleaseYear(rs.getInt("release_year"));
                 movie.setCategoryId(rs.getInt("category_id"));
-                movie.setRating((Integer) rs.getObject("rating"));
+                movie.setRating(rs.getObject("rating") != null ? ((Number) rs.getObject("rating")).intValue() : null);
                 movie.setAddedDate(rs.getTimestamp("added_date").toLocalDateTime());
                 movies.add(movie);
             }
