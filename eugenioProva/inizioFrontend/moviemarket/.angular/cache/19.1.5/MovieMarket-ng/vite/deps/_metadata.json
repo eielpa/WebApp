@@ -1,52 +1,52 @@
 {
-  "hash": "f3d334f6",
-  "configHash": "bdd38e2b",
-  "lockfileHash": "64a9016b",
-  "browserHash": "b4f02e0c",
+  "hash": "c55d562a",
+  "configHash": "32e1f47e",
+  "lockfileHash": "16fc26fd",
+  "browserHash": "ffed5f0e",
   "optimized": {
     "@angular/common": {
       "src": "../../../../../../node_modules/@angular/common/fesm2022/common.mjs",
       "file": "@angular_common.js",
-      "fileHash": "2f259a6e",
+      "fileHash": "4285fa8d",
       "needsInterop": false
     },
     "@angular/common/http": {
       "src": "../../../../../../node_modules/@angular/common/fesm2022/http.mjs",
       "file": "@angular_common_http.js",
-      "fileHash": "c71a72d4",
+      "fileHash": "e3c6328a",
       "needsInterop": false
     },
     "@angular/core": {
       "src": "../../../../../../node_modules/@angular/core/fesm2022/core.mjs",
       "file": "@angular_core.js",
-      "fileHash": "c31492ba",
+      "fileHash": "f106d3de",
       "needsInterop": false
     },
     "@angular/platform-browser": {
       "src": "../../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
       "file": "@angular_platform-browser.js",
-      "fileHash": "e84f4618",
+      "fileHash": "62a1f8b3",
       "needsInterop": false
     },
     "@angular/router": {
       "src": "../../../../../../node_modules/@angular/router/fesm2022/router.mjs",
       "file": "@angular_router.js",
-      "fileHash": "03b1c110",
+      "fileHash": "91845999",
       "needsInterop": false
     }
   },
   "chunks": {
-    "chunk-RT3ITFMY": {
-      "file": "chunk-RT3ITFMY.js"
+    "chunk-QZRTWQUI": {
+      "file": "chunk-QZRTWQUI.js"
     },
-    "chunk-JKHO4PEW": {
-      "file": "chunk-JKHO4PEW.js"
+    "chunk-D3IO6Q2L": {
+      "file": "chunk-D3IO6Q2L.js"
     },
-    "chunk-LNGJQ4BE": {
-      "file": "chunk-LNGJQ4BE.js"
+    "chunk-EPBMGNWV": {
+      "file": "chunk-EPBMGNWV.js"
     },
-    "chunk-NTS2FYPI": {
-      "file": "chunk-NTS2FYPI.js"
+    "chunk-DFA5AXSP": {
+      "file": "chunk-DFA5AXSP.js"
     }
   }
 }
