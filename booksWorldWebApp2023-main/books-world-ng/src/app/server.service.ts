@@ -20,11 +20,11 @@ export class ServerService {
 
     return this.http.get<boolean>('http://localhost:8080/IncrementaDislikes?id=' + id);
   }
-  
+
   getRecensioni (ISBN: string): Observable<Recensione[]>{
     return this.http.get<Recensione[]>('http://localhost:8080/getRecensioni', {params: {ISBN: ISBN}});
   }
-  
+
 
   rimuoviRecensione(id: BigInt): Observable<boolean>{
     return this.http.get<boolean>('http://localhost:8080/removeReview?id=' + id);
@@ -58,15 +58,8 @@ export class ServerService {
   getUserBySession(sessionId:string | null):Observable<Utente>{
     if(sessionId==null){return new Observable<Utente>();}
     return this.http.get<Utente>('http://localhost:8080/utente',{params:{sessionId: sessionId}})
-
-
   }
   checkisLogged(sessionId:string):Observable<boolean>{
     return this.http.get<boolean>('http://localhost:8080/checkisLogged',{params:{sessionId:sessionId}});
   }
-
-
-
-
-  
 }
