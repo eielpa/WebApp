@@ -1,5 +1,10 @@
 <div class="movie-card">
-    <h3>{{ movie.title }}</h3>
-    <p>{{ movie.description }}</p>
-    <p><strong>Rating: </strong>{{ movie.rating }}</p>
+    <div class="card-header">
+        <h3>{{ movie.title }}</h3>
+        <!-- Il rating sarà nascosto di default e mostrato solo al passaggio del mouse -->
+        <p class="rating"><strong>Rating: </strong>{{ movie.rating }}</p>
+    </div>
+    <div class="card-footer">
+        <p>{{ movie.description }}</p>
+    </div>
 </div>

@@ -23,7 +23,7 @@ export class MovieService {
 
     // Recupera i film per rating
     getMoviesByRating(rating: number): Observable<any[]> {
-        return this.http.get<any[]>("http://localhost:8080/movies/rating/"+rating);
+        return this.http.get<any[]>("http://localhost:8080/movies/rating/" + rating);
     }
 
     // Recupera i film per categoria (assicurati di passare l'ID della categoria)

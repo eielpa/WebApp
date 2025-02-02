@@ -12,19 +12,27 @@
     </div>
 </div>
 
-
 <!-- Sezione film recenti -->
 <div class="movie-section">
     <h2>Film Recenti</h2>
-    <div class="movie-list">
-        <app-moviecard *ngFor="let movie of recentMovies" [movie]="movie"></app-moviecard>
+    <div class="movie-list-wrapper">
+        <button class="arrow left" (click)="scroll(movieListRecent, 'left')">&#10094;</button>
+        <div class="movie-list" #movieListRecent>
+            <app-moviecard *ngFor="let movie of recentMovies" [movie]="movie"></app-moviecard>
+        </div>
+        <button class="arrow right" (click)="scroll(movieListRecent, 'right')">&#10095;</button>
     </div>
 </div>
 
 <!-- Sezione film con il rating più alto -->
 <div class="movie-section">
     <h2>Film con il Rating Più Alto</h2>
-    <div class="movie-list">
-        <app-moviecard *ngFor="let movie of topRatedMovies" [movie]="movie"></app-moviecard>
+    <div class="movie-list-wrapper">
+        <button class="arrow left" (click)="scroll(movieListTop, 'left')">&#10094;</button>
+        <div class="movie-list" #movieListTop>
+            <app-moviecard-toprated *ngFor="let movie of topRatedMovies; let i = index" [movie]="movie" [movieIndex]="i"></app-moviecard-toprated>
+        </div>
+        <button class="arrow right" (click)="scroll(movieListTop, 'right')">&#10095;</button>
     </div>
 </div>
+
