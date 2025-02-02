@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute} from "@angular/router";
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-movie',
-  imports: [],
   templateUrl: './movie.component.html',
   styleUrl: './movie.component.css'
 })
 export class MovieComponent {
   movieTitle: string = '';
+  movieDescription: string = '';
 
   constructor(private route: ActivatedRoute) {}
 
@@ -16,5 +16,7 @@ export class MovieComponent {
     this.route.paramMap.subscribe(params => {
       this.movieTitle = params.get('title') || 'Film non trovato';
     });
+
+    this.movieDescription = history.state.description || 'Descrizione non disponibile';
   }
 }
