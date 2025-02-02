@@ -1,5 +1,29 @@
-<div class="container">
-  <h2>{{ title }}</h2>
-  <p>Questa è la pagina login del sito.</p>
-  <a routerLink="/" class="btn">Torna alla Home</a>
+<div class="login-container">
+    <a routerLink="/" class="btn-home">Torna alla Home</a>
+    <div class="login-form">
+        <h2>{{ title }}</h2>
+        <form>
+            <div class="input-group">
+                <label for="username">ID Utente</label>
+                <input type="text" id="username" name="username" required />
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <div class="password-container">
+                    <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            required
+                            [type]="passwordVisible ? 'text' : 'password'"
+                            (keydown)="preventCopyPaste($event)"
+                    />
+                    <span class="eye-icon" (click)="togglePasswordVisibility()">👁️</span>
+                </div>
+            </div>
+            <button type="submit" class="btn">Accedi</button>
+        </form>
+        <p><a routerLink="/recupero-password" class="password-recovery-link">Password dimenticata?</a></p>
+        <p><a routerLink="/registration" class="registration-link">Iscriviti</a></p>
+    </div>
 </div>
