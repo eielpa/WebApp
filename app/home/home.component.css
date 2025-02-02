@@ -1,13 +1,11 @@
-.home {
-  background-color: #111;  /* leggermente più chiaro per la home */
-  color: white;
-  min-height: 100vh;
-  padding: 50px 20px;
-  text-align: center;
+:host {
+  display: block;
+  background-color: #000; /* Sfondo nero */
+  color: #fff;           /* Testo chiaro */
+  min-height: 100vh;     /* Assicura che il componente occupi almeno l'altezza intera della viewport */
 }
 
 .hero {
-  background: url('https://yourimageurl.com/banner.jpg') no-repeat center center/cover;
   height: 80vh;
   display: flex;
   align-items: center;
@@ -33,4 +31,67 @@
 .info-btn {
   background: gray;
   color: white;
+}
+
+/* Wrapper per ogni sezione con frecce */
+.movie-list-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  width: 100%; /* Assicurati che il wrapper occupi tutta la larghezza disponibile */
+}
+
+/* Sezione film */
+.movie-section {
+  margin: 30px 0;
+}
+
+/* Container delle card in orizzontale */
+.movie-list {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 15px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 10px;
+  /* Nasconde la scrollbar */
+  scrollbar-width: none; /* Firefox */
+}
+.movie-list::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+/* Pulsanti freccia */
+.arrow {
+  background-color: rgba(0, 0, 0, 0.5); /* Sfondo trasparente scuro per visibilità */
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: white;
+  position: absolute;
+  z-index: 20;  /* Assicurati che le frecce siano sopra le card */
+  top: 50%;
+  transform: translateY(-50%);
+  user-select: none;
+  padding: 10px; /* Aumenta l'area cliccabile */
+  transition: background-color 0.3s ease, opacity 0.3s ease; /* Transizione per effetto hover */
+  opacity: 0; /* Nasconde le frecce di default */
+}
+
+/* Mostra le frecce al passaggio del mouse sopra il wrapper */
+.movie-list-wrapper:hover .arrow {
+  opacity: 1;
+}
+
+.arrow:hover {
+  background-color: rgba(0, 0, 0, 0.7); /* Cambia colore al passaggio del mouse */
+}
+
+.arrow.left {
+  left: 0;
+}
+
+.arrow.right {
+  right: 0;
 }

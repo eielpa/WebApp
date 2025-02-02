@@ -1,1 +1,10 @@
 <p>movie works!</p>
+
+<div class="movie-card">
+    <h3>{{ movie?.title }}</h3>
+    <p>{{ movie?.description }}</p>
+
+    <button *ngIf="!purchased" (click)="buyMovie()">Acquista</button>
+
+    <button *ngIf="purchased" (click)="downloadMovie()">Download</button>
+</div>
