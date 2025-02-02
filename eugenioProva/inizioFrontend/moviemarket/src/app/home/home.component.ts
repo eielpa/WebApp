@@ -5,11 +5,12 @@ import { CommonModule } from '@angular/common';
 import { RouterLink, Router } from '@angular/router';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { MovieCardComponent } from '../moviecard/moviecard.component';
+import {MovieCardTopRatedComponent} from "../moviecard-toprated/moviecard-toprated.component";
 
 @Component({
   selector: 'app-home',
   imports: [
-    RouterLink, CommonModule, NavbarComponent, MovieCardComponent
+    RouterLink, CommonModule, NavbarComponent, MovieCardComponent, MovieCardTopRatedComponent
   ],
   templateUrl: './home.component.html',
   standalone: true,

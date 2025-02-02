@@ -8,7 +8,7 @@ public class Movie {
     private String title;
     private String description;
     private int releaseYear;
-    private int categoryId;
+    private Category category;
     private Integer rating; // Usiamo Integer per permettere valori null
     private LocalDateTime addedDate; // Data di aggiunta
 
@@ -50,11 +50,14 @@ public class Movie {
 
     // Getter e setter per categoryId
     public int getCategoryId() {
-        return categoryId;
+        return category.getId();
     }
 
     public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
+        if (this.category == null) {
+            this.category = new Category();
+        }
+        this.category.setId(categoryId);
     }
 
     // Getter e setter per rating

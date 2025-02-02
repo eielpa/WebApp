@@ -30,7 +30,7 @@ public class DownloadDaoPostgres implements DownloadDao {
             if (rs.next()) {
                 download = new Download();
                 download.setId(rs.getInt("id"));
-                download.setUserId(rs.getInt("user_id"));
+                download.setUserId(rs.getString("user_id"));
                 download.setMovieId(rs.getInt("movie_id"));
                 download.setDownloadDate(rs.getString("download_date"));
                 download.setDownloadStatus(rs.getString("download_status"));
@@ -52,7 +52,7 @@ public class DownloadDaoPostgres implements DownloadDao {
             while (rs.next()) {
                 Download download = new Download();
                 download.setId(rs.getInt("id"));
-                download.setUserId(rs.getInt("user_id"));
+                download.setUserId(rs.getString("user_id"));
                 download.setMovieId(rs.getInt("movie_id"));
                 download.setDownloadDate(rs.getString("download_date"));
                 download.setDownloadStatus(rs.getString("download_status"));
@@ -69,7 +69,7 @@ public class DownloadDaoPostgres implements DownloadDao {
     public void save(Download download) {
         String insertStr = "INSERT INTO downloads (user_id, movie_id, download_date, download_status) VALUES (?, ?, ?, ?)";
         try (PreparedStatement st = conn.prepareStatement(insertStr)) {
-            st.setInt(1, download.getUserId());
+            st.setString(1, download.getUserId());
             st.setInt(2, download.getMovieId());
             st.setString(3, download.getDownloadDate());
             st.setString(4, download.getDownloadStatus());
@@ -83,7 +83,7 @@ public class DownloadDaoPostgres implements DownloadDao {
     public void update(Download download) {
         String updateStr = "UPDATE downloads SET user_id = ?, movie_id = ?, download_date = ?, download_status = ? WHERE id = ?";
         try (PreparedStatement st = conn.prepareStatement(updateStr)) {
-            st.setInt(1, download.getUserId());
+            st.setString(1, download.getUserId());
             st.setInt(2, download.getMovieId());
             st.setString(3, download.getDownloadDate());
             st.setString(4, download.getDownloadStatus());

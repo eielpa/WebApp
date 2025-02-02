@@ -14,6 +14,12 @@ public class CategoryService {
         this.categoryDao = categoryDao;
     }
 
+    public String findCategoryNameById(int id) {
+        Category category = findById(id);  // Trova la categoria per ID
+        return category.getName();  // Restituisce il nome della categoria
+    }
+
+
     public Category findById(int id) {
         return categoryDao.findById(id);
     }
@@ -25,7 +31,6 @@ public class CategoryService {
     public List<Category> findAll() {
         return categoryDao.findAll();
     }
-
 
     public void save(Category category) {
         categoryDao.save(category);

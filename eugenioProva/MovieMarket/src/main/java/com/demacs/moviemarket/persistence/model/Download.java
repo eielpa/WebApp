@@ -3,8 +3,8 @@ package com.demacs.moviemarket.persistence.model;
 public class Download {
 
     private int id;
-    private int userId;
-    private int movieId;
+    private User user;
+    private Movie movie;
     private String downloadDate;
     private String downloadStatus;
 
@@ -18,21 +18,21 @@ public class Download {
     }
 
     // Getter e setter per userId
-    public int getUserId() {
-        return userId;
+    public String getUserId() {
+        return user.getId();
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUserId(String userId) {
+        this.user.setId(userId);
     }
 
     // Getter e setter per movieId
     public int getMovieId() {
-        return movieId;
+        return movie.getId();
     }
 
     public void setMovieId(int movieId) {
-        this.movieId = movieId;
+        this.movie.setId(movieId);
     }
 
     // Getter e setter per downloadDate

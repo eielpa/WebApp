@@ -30,7 +30,7 @@ public class PersonalLibraryDaoPostgres implements PersonalLibraryDao {
             if (rs.next()) {
                 personalLibrary = new PersonalLibrary();
                 personalLibrary.setId(rs.getInt("id"));
-                personalLibrary.setUserId(rs.getInt("user_id"));
+                personalLibrary.setUserId(rs.getString("user_id"));
                 personalLibrary.setMovieId(rs.getInt("movie_id"));
                 personalLibrary.setDownloadDate(rs.getString("download_date"));
                 personalLibrary.setDownloadStatus(rs.getString("download_status"));
@@ -52,7 +52,7 @@ public class PersonalLibraryDaoPostgres implements PersonalLibraryDao {
             while (rs.next()) {
                 PersonalLibrary personalLibrary = new PersonalLibrary();
                 personalLibrary.setId(rs.getInt("id"));
-                personalLibrary.setUserId(rs.getInt("user_id"));
+                personalLibrary.setUserId(rs.getString("user_id"));
                 personalLibrary.setMovieId(rs.getInt("movie_id"));
                 personalLibrary.setDownloadDate(rs.getString("download_date"));
                 personalLibrary.setDownloadStatus(rs.getString("download_status"));
@@ -69,7 +69,7 @@ public class PersonalLibraryDaoPostgres implements PersonalLibraryDao {
     public void save(PersonalLibrary personalLibrary) {
         String insertStr = "INSERT INTO personal_library (user_id, movie_id, download_date, download_status) VALUES (?, ?, ?, ?)";
         try (PreparedStatement st = conn.prepareStatement(insertStr)) {
-            st.setInt(1, personalLibrary.getUserId());
+            st.setString(1, personalLibrary.getUserId());
             st.setInt(2, personalLibrary.getMovieId());
             st.setString(3, personalLibrary.getDownloadDate());
             st.setString(4, personalLibrary.getDownloadStatus());
@@ -83,7 +83,7 @@ public class PersonalLibraryDaoPostgres implements PersonalLibraryDao {
     public void update(PersonalLibrary personalLibrary) {
         String updateStr = "UPDATE personal_library SET user_id = ?, movie_id = ?, download_date = ?, download_status = ? WHERE id = ?";
         try (PreparedStatement st = conn.prepareStatement(updateStr)) {
-            st.setInt(1, personalLibrary.getUserId());
+            st.setString(1, personalLibrary.getUserId());
             st.setInt(2, personalLibrary.getMovieId());
             st.setString(3, personalLibrary.getDownloadDate());
             st.setString(4, personalLibrary.getDownloadStatus());

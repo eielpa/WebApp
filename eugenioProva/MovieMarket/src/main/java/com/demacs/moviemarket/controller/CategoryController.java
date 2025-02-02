@@ -19,13 +19,11 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping("/{id}")
-    public Category getCategory(@PathVariable int id) {
-        return categoryService.findById(id);
+    @GetMapping("/getNameById/{id}")
+    public ResponseEntity<String> getCategory(@PathVariable int id) {
+        Category category = categoryService.findById(id);
+        return ResponseEntity.ok(category.getName());  // Restituisce la stringa come JSON
     }
-
-
-
 
     @GetMapping("allCategories")
     public List<Category> getAllCategories() {

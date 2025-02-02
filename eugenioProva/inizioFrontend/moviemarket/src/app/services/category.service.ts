@@ -16,6 +16,10 @@ export class CategoryService {
         return this.http.get<any[]>("http://localhost:8080/categories/allCategories");
     }
 
+    getCategoryNameById(id: number): Observable<string> {
+        return this.http.get<string>("http://localhost:8080/categories/getNameById/" + id);
+    }
+
     setSelectedCategory(id: number) {
         this.selectedCategoryId.next(id); // Imposta il valore dell'ID selezionato
     }

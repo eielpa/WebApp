@@ -1,0 +1,50 @@
+.movie-list {
+    display: flex;
+    flex-direction: row; /* Disposizione orizzontale delle card */
+    gap: 15px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 10px;
+    /* Nasconde la scrollbar */
+    scrollbar-width: none; /* Firefox */
+}
+.movie-list::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+.movie-card {
+    display: flex;
+    flex-direction: row; /* Assicura che gli elementi della card siano disposti orizzontalmente */
+    width: 250px; /* Puoi regolare la larghezza della card a seconda delle tue necessità */
+    background-color: #333; /* Colore di sfondo per la card */
+    color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.movie-card:hover {
+    transform: scale(1.05); /* Aggiungi un effetto di ingrandimento quando la card è in hover */
+}
+
+.card-header {
+    flex: 1; /* Occupa tutta la larghezza disponibile per il titolo e la valutazione */
+}
+
+.card-footer {
+    margin-top: 10px;
+    font-size: 0.9rem;
+}
+
+/* Adatta la dimensione della descrizione alla larghezza */
+.card-footer p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.rating {
+    font-size: 1rem;
+}

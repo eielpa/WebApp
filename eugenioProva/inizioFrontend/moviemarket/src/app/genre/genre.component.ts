@@ -43,4 +43,3 @@ export class GenreComponent implements OnInit {
   }
 
 }
-
