@@ -12,13 +12,11 @@ public class MovieDaoProxy implements MovieDao {
 
     @Override
     public Movie findById(int id) {
-        System.out.println("Fetching movie with ID: " + id);
         return movieDao.findById(id);
     }
 
     @Override
     public List<Movie> findAll() {
-        System.out.println("Fetching all movies...");
         return movieDao.findAll();
     }
 
@@ -29,7 +27,7 @@ public class MovieDaoProxy implements MovieDao {
 
     @Override
     public List<Movie> findByCategory(int categoryId) {
-        return List.of();
+        return movieDao.findByCategory(categoryId);
     }
 
     @Override
@@ -39,19 +37,16 @@ public class MovieDaoProxy implements MovieDao {
 
     @Override
     public void save(Movie movie) {
-        System.out.println("Saving movie: " + movie.getTitle());
         movieDao.save(movie);
     }
 
     @Override
     public void update(Movie movie) {
-        System.out.println("Updating movie: " + movie.getTitle());
         movieDao.update(movie);
     }
 
     @Override
     public void delete(Movie movie) {
-        System.out.println("Deleting movie: " + movie.getTitle());
         movieDao.delete(movie);
     }
 }

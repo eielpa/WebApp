@@ -1,21 +1,46 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute} from '@angular/router';
-import { CommonModule} from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { MovieService } from '../services/movie.service';
+import { CategoryService } from '../services/category.service';
+import { MovieCardComponent } from "../moviecard/moviecard.component";
+import { NgForOf } from "@angular/common";
+import { NavbarComponent } from "../navbar/navbar.component";
 
 @Component({
   selector: 'app-genre',
-  imports: [CommonModule],
   templateUrl: './genre.component.html',
   standalone: true,
-  styleUrl: './genre.component.css'
+  imports: [
+    MovieCardComponent,
+    NgForOf,
+    NavbarComponent
+  ],
+  styleUrls: ['./genre.component.css']
 })
+export class GenreComponent implements OnInit {
+  genre: string | null = '';
+  movies: any[] = [];
+  selectedCategoryId: number | null | undefined ;
 
-export class GenreComponent {
-  genreName: string = '';
+  constructor(
+      private route: ActivatedRoute,
+      private movieService: MovieService,
+      private categoryService: CategoryService,
 
-  constructor(private route: ActivatedRoute) {
-    this.route.params.subscribe(params => {
-      this.genreName = params['name'];
+) {}
+
+  ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+      this.selectedCategoryId = Number(params.get('name'));// Recupera l'ID dalla rotta
+
+      console.log(this.selectedCategoryId)
+      if (this.selectedCategoryId) {
+        this.movieService.getMoviesByCategory(this.selectedCategoryId).subscribe((data: any) => {
+          this.movies = data;
+        });
+      }
     });
   }
+
 }
+

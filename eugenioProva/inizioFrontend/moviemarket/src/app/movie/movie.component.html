@@ -1,1 +1,9 @@
-<p>movie works!</p>
+<div class="movies-container">
+    <h1>Film per Genere</h1>
+    <div *ngFor="let genreData of moviesByGenre" class="genre-section">
+        <h2>{{ genreData.genre }}</h2>
+        <div class="movies-grid">
+            <app-moviecard *ngFor="let movie of genreData.movies" [movie]="movie"></app-moviecard>
+        </div>
+    </div>
+</div>

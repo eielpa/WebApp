@@ -23,13 +23,12 @@ export class MovieService {
 
     // Recupera i film per rating
     getMoviesByRating(rating: number): Observable<any[]> {
-        return this.http.get<any[]>("http://localhost:8080/movies/rating/"+rating);
+        return this.http.get<any[]>("http://localhost:8080/movies/rating/" + rating);
     }
 
     // Recupera i film per categoria (assicurati di passare l'ID della categoria)
-    getMoviesByCategory(categoryId: number): Observable<any[]> {
-        const url = `${this.apiUrl}/category/${categoryId}` ;
-        return this.http.get<any[]>(url);
+    getMoviesByCategory(categoryId: number ): Observable<any[]> {
+        return this.http.get<any[]>("http://localhost:8080/movies/category/" + categoryId);
     }
 
     // Recupera i film più recenti

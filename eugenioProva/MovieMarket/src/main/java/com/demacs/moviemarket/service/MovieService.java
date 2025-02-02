@@ -45,7 +45,6 @@ public class MovieService {
     }
 
     public List<Movie> findMostRecent(int limit) {
-        System.out.println("movie service"  + movieDao.findMostRecent(limit));
         return movieDao.findMostRecent(limit);
     }
 }

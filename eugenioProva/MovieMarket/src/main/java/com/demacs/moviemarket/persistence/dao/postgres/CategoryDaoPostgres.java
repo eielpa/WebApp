@@ -39,6 +39,27 @@ public class CategoryDaoPostgres implements CategoryDao {
         return category;
     }
 
+    // Metodo per trovare l'ID della categoria in base al nome del genere
+    @Override
+    public int findByGenre(String genre) {
+        int categoryId = -1; // Valore di default in caso di assenza del genere
+        String query = "SELECT id FROM categories WHERE name = ?";
+
+        try (PreparedStatement st = conn.prepareStatement(query)) {
+            st.setString(1, genre);
+            ResultSet rs = st.executeQuery();
+
+            if (rs.next()) {
+                categoryId = rs.getInt("id");
+            }
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+
+        return categoryId;
+    }
+
+
     @Override
     public List<Category> findAll() {
         List<Category> categories = new ArrayList<>();
@@ -50,7 +71,7 @@ public class CategoryDaoPostgres implements CategoryDao {
                 Category category = new Category();
                 category.setId(rs.getInt("id"));
                 category.setName(rs.getString("name"));
-                categories.add(category);
+                System.out.println("CATEGORI" + category);                categories.add(category);
             }
         } catch (SQLException exception) {
             exception.printStackTrace();

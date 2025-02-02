@@ -123,7 +123,7 @@ public class MovieDaoPostgres implements MovieDao {
     @Override
     public List<Movie> findByRating(int rating) {
         List<Movie> movies = new ArrayList<>();
-        String query = "SELECT * FROM movies WHERE rating = ?";
+        String query = "SELECT * FROM movies WHERE rating >= ? ORDER BY rating DESC LIMIT 10";
         try (PreparedStatement st = conn.prepareStatement(query)) {
             st.setInt(1, rating);
             ResultSet rs = st.executeQuery();
@@ -135,11 +135,10 @@ public class MovieDaoPostgres implements MovieDao {
                 movie.setDescription(rs.getString("description"));
                 movie.setReleaseYear(rs.getInt("release_year"));
                 movie.setCategoryId(rs.getInt("category_id"));
-                movie.setRating((Integer) rs.getObject("rating"));
+                movie.setRating(rs.getObject("rating") != null ? ((Number) rs.getObject("rating")).intValue() : null);
                 movie.setAddedDate(rs.getTimestamp("added_date").toLocalDateTime());
                 movies.add(movie);
             }
-            System.out.println("suca sono il postgres");
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
@@ -162,7 +161,7 @@ public class MovieDaoPostgres implements MovieDao {
                 movie.setDescription(rs.getString("description"));
                 movie.setReleaseYear(rs.getInt("release_year"));
                 movie.setCategoryId(rs.getInt("category_id"));
-                movie.setRating((Integer) rs.getObject("rating"));
+                movie.setRating(rs.getObject("rating") != null ? ((Number) rs.getObject("rating")).intValue() : null);
                 movie.setAddedDate(rs.getTimestamp("added_date").toLocalDateTime());
                 movies.add(movie);
             }
@@ -199,6 +198,4 @@ public class MovieDaoPostgres implements MovieDao {
 
         return movies;
     }
-
-
 }

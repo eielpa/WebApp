@@ -3,17 +3,15 @@
   <ul class="menu">
     <li><a routerLink="/">Home</a></li>
 
-    <!-- Bottone Generi -->
-    <li class="dropdown">
-      <a (click)="toggleDropdown()">Generi ⌄</a>
-
-      <!-- Menu a tendina -->
-      <ul class="dropdown-menu" [class.open]="isDropdownOpen">
-        <li *ngFor="let genre of genres">
-          <a [routerLink]="['/genre', genre]">{{ genre }}</a>
-        </li>
-      </ul>
-    </li>
+      <!-- Sezione Generi con Menu a Tendina -->
+      <div class="genre-section">
+          <h2>Generi</h2>
+          <select class="genre-dropdown" (change)="onCategoryChange($event)">
+              <option *ngFor="let category of categories" [value]="category.id">
+                  {{ category.name }}
+              </option>
+          </select>
+      </div>
 
     <li><a routerLink="/films">Film</a></li>
     <li><a routerLink="/premium">Premium</a></li>

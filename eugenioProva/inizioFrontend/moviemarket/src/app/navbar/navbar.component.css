@@ -74,3 +74,12 @@
 .actions .login-btn:hover {
   background-color: #555;
 }
+
+/* Esempio di stile per il menu a tendina */
+.genre-dropdown {
+  padding: 10px;
+  font-size: 16px;
+  width: 200px;
+  margin-top: 10px;
+}
+
