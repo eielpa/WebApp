@@ -1,0 +1,98 @@
+/* Wrapper per ogni sezione con frecce */
+.movie-list-wrapper {
+    position: relative !important;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    width: 100%; /* Assicurati che il wrapper occupi tutta la larghezza disponibile */
+}
+
+/* Sezione film */
+.movie-section {
+    margin: 40px 0;
+    position: relative;
+}
+
+/* Container delle card in orizzontale */
+.movie-list {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 25px;
+    overflow-x: auto;
+    padding: 10px;
+    transition: transform 0.3s ease;
+    justify-content: center;
+}
+
+/* Card */
+.movie-card {
+    position: relative;
+    flex: 0 0 auto;
+    width: 200px;
+    height: 180px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    z-index: 1; /* Assicura che la card sia sotto la freccia */
+    transform-origin: center center;
+    margin: 0 5px;
+}
+
+/* Al passaggio del mouse, ingrandisce la card */
+.movie-card:hover {
+    transform: scale(1.1);
+    z-index: 10; /* Aumenta z-index per farla sovrastare gli altri contenuti */
+    box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Aumenta la larghezza e l'altezza del contenitore durante l'ingrandimento */
+.movie-list-wrapper:hover .movie-list {
+    transform: scale(1.05);
+}
+
+/* Intestazione della card: titolo e rating */
+.card-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: black;
+}
+
+/* Rating nascosto di default */
+.card-header .rating {
+    display: none;
+    margin: 5px 0 0 0;
+    font-size: 0.9rem;
+    color: black;
+}
+
+/* Mostra il rating al passaggio del mouse */
+.movie-card:hover .card-header .rating {
+    display: block;
+}
+
+/* Footer della card: contiene la descrizione */
+.card-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 0 10px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+/* Mostra il footer con la descrizione al passaggio del mouse */
+.movie-card:hover .card-footer {
+    max-height: 80px;
+    padding: 10px;
+}
