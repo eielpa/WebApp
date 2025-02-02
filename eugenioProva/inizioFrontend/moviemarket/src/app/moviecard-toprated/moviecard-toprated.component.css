@@ -17,7 +17,7 @@
 .movie-card .card-left {
     width: 50%; /* Occupa metà della card */
     height: 100%;
-    background-color: white; /* Sfondo trasparente */
+    background-color: white;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -31,15 +31,15 @@
 .movie-card .card-right {
     width: 50%; /* Occupa l'altra metà */
     height: 100%; /* Occupa tutta la metà destra */
-    background-color: transparent;
+    background-color: black;
     display: flex;
-    justify-content: center;
+    justify-content: right;
     align-items: center;
-    font-size: 2rem; /* Imposta la dimensione del numero */
+    font-size: 6rem; /* Imposta la dimensione del numero */
     font-weight: bold;
-    color: black;
+    font-family: "Felix Titling";
+    color: gray;
     z-index: 2;
-    flex-grow: 1; /* Consente al titolo di adattarsi */
 }
 
 /* Titolo nella parte sinistra */
