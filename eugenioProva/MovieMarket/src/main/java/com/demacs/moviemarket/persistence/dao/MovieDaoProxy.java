@@ -17,6 +17,11 @@ public class MovieDaoProxy implements MovieDao {
     }
 
     @Override
+    public Movie findByTitle(String title) {
+        return movieDao.findByTitle(title);
+    }
+
+    @Override
     public List<Movie> findAll() {
         System.out.println("Fetching all movies...");
         return movieDao.findAll();
