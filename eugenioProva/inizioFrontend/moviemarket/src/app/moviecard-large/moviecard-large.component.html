@@ -1,0 +1,10 @@
+<div class="movie-card-large" (click)="goToMovieDetails()">
+    <div class="card-image">
+        <img [alt]="movie.title">
+    </div>
+    <div class="card-content">
+        <h2>{{ movie.title }}</h2>
+        <p class="rating"><strong>Rating: </strong>{{ movie.rating }}</p>
+        <p class="description">{{ movie.description }}</p>
+    </div>
+</div>
