@@ -2,23 +2,32 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+export interface Movie {
+    id: number;
+    title: string;
+    description: string;
+    releaseYear: number;
+    categoryId: number;
+    rating?: number;       // rating opzionale (può essere null)
+    addedDate: string;     // Data in formato ISO (es. "2025-01-01T12:34:56")
+}
+
 @Injectable({
     providedIn: 'root'
 })
 export class MovieService {
-    private apiUrl = 'http://localhost:8080/movies';  // Assicurati che l'URL corrisponda al tuo backend
+     // Assicurati che l'URL corrisponda al tuo backend
 
     constructor(private http: HttpClient) {}
 
     // Recupera tutti i film
     getAllMovies(): Observable<any[]> {
-        return this.http.get<any[]>(this.apiUrl);
+        return this.http.get<any[]>("http://localhost:8080/movies");
     }
 
     // Recupera un film specifico per ID
-    getMovieById(id: number): Observable<any> {
-        const url = `${this.apiUrl}/${id}` ;
-        return this.http.get<any>(url);
+    getMovieByTitle(title: string): Observable<any> {
+        return this.http.get<any>("http://localhost:8080/movies/getMovieByTitle/" + title);
     }
 
     // Recupera i film per rating
