@@ -1,0 +1,10 @@
+<div *ngFor="let genreData of moviesByGenre" class="genre-section">
+    <h2>{{ genreData.genre }}</h2>
+    <div class="movie-list-wrapper">
+        <button class="arrow left" (click)="scroll(genreData.genre, 'left')">&#10094;</button>
+        <div class="movies-row" #movieList [attr.data-genre]="genreData.genre">
+            <app-moviecard *ngFor="let movie of genreData.movies" [movie]="movie"></app-moviecard>
+        </div>
+        <button class="arrow right" (click)="scroll(genreData.genre, 'right')">&#10095;</button>
+    </div>
+</div>

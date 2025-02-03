@@ -18,9 +18,14 @@ public class CategoryService {
         return categoryDao.findById(id);
     }
 
+    public int findByGenre(String genre) {
+        return categoryDao.findByGenre(genre);
+    }
+
     public List<Category> findAll() {
         return categoryDao.findAll();
     }
+
 
     public void save(Category category) {
         categoryDao.save(category);

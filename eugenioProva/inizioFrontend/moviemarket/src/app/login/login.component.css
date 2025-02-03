@@ -1,37 +1,47 @@
 .login-container {
   display: flex;
-  flex-direction: column; /* Imposta una colonna per il contenuto */
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 120vh;
+  height: 100vh;
   position: relative;
-  background-color: green;
+  background-color: #001a17; /* Stesso sfondo della home */
+  color: white;
 }
 
 .login-form {
-  background-color: white;
-  padding: 80px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.1); /* Sfondo semi-trasparente per effetto moderno */
+  padding: 60px;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
   text-align: center;
-  width: 600px;
+  width: 400px;
+  backdrop-filter: blur(10px); /* Effetto sfocato */
+}
+
+.input-group:last-of-type {
+  margin-bottom: 40px; /* Aggiunto spazio extra prima del bottone */
 }
 
 .input-group {
-  margin-bottom: 25px;
+  margin-bottom: 20px;
   text-align: left;
 }
 
 .input-group label {
   display: block;
   margin-bottom: 5px;
+  font-weight: bold;
 }
 
 .input-group input {
-  width: 97%;
-  padding: 8px;
-  border-radius: 4px;
+  width: 94.5%;
+  padding: 10px;
+  padding-block-end: 10px;
+  border-radius: 5px;
   border: 1px solid #ccc;
+  background: rgba(255, 255, 255, 0.7);
+  font-size: 16px;
 }
 
 .password-container {
@@ -48,18 +58,27 @@
 }
 
 h2 {
-  color: green;
+  color: white;
+  margin-bottom: 20px;
 }
 
 .btn {
   display: inline-block;
-  padding: 10px 15px;
-  background-color: blue;
+  padding: 12px;
+  background-color: #00b894; /* Verde acceso per contrasto */
   color: white;
   text-decoration: none;
   border-radius: 5px;
-  width: 20%;
-  margin-top: 10px;
+  width: 100%;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #009974;
 }
 
 .btn-home {
@@ -67,7 +86,7 @@ h2 {
   top: 20px;
   left: 20px;
   background-color: transparent;
-  color: blue;
+  color: white;
   border: none;
   cursor: pointer;
   font-size: 16px;
@@ -77,9 +96,9 @@ h2 {
 .registration-link {
   text-align: center;
   display: inline-block;
-  color: blue;
+  color: #00b894;
   text-decoration: none;
-  margin-top: 10px; /* Distanza tra il login e il link di registrazione */
+  margin-top: 10px;
 }
 
 .registration-link:hover {

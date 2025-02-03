@@ -3,12 +3,14 @@ package com.demacs.moviemarket.controller;
 import com.demacs.moviemarket.persistence.model.Category;
 import com.demacs.moviemarket.service.CategoryService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/api/categories")
+@RequestMapping("/categories")
 public class CategoryController {
 
     private final CategoryService categoryService;
@@ -22,9 +24,17 @@ public class CategoryController {
         return categoryService.findById(id);
     }
 
-    @GetMapping
+
+
+
+    @GetMapping("allCategories")
     public List<Category> getAllCategories() {
         return categoryService.findAll();
+    }
+
+    @GetMapping("idByGenre")
+    public int getIDByGenre(@RequestParam String genre) {
+        return categoryService.findByGenre(genre);
     }
 
     @PostMapping

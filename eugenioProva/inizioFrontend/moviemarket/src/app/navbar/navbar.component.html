@@ -5,7 +5,7 @@
 
         <!-- Bottone Generi -->
         <li class="dropdown">
-            <a (click)="toggleDropdown()">Generi ⌄</a>
+            <a (click)="toggleDropdown()">Generi <span class="arrow">⌄</span></a>
             <!-- Menu a tendina -->
             <ul class="dropdown-menu" [class.open]="isDropdownOpen">
                 <li *ngFor="let genre of genres">

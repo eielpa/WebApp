@@ -5,10 +5,10 @@
     flex-direction: row; /* Disposizione orizzontale */
     width: 300px;
     height: 180px;
-    border-radius: 10px;
+    border-radius: 15px; /* Bordo più arrotondato */
     overflow: hidden;
-    background-color: #fff;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: #121212; /* Sfondo scuro */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Ombra più morbida */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     z-index: 1;
 }
@@ -17,13 +17,14 @@
 .movie-card .card-left {
     width: 50%; /* Occupa metà della card */
     height: 100%;
-    background-color: white;
+    background-color: #1a1a1a; /* Sfondo leggermente più scuro */
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.2rem; /* Imposta la dimensione del titolo */
+    font-size: 1.2rem;
     font-weight: bold;
-    color: black;
+    color: #fff; /* Testo bianco per contrasto */
+    padding: 10px;
     z-index: 1;
 }
 
@@ -31,22 +32,24 @@
 .movie-card .card-right {
     width: 50%; /* Occupa l'altra metà */
     height: 100%; /* Occupa tutta la metà destra */
-    background-color: black;
+    background-color: #003d33; /* Colore di base per il lato destro */
     display: flex;
     justify-content: right;
     align-items: center;
-    font-size: 6rem; /* Imposta la dimensione del numero */
+    font-size: 8rem; /* Imposta la dimensione del numero */
     font-weight: bold;
-    font-family: "Felix Titling";
-    color: gray;
+    background: linear-gradient(to bottom, #004d40, black); /* Gradiente verde scuro → nero */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 1px 1px 2px rgba(0, 77, 64, 0.5); /* Effetto glow verde */
     z-index: 2;
 }
 
 /* Titolo nella parte sinistra */
 .movie-card .card-left h3 {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: bold;
-    color: black;
+    color: #fff;
     text-align: center;
     margin: 0;
     flex-grow: 1; /* Permette al titolo di adattarsi */
@@ -69,7 +72,7 @@
 
 /* Al passaggio del mouse, ingrandisce la card */
 .movie-card:hover {
-    transform: scale(1.2);
+    transform: scale(1.1); /* Ingrandisce meno per un effetto più morbido */
     z-index: 10;
     box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.3);
 }
@@ -81,7 +84,7 @@
     left: 10px;
     right: 10px;
     font-size: 0.9rem;
-    color: black;
+    color: #fff; /* Colore bianco per il titolo e rating */
     visibility: hidden; /* Visibile solo al passaggio del mouse */
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -99,7 +102,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.8); /* Sfondo scuro trasparente */
     color: #fff;
     padding: 0 10px;
     max-height: 0;
@@ -113,4 +116,19 @@
     max-height: 80px;
     padding: 10px;
     opacity: 1;
+}
+
+/* Ottimizzazione per la visualizzazione dei numeri sulla parte destra */
+.movie-card .card-right p {
+    font-size: 4rem;
+    font-weight: bold;
+    background: linear-gradient(to bottom, #004d40, #000);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 1px 1px 5px rgba(0, 77, 64, 0.5);
+}
+
+/* Transizione per l'ingrandimento delle card */
+.movie-card:hover {
+    transform: scale(1.1);
 }

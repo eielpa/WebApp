@@ -1,9 +1,14 @@
 /* Navbar */
 .navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  width: 98%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #000;  /* sfondo nero */
+  background: linear-gradient(to top, #000, #001a17); /* Nero → Verde petrolio */
   padding: 10px 20px;
   color: white;
 }
@@ -19,10 +24,13 @@
   list-style: none;
   margin: 0;
   padding: 0;
+  align-items: center; /* Allinea verticalmente tutti gli elementi del menu */
 }
 
 .menu li {
   margin-right: 20px;
+  display: flex;
+  align-items: center; /* Allinea verticalmente la scritta con la freccia */
 }
 
 .menu a {
@@ -37,6 +45,31 @@
   background-color: #333;  /* colore di hover */
 }
 
+/* Dropdown Generi */
+.dropdown {
+  position: relative;
+}
+
+.dropdown a {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  font-size: 16px;
+  padding: 10px 15px; /* Allineamento verticale */
+}
+
+.dropdown .arrow {
+  margin-left: 5px;
+  transition: transform 0.3s ease;
+  opacity: 0; /* Partiamo con la freccia invisibile */
+}
+
+/* La freccia appare quando si passa sopra il dropdown e si sposta da sopra a sotto */
+.dropdown:hover .arrow {
+  opacity: 1;
+  transform: translateY(3px); /* Muove la freccia da sopra a sotto */
+}
+
 .dropdown-menu {
   display: none;
   position: absolute;
@@ -45,6 +78,13 @@
   list-style: none;
   margin: 0;
   padding: 10px 0;
+  z-index: 999;
+  top: 100%; /* Posiziona il menu a tendina sotto il bottone */
+  left: 0;
+  width: 200px; /* Imposta una larghezza fissa per il menu */
+  max-height: 300px; /* Imposta un'altezza massima per il menu */
+  overflow-y: auto; /* Permette lo scroll verticale */
+  border-radius: 5px;
 }
 
 .dropdown-menu.open {
@@ -74,19 +114,3 @@
 .actions .login-btn:hover {
   background-color: #555;
 }
-
-.actions .login-btn {
-  display: inline-block;
-  background-color: #444;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 5px;
-  text-decoration: none;
-  font-size: 16px;
-  transition: background 0.3s ease;
-}
-
-.actions .login-btn:hover {
-  background-color: #555;
-}
-

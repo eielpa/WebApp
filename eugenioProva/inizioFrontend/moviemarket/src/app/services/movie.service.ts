@@ -28,8 +28,7 @@ export class MovieService {
 
     // Recupera i film per categoria (assicurati di passare l'ID della categoria)
     getMoviesByCategory(categoryId: number): Observable<any[]> {
-        const url = `${this.apiUrl}/category/${categoryId}` ;
-        return this.http.get<any[]>(url);
+        return this.http.get<any[]>("http://localhost:8080/movies/category/" + categoryId);
     }
 
     // Recupera i film più recenti

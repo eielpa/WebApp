@@ -19,6 +19,26 @@ public class CategoryDaoPostgres implements CategoryDao {
         this.conn = dbManager.getConnection();  // Ottieni la connessione tramite DBManager
     }
 
+    // Metodo per trovare l'ID della categoria in base al nome del genere
+    @Override
+    public int findByGenre(String genre) {
+        int categoryId = -1; // Valore di default in caso di assenza del genere
+        String query = "SELECT id FROM categories WHERE name = ?";
+
+        try (PreparedStatement st = conn.prepareStatement(query)) {
+            st.setString(1, genre);
+            ResultSet rs = st.executeQuery();
+
+            if (rs.next()) {
+                categoryId = rs.getInt("id");
+            }
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+
+        return categoryId;
+    }
+
     @Override
     public Category findById(int id) {
         Category category = null;

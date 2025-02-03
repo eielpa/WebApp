@@ -29,7 +29,7 @@ public class MovieDaoProxy implements MovieDao {
 
     @Override
     public List<Movie> findByCategory(int categoryId) {
-        return List.of();
+        return movieDao.findByCategory(categoryId);
     }
 
     @Override

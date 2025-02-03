@@ -25,7 +25,6 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     // Recupera i film più recenti (ad esempio 10 film)
     this.movieService.getMostRecentMovies(10).subscribe((movies) => {
-      console.log(movies);
       this.recentMovies = movies;
     });
 

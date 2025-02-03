@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-movie',
   templateUrl: './movie.component.html',
+  standalone: true,
   styleUrl: './movie.component.css'
 })
 export class MovieComponent {

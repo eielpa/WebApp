@@ -1,8 +1,8 @@
 :host {
   display: block;
-  background-color: #000; /* Sfondo nero */
-  color: #fff;           /* Testo chiaro */
-  min-height: 100vh;     /* Assicura che il componente occupi almeno l'altezza intera della viewport */
+  background-color: #001a17; /* Verde petrolio molto scuro, quasi nero */
+  color: #fff;
+  min-height: 100vh;
 }
 
 .hero {

@@ -162,8 +162,12 @@ public class MovieDaoPostgres implements MovieDao {
                 movie.setDescription(rs.getString("description"));
                 movie.setReleaseYear(rs.getInt("release_year"));
                 movie.setCategoryId(rs.getInt("category_id"));
-                movie.setRating((Integer) rs.getObject("rating"));
-                movie.setAddedDate(rs.getTimestamp("added_date").toLocalDateTime());
+                movie.setRating(rs.getObject("rating") != null ? ((Number) rs.getObject("rating")).intValue() : null);
+                Timestamp ts = rs.getTimestamp("added_date");
+                if (ts != null) {
+                    movie.setAddedDate(ts.toLocalDateTime());
+                }
+
                 movies.add(movie);
             }
         } catch (SQLException exception) {
