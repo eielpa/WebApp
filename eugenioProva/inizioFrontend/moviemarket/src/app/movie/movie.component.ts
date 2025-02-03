@@ -33,4 +33,12 @@ export class MoviesComponent implements OnInit {
       });
     });
   }
+
+  scroll(genre: string, direction: string) {
+    const movieList = document.querySelector(`.movies-row[data-genre="${genre}"]`);
+    if (movieList) {
+      const scrollAmount = 300; // Puoi modificare la distanza di scorrimento
+      movieList.scrollBy({ left: direction === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' });
+    }
+  }
 }

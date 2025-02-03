@@ -1,50 +1,98 @@
-.movie-list {
+:host {
+    display: block;
+    background-color: #001a17; /* Verde petrolio molto scuro, quasi nero */
+    color: #fff;
+    min-height: 100vh;
+    padding-top: 58px;
+}
+
+/* Wrapper per ogni sezione con frecce */
+.movie-list-wrapper {
+    position: relative;
     display: flex;
-    flex-direction: row; /* Disposizione orizzontale delle card */
-    gap: 15px;
+    align-items: center;
+    overflow: hidden;
+    width: 100%; /* Assicurati che il wrapper occupi tutta la larghezza disponibile */
+    padding: 0 10px; /* Spazio laterale */
+}
+
+/* Sezione film */
+.movie-section {
+    margin: 30px 0;
+    position: relative;
+    background-color: #00221a; /* Aggiornato per avere uno sfondo più scuro, simile ma diverso */
+    padding: 20px 0;
+    border-radius: 10px;
+}
+
+/* Container delle card in orizzontale */
+.movies-row {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 20px;
     overflow-x: auto;
     scroll-behavior: smooth;
     padding: 10px;
-    /* Nasconde la scrollbar */
-    scrollbar-width: none; /* Firefox */
-}
-.movie-list::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera */
+    scrollbar-width: none;
 }
 
-.movie-card {
-    display: flex;
-    flex-direction: row; /* Assicura che gli elementi della card siano disposti orizzontalmente */
-    width: 250px; /* Puoi regolare la larghezza della card a seconda delle tue necessità */
-    background-color: #333; /* Colore di sfondo per la card */
-    color: #fff;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+/* Nasconde la scrollbar */
+.movies-row::-webkit-scrollbar {
+    display: none;
+}
+
+/* Pulsanti freccia */
+.arrow {
+    background-color: rgba(0, 0, 0, 0.5); /* Sfondo trasparente scuro per visibilità */
+    border: none;
+    font-size: 3.5rem;
     cursor: pointer;
-    transition: transform 0.2s ease;
+    color: white;
+    position: absolute;
+    z-index: 20;  /* Assicurati che le frecce siano sopra le card */
+    top: 50%;
+    transform: translateY(-50%);
+    user-select: none;
+    padding: 10px;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+    opacity: 0; /* Nasconde le frecce di default */
 }
 
-.movie-card:hover {
-    transform: scale(1.05); /* Aggiungi un effetto di ingrandimento quando la card è in hover */
+.movie-list-wrapper:hover .arrow {
+    opacity: 1; /* Mostra le frecce al passaggio del mouse */
 }
 
-.card-header {
-    flex: 1; /* Occupa tutta la larghezza disponibile per il titolo e la valutazione */
+.arrow:hover {
+    background-color: rgba(0, 0, 0, 0.7); /* Cambia colore al passaggio del mouse */
 }
 
-.card-footer {
-    margin-top: 10px;
-    font-size: 0.9rem;
+.arrow.left {
+    left: 10px; /* Aggiungi spazio per il posizionamento */
 }
 
-/* Adatta la dimensione della descrizione alla larghezza */
-.card-footer p {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+.arrow.right {
+    right: 10px; /* Aggiungi spazio per il posizionamento */
 }
 
-.rating {
-    font-size: 1rem;
+/* Sezione genere */
+.genre-section h2 {
+    padding-top: 40px;
+    margin-left: 30px; /* Sposta il titolo un po' verso destra */
+    margin-bottom: 10px; /* Distanza tra il titolo e le card */
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #fff; /* Colore bianco per il titolo */
+    letter-spacing: 1px; /* Spaziatura tra le lettere */
+    transition: color 0.3s ease, text-shadow 0.3s ease, text-stroke 0.3s ease;
+}
+
+.genre-section h2:hover {
+    color: #00bfae; /* Colore più vivace */
+    text-shadow: 0 4px 6px rgba(0, 191, 174, 0.6), 0 0 10px rgba(0, 255, 255, 0.8); /* Ombra e bagliore */
+    text-stroke: 1px rgba(0, 191, 174, 1); /* Effetto di contorno luminoso */
+}
+
+
+.genre-section h2:hover {
+    color: #00bfae; /* Cambia colore al passaggio del mouse */
 }

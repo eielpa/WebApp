@@ -1,22 +1,30 @@
 <nav class="navbar">
-  <div class="logo">SC</div>
-  <ul class="menu">
-    <li><a routerLink="/">Home</a></li>
+    <div class="logo">SC</div>
+    <ul class="menu">
+        <li><a routerLink="/">Home</a></li>
 
-      <!-- Sezione Generi con Menu a Tendina -->
-      <div class="genre-section">
-          <h2>Generi</h2>
-          <select class="genre-dropdown" (change)="onCategoryChange($event)">
-              <option *ngFor="let category of categories" [value]="category.id">
-                  {{ category.name }}
-              </option>
-          </select>
-      </div>
+        <!-- Sezione Generi con Menu a Tendina -->
+        <li class="dropdown">
+            <a (click)="toggleDropdown()">Generi <span class="arrow">⌄</span></a>
+            <ul class="dropdown-menu" [class.open]="isDropdownOpen">
+                <!-- Al click su ciascun li viene chiamato onCategoryChange passando l'ID della categoria -->
+                <li *ngFor="let category of categories" (click)="onCategoryChange(category.id)">
+                    {{ category.name }}
+                </li>
+            </ul>
+        </li>
 
-    <li><a routerLink="/films">Film</a></li>
-    <li><a routerLink="/premium">Premium</a></li>
-  </ul>
-  <div class="actions">
-    <button class="login-btn" routerLink="/login">Accedi</button>
-  </div>
+        <li><a routerLink="/films">Film</a></li>
+        <li><a routerLink="/premium">Premium</a></li>
+    </ul>
+    <div class="actions">
+        <!-- Mostra il pulsante Accedi se l'utente non è loggato -->
+        <button *ngIf="!isLoggedIn()" class="login-btn" routerLink="/login">Accedi</button>
+
+        <!-- Se l'utente è loggato mostra il pulsante Libreria Personale e Logout -->
+        <ng-container *ngIf="isLoggedIn()">
+            <button class="library-btn" routerLink="/personal-library">Libreria Personale</button>
+            <button class="logout-btn" (click)="logout()">Logout</button>
+        </ng-container>
+    </div>
 </nav>

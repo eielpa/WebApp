@@ -1,21 +1,14 @@
-<div class="movie-card">
-    <!-- Parte sinistra con il titolo -->
+<div class="movie-card" (click)="goToMovieDetails()">
     <div class="card-right">
         <h3>{{ movieIndex + 1 }}</h3>
     </div>
-
-    <!-- Parte destra con il numero crescente -->
     <div class="card-left">
         <p>{{ movie.title }}</p>
     </div>
-
-    <!-- Header della card con titolo e rating -->
     <div class="card-header">
-        <h3>{{ movie.title }}</h3> <!-- Titolo -->
-        <p class="rating"><strong>Rating: </strong>{{ movie.rating }}</p> <!-- Rating -->
+        <h3>{{ movie.title }}</h3>
+        <p class="rating"><strong>Rating: </strong>{{ movie.rating }}</p>
     </div>
-
-    <!-- Footer della card con descrizione -->
     <div class="card-footer">
         <p>{{ movie.description }}</p>
     </div>

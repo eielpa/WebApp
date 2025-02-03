@@ -28,8 +28,10 @@ export class RegistrationService {
     // Metodo per registrare l'utente
     registerUser(user: User): Observable<any> {
         user.dob = new Date(user.dob).toISOString().split('T')[0];
-        return this.http.post("http://localhost:8080/auth/register", user, {headers})
-            .pipe(catchError(this.handleError)); // Gestisce gli errori
+        return this.http.post("http://localhost:8080/auth/register", user, {
+            headers,
+            responseType: 'text'
+        }).pipe(catchError(this.handleError)); // Gestisce gli errori
     }
 
 

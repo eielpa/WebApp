@@ -32,21 +32,20 @@
     height: 180px;
     padding: 10px;
     border: 1px solid #ddd;
-    border-radius: 10px;
+    border-radius: 15px; /* Bordi arrotondati per un look più morbido */
     background-color: #fff;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     z-index: 1; /* Assicura che la card sia sotto la freccia */
-    transform-origin: center center;
     margin: 0 5px;
 }
 
-/* Al passaggio del mouse, ingrandisce la card */
+/* Al passaggio del mouse, ingrandisce la card con una leggera ombra */
 .movie-card:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
     z-index: 10; /* Aumenta z-index per farla sovrastare gli altri contenuti */
-    box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
 }
 
 /* Aumenta la larghezza e l'altezza del contenitore durante l'ingrandimento */
@@ -57,24 +56,26 @@
 /* Intestazione della card: titolo e rating */
 .card-header h3 {
     margin: 0;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: black;
+    color: #333; /* Colore del titolo scuro */
+    font-family: 'Cinzel', serif; /* Font elegante */
 }
 
 /* Rating nascosto di default */
 .card-header .rating {
     display: none;
     margin: 5px 0 0 0;
-    font-size: 0.9rem;
-    color: black;
+    font-size: 1rem;
+    color: #999; /* Colore del rating chiaro */
 }
 
 /* Mostra il rating al passaggio del mouse */
 .movie-card:hover .card-header .rating {
     display: block;
+    color: black; /* Colore del rating al passaggio del mouse */
 }
 
 /* Footer della card: contiene la descrizione */
@@ -95,4 +96,32 @@
 .movie-card:hover .card-footer {
     max-height: 80px;
     padding: 10px;
+    opacity: 1;
+}
+
+/* Sezione del titolo nella card */
+.card-left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: black;
+    z-index: 2;
+}
+
+/* Sezione del numero nella card */
+.card-right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 2.5rem;
+    color: #000;
+    font-weight: bold;
+    font-family: 'Cinzel', serif;
+    background: linear-gradient(to bottom, #004d40, #000); /* Gradiente verde scuro → nero */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 1px 1px 5px rgba(0, 77, 64, 0.5); /* Effetto glow leggero */
+    z-index: 2;
 }

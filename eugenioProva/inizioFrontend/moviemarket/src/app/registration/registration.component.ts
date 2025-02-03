@@ -29,7 +29,7 @@ export class RegistrationComponent {
     this.registrationService.registerUser(this.user).subscribe({
       next: (response) => {
         console.log(response);
-        if (response.equals("USER_SAVED")) {
+        if (response === 'Registration successful') {
           alert('Registrazione completata con successo! Ora verrai reindirizzato alla pagina di login.');
           this.router.navigate(['/login']);
           this.registrationMessage = 'Registrazione completata con successo!';

@@ -1,72 +1,91 @@
 .registration-container {
     display: flex;
-    align-items: center;
     flex-direction: column;
-    height: 120vh; /* Impostiamo l'altezza della schermata per centrare verticalmente */
-    background-color: green;
-    padding: 35px;
-}
-
-h2 {
-    color: black;
-    text-align: center;
-    margin-bottom: 30px;
+    justify-content: center;
+    align-items: center;
+    height: 130vh;
+    position: relative;
+    background-color: #001a17; /* Stesso sfondo della login */
+    color: white;
 }
 
 form {
-    background-color: white;
-    padding: 50px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.1); /* Sfondo semi-trasparente */
+    padding: 60px;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
     text-align: center;
-    width: 400px; /* Larghezza del modulo */
+    width: 400px;
+    backdrop-filter: blur(10px);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
+h2 {
+    color: white;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
 .input-group {
     margin-bottom: 20px;
     text-align: left;
-    width: 100%; /* Assicuriamo che gli input si estendano */
+    width: 100%;
 }
 
 .input-group label {
     display: block;
-    margin-bottom: 15px;
-    font-size: 16px;
+    margin-bottom: 5px;
+    font-weight: bold;
 }
 
 .input-group input {
-    width: 95%;
+    width: 94.5%;
     padding: 10px;
-    border-radius: 4px;
+    border-radius: 5px;
     border: 1px solid #ccc;
+    background: rgba(255, 255, 255, 0.7);
     font-size: 16px;
 }
 
-.input-group span {
-    font-size: 14px;
-    color: red;
+.input-group:last-of-type {
+    margin-bottom: 40px;
 }
 
 .btn {
     display: inline-block;
-    padding: 12px 20px;
-    background-color: blue;
+    padding: 12px;
+    background-color: #00b894;
     color: white;
     text-decoration: none;
     border-radius: 5px;
     width: 100%;
-    margin-top: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
 }
 
 .btn:hover {
-    background-color: darkblue;
+    background-color: #009974;
 }
 
 .registration-container p {
     margin-top: 15px;
     text-align: center;
+}
+
+.registration-link {
+    text-align: center;
+    display: inline-block;
+    color: #00b894;
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+.registration-link:hover {
+    text-decoration: underline;
 }

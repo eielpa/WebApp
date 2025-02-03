@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { CategoryService } from '../services/category.service';
@@ -8,11 +8,12 @@ import { CategoryService } from '../services/category.service';
   imports: [CommonModule, RouterModule],
   templateUrl: './navbar.component.html',
   standalone: true,
-  styleUrl: './navbar.component.css'
+  styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   categories: any[] = [];
-  selectedCategoryId: number | null = null; // Variabile per memorizzare l'ID della categoria selezionata
+  selectedCategoryId: number | null = null;
+  isDropdownOpen = false;
 
   constructor(
       private categoryService: CategoryService,
@@ -26,15 +27,35 @@ export class NavbarComponent {
     });
   }
 
-  isDropdownOpen = false;
-
-  toggleDropdown() {
+  // Alterna la visibilità del dropdown
+  toggleDropdown(): void {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
 
-  onCategoryChange(event: any): void {
-    this.selectedCategoryId = event.target.value;// Memorizza l'ID selezionato
-    this.router.navigate(['/genre', this.selectedCategoryId]); // Naviga alla pagina del genere
+  @HostListener('document:click', ['$event'])
+  clickOut(event: MouseEvent) {
+    const clickedInside = (event.target as HTMLElement).closest('.navbar');
+    if (!clickedInside) {
+      this.isDropdownOpen = false; // Chiudi il menu se clicchi fuori
+    }
+  }
+
+  // Viene invocato al click su una categoria: naviga alla pagina del genere
+  onCategoryChange(categoryId: number): void {
+    this.selectedCategoryId = categoryId;
+    this.router.navigate(['/genre', categoryId]);
+    // Chiude il dropdown dopo la selezione
+    this.isDropdownOpen = false;
+  }
+
+  // Verifica se l'utente è loggato (presenza di un token/sessionId)
+  isLoggedIn(): boolean {
+    return !!sessionStorage.getItem('sessionId');
+  }
+
+  // Esegue il logout: rimuove il token e reindirizza alla pagina di login
+  logout(): void {
+    sessionStorage.removeItem('sessionId');
+    this.router.navigate(['/login']);
   }
 }
-

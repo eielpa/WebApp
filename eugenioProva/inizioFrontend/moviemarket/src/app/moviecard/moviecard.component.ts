@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Router} from "@angular/router";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-moviecard',
@@ -10,7 +10,8 @@ import { Router} from "@angular/router";
 export class MovieCardComponent {
   @Input() movie: any;  // Input per il film
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+  }
 
   goToMovieDetails() {
     this.router.navigate(['/movie', this.movie.title]); // Passa il titolo come parametro nell'URL

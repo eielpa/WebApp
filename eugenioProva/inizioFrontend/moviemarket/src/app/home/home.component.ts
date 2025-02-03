@@ -61,4 +61,12 @@ export class HomeComponent implements OnInit {
     const selectedCategoryId = event.target.value;
     this.router.navigate(['/genre', selectedCategoryId]); // Naviga alla pagina del genere
   }
-}
+
+  scroll(list: HTMLElement, direction: string) {
+    const scrollAmount = 300; // Quantità di pixel da scorrere (regolabile)
+    if (direction === 'left') {
+      list.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    } else {
+      list.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  }}
