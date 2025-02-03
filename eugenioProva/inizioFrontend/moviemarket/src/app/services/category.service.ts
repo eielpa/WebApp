@@ -17,8 +17,9 @@ export class CategoryService {
     }
 
     getCategoryNameById(id: number): Observable<string> {
-        return this.http.get<string>("http://localhost:8080/categories/getNameById/" + id);
+        return this.http.get<string>("http://localhost:8080/categories/getNameById/" + id, { responseType: 'text' as 'json' });
     }
+
 
     setSelectedCategory(id: number) {
         this.selectedCategoryId.next(id); // Imposta il valore dell'ID selezionato

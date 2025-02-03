@@ -7,7 +7,9 @@ import java.util.List;
 
 public interface MovieDao {
     Movie findById(int id);
+
     Movie findByTitle(String title);
+
     List<Movie> findAll();
     List<Movie> findByRating(int rating);
     List<Movie> findByCategory(int categoryId);

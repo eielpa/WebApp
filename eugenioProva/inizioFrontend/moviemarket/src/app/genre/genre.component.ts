@@ -18,28 +18,31 @@ import { NavbarComponent } from "../navbar/navbar.component";
   styleUrls: ['./genre.component.css']
 })
 export class GenreComponent implements OnInit {
-  genre: string | null = '';
+  genre: string | null = null; // Mantieni 'null' per garantire che non sia una stringa vuota
   movies: any[] = [];
-  selectedCategoryId: number | null | undefined ;
+  selectedCategoryId: number | null | undefined;
 
   constructor(
       private route: ActivatedRoute,
       private movieService: MovieService,
       private categoryService: CategoryService,
-
-) {}
+  ) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-      this.selectedCategoryId = Number(params.get('name'));// Recupera l'ID dalla rotta
+      this.selectedCategoryId = Number(params.get('name')); // Recupera l'ID dalla rotta
 
-      console.log(this.selectedCategoryId)
       if (this.selectedCategoryId) {
+        // Recupera il nome del genere dalla categoria
+        this.categoryService.getCategoryNameById(this.selectedCategoryId).subscribe((categoryName: string) => {
+          this.genre = categoryName;  // Assegna il nome del genere
+        });
+
+        // Recupera i film per categoria
         this.movieService.getMoviesByCategory(this.selectedCategoryId).subscribe((data: any) => {
-          this.movies = data;
+          this.movies = data;  // Assegna i film recuperati
         });
       }
     });
   }
-
 }

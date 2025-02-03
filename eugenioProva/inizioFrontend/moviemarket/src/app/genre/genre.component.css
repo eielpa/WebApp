@@ -3,33 +3,41 @@
     background-color: #000; /* Sfondo nero */
     color: #fff;           /* Testo chiaro */
     min-height: 100vh;     /* Assicura che il componente occupi almeno l'altezza intera della viewport */
+    padding-top: 50px;     /* Aggiungi padding superiore per spostare il contenuto verso il basso */
 }
 
 .hero {
     height: 80vh;
     display: flex;
     align-items: center;
+    justify-content: center;
     padding: 50px;
+    text-align: center;  /* Centra il contenuto */
     color: white;
+    background: linear-gradient(to right, #000, #222); /* Aggiunto gradiente per maggiore profondità */
 }
 
 .hero-content {
     max-width: 600px;
+    padding: 20px;
 }
 
 .play-btn, .info-btn {
-    padding: 10px 15px;
+    padding: 12px 18px;
     border: none;
     cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px; /* Bordo arrotondato per i pulsanti */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Aggiunto effetto di transizione */
 }
 
 .play-btn {
-    background: white;
+    background: #00bfae; /* Colore verde brillante per il pulsante play */
     color: black;
 }
 
 .info-btn {
-    background: gray;
+    background: #555; /* Colore più scuro per il pulsante info */
     color: white;
 }
 
@@ -40,24 +48,27 @@
     align-items: center;
     overflow: hidden;
     width: 100%; /* Assicurati che il wrapper occupi tutta la larghezza disponibile */
+    padding: 20px 0; /* Aggiunto un po' di spazio sopra e sotto */
+    margin-top: 50px; /* Sposta la sezione dei film più in basso */
 }
 
 /* Sezione film */
 .movie-section {
-    margin: 30px 0;
+    margin-top: 50px; /* Aggiungi margine sopra la sezione dei film */
+    margin-bottom: 50px; /* Aggiungi margine sotto la sezione dei film */
 }
 
 /* Container delle card in orizzontale */
 .movie-list {
     display: flex;
     flex-wrap: nowrap;
-    gap: 15px;
+    gap: 20px;
     overflow-x: auto;
     scroll-behavior: smooth;
     padding: 10px;
-    /* Nasconde la scrollbar */
     scrollbar-width: none; /* Firefox */
 }
+
 .movie-list::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera */
 }
@@ -74,14 +85,13 @@
     top: 50%;
     transform: translateY(-50%);
     user-select: none;
-    padding: 10px; /* Aumenta l'area cliccabile */
+    padding: 15px; /* Aumentata l'area cliccabile */
     transition: background-color 0.3s ease, opacity 0.3s ease; /* Transizione per effetto hover */
     opacity: 0; /* Nasconde le frecce di default */
 }
 
-/* Mostra le frecce al passaggio del mouse sopra il wrapper */
 .movie-list-wrapper:hover .arrow {
-    opacity: 1;
+    opacity: 1; /* Mostra le frecce al passaggio del mouse sopra il wrapper */
 }
 
 .arrow:hover {
@@ -94,4 +104,18 @@
 
 .arrow.right {
     right: 0;
+}
+
+/* Miglioramenti visivi generali per la lista di film */
+.movie-card {
+    width: 250px;
+    background-color: #333;
+    border-radius: 10px;
+    padding: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.movie-card:hover {
+    transform: scale(1.05); /* Leggero ingrandimento al passaggio del mouse */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }

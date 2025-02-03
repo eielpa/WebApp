@@ -1,5 +1,5 @@
 <div class="genre-page">
-    <h2>Film del genere </h2>
+    <h2 class="genre-title">Genere: {{ genre }}</h2>
     <div class="movie-list">
         <app-moviecard *ngFor="let movie of movies" [movie]="movie"></app-moviecard>
     </div>

@@ -1,7 +1,8 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { CategoryService } from '../services/category.service';
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-navbar',
@@ -12,8 +13,9 @@ import { CategoryService } from '../services/category.service';
 })
 export class NavbarComponent implements OnInit {
   categories: any[] = [];
-  selectedCategoryId: number | null = null;
   isDropdownOpen = false;
+  categoryName: string = '';
+
 
   constructor(
       private categoryService: CategoryService,
@@ -42,7 +44,9 @@ export class NavbarComponent implements OnInit {
 
   // Viene invocato al click su una categoria: naviga alla pagina del genere
   onCategoryChange(categoryId: number): void {
-    this.selectedCategoryId = categoryId;
+    this.categoryService.setSelectedCategory(categoryId);
+    console.log(this.categoryService.getCategoryNameById(categoryId));
+
     this.router.navigate(['/genre', categoryId]);
     // Chiude il dropdown dopo la selezione
     this.isDropdownOpen = false;

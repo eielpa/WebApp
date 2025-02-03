@@ -1,55 +1,55 @@
 {
-  "hash": "2e9408ca",
-  "configHash": "3ff8b118",
+  "hash": "9451e85d",
+  "configHash": "e6470cb1",
   "lockfileHash": "64a9016b",
-  "browserHash": "26fce45d",
+  "browserHash": "245f035d",
   "optimized": {
     "@angular/common": {
       "src": "../../../../../../node_modules/@angular/common/fesm2022/common.mjs",
       "file": "@angular_common.js",
-      "fileHash": "cacfe47f",
+      "fileHash": "0d26d424",
       "needsInterop": false
     },
     "@angular/common/http": {
       "src": "../../../../../../node_modules/@angular/common/fesm2022/http.mjs",
       "file": "@angular_common_http.js",
-      "fileHash": "d70368d5",
+      "fileHash": "c94efa00",
       "needsInterop": false
     },
     "@angular/core": {
       "src": "../../../../../../node_modules/@angular/core/fesm2022/core.mjs",
       "file": "@angular_core.js",
-      "fileHash": "3d73a844",
+      "fileHash": "75eec932",
       "needsInterop": false
     },
     "@angular/forms": {
       "src": "../../../../../../node_modules/@angular/forms/fesm2022/forms.mjs",
       "file": "@angular_forms.js",
-      "fileHash": "74198999",
+      "fileHash": "fb5afd10",
       "needsInterop": false
     },
     "@angular/platform-browser": {
       "src": "../../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
       "file": "@angular_platform-browser.js",
-      "fileHash": "33ac0bc9",
+      "fileHash": "780998ed",
       "needsInterop": false
     },
     "@angular/router": {
       "src": "../../../../../../node_modules/@angular/router/fesm2022/router.mjs",
       "file": "@angular_router.js",
-      "fileHash": "a7f35fec",
+      "fileHash": "e66b656f",
       "needsInterop": false
     },
     "rxjs": {
       "src": "../../../../../../node_modules/rxjs/dist/esm5/index.js",
       "file": "rxjs.js",
-      "fileHash": "9293e402",
+      "fileHash": "ed4ce8d4",
       "needsInterop": false
     },
     "rxjs/operators": {
       "src": "../../../../../../node_modules/rxjs/dist/esm5/operators/index.js",
       "file": "rxjs_operators.js",
-      "fileHash": "cd18f72d",
+      "fileHash": "27b00eda",
       "needsInterop": false
     }
   },

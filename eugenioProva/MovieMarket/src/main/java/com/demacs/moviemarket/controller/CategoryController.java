@@ -21,9 +21,22 @@ public class CategoryController {
 
     @GetMapping("/getNameById/{id}")
     public ResponseEntity<String> getCategory(@PathVariable int id) {
-        Category category = categoryService.findById(id);
-        return ResponseEntity.ok(category.getName());  // Restituisce la stringa come JSON
+        try {
+            String categoryName = categoryService.findCategoryNameById(id);
+            System.out.println(categoryName);
+
+            if (categoryName == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Categoria non trovata");
+            }
+
+            return ResponseEntity.ok(categoryName);  // Restituisce direttamente una stringa
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Errore del server");
+        }
     }
+
+
 
     @GetMapping("allCategories")
     public List<Category> getAllCategories() {

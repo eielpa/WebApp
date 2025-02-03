@@ -19,30 +19,35 @@
   color: white;
 }
 
+/* Menu principale */
 .menu {
   display: flex;
   list-style: none;
   margin: 0;
   padding: 0;
-  align-items: center; /* Allinea verticalmente tutti gli elementi del menu */
+  align-items: center;
 }
 
 .menu li {
   margin-right: 20px;
   display: flex;
-  align-items: center; /* Allinea verticalmente la scritta con la freccia */
+  align-items: center;
 }
 
+/* Link nel menu principale */
 .menu a {
   color: white;
   text-decoration: none;
   padding: 10px 15px;
   font-size: 16px;
-  transition: background-color 0.3s;
+  transition: color 0.3s ease, transform 0.3s ease, text-shadow 0.3s ease, -webkit-text-stroke 0.3s ease;
 }
 
 .menu a:hover {
-  background-color: #333;  /* colore di hover */
+  transform: translateY(-3px);
+  color: #00bfae; /* Colore più vivace al passaggio */
+  text-shadow: 0 4px 6px rgba(0,191,174,0.6), 0 0 10px rgba(0,255,255,0.8);
+  -webkit-text-stroke: 1px rgba(0,191,174,1);
 }
 
 /* Dropdown Generi */
@@ -55,21 +60,30 @@
   display: inline-flex;
   align-items: center;
   font-size: 16px;
-  padding: 10px 15px; /* Allineamento verticale */
+  padding: 10px 15px;
+  transition: color 0.3s ease, text-shadow 0.3s ease, -webkit-text-stroke 0.3s ease;
 }
 
 .dropdown .arrow {
   margin-left: 5px;
-  transition: transform 0.3s ease;
-  opacity: 0; /* Partiamo con la freccia invisibile */
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
 }
 
-/* La freccia appare quando si passa sopra il dropdown e si sposta da sopra a sotto */
+/* La freccia rimane fissa verso il basso e appare al passaggio del mouse */
 .dropdown:hover .arrow {
   opacity: 1;
-  transform: translateY(3px); /* Muove la freccia da sopra a sotto */
+  transform: translateY(3px);
 }
 
+/* Effetto hover per il testo del dropdown */
+.dropdown a:hover {
+  color: #00bfae;
+  text-shadow: 0 4px 6px rgba(0,191,174,0.6), 0 0 10px rgba(0,255,255,0.8);
+  -webkit-text-stroke: 1px rgba(0,191,174,1);
+}
+
+/* Dropdown menu */
 .dropdown-menu {
   display: none;
   position: absolute;
@@ -79,26 +93,63 @@
   margin: 0;
   padding: 10px 0;
   z-index: 999;
-  top: 100%; /* Posiziona il menu a tendina sotto il bottone */
+  top: 100%; /* Posiziona il menu subito sotto il bottone */
   left: 0;
-  width: 200px; /* Imposta una larghezza fissa per il menu */
-  max-height: 300px; /* Imposta un'altezza massima per il menu */
-  overflow-y: auto; /* Permette lo scroll verticale */
+  width: 200px;
+  max-height: 300px; /* Altezza massima: se superata viene attivato lo scroll */
+  overflow-y: auto; /* Scroll verticale se necessario */
   border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .dropdown-menu.open {
   display: block;
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.dropdown-menu a {
-  padding: 10px 15px;
+/* Stili per le voci del dropdown (collegamenti) */
+.dropdown-menu li a {
+  display: block; /* Ogni link occupa una riga intera */
+  padding: 15px;
+  font-size: 18px; /* Dimensione del testo aumentata */
   color: white;
   text-decoration: none;
+  transition: background-color 0.2s, padding-left 0.2s, color 0.3s ease, text-shadow 0.3s ease, -webkit-text-stroke 0.3s ease;
 }
 
-.dropdown-menu a:hover {
+.dropdown-menu li a:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.dropdown-menu li a:hover {
   background-color: #333;
+  padding-left: 20px;
+  color: #00bfae;
+  text-shadow: 0 4px 6px rgba(0,191,174,0.6), 0 0 10px rgba(0,255,255,0.8);
+  -webkit-text-stroke: 1px rgba(0,191,174,1);
+}
+
+/* Personalizzazione dello scrollbar (solo per browser WebKit: Chrome, Safari, Edge) */
+.dropdown-menu::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dropdown-menu::-webkit-scrollbar-track {
+  background: #111;
+  border-radius: 5px;
+}
+
+.dropdown-menu::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 5px;
+}
+
+.dropdown-menu::-webkit-scrollbar-thumb:hover {
+  background: #666;
 }
 
 /* Azioni (Login) */
@@ -109,8 +160,12 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
 }
 
 .actions .login-btn:hover {
-  background-color: #555;
+  background-color: #555; /* Leggermente più chiaro */
+  transform: scale(1.05); /* Leggero ingrandimento */
+  /* Effetto glow per lo sfondo, che richiama lo stile della navbar senza cambiare il colore del testo */
+  box-shadow: 0 0 10px rgba(0,191,174,0.6), 0 0 15px rgba(0,255,255,0.4);
 }

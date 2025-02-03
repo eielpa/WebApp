@@ -5,11 +5,12 @@
 
         <!-- Sezione Generi con Menu a Tendina -->
         <li class="dropdown">
-            <a (click)="toggleDropdown()">Generi <span class="arrow">⌄</span></a>
+            <a (click)="toggleDropdown()">
+                Generi <span class="arrow">⌄</span>
+            </a>
             <ul class="dropdown-menu" [class.open]="isDropdownOpen">
-                <!-- Al click su ciascun li viene chiamato onCategoryChange passando l'ID della categoria -->
                 <li *ngFor="let category of categories" (click)="onCategoryChange(category.id)">
-                    {{ category.name }}
+                    <a>{{ category.name }}</a>
                 </li>
             </ul>
         </li>
@@ -27,4 +28,5 @@
             <button class="logout-btn" (click)="logout()">Logout</button>
         </ng-container>
     </div>
+
 </nav>

@@ -20,10 +20,6 @@ public class MovieService {
         return movieDao.findById(id);
     }
 
-    public Movie findByTitle(String title) {
-        return movieDao.findByTitle(title);
-    }
-
     public List<Movie> findAll() {
         return movieDao.findAll();
     }

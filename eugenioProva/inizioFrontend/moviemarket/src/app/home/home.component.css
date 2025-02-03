@@ -39,12 +39,13 @@
   display: flex;
   align-items: center;
   overflow: hidden;
-  width: 100%; /* Assicurati che il wrapper occupi tutta la larghezza disponibile */
+  width: 100%;
+  margin-top: 50px; /* Distanza superiore per far "scendere" le card */
 }
 
-/* Sezione film */
 .movie-section {
   margin: 30px 0;
+  padding-top: 50px; /* Assicura che ci sia spazio sopra le card */
 }
 
 /* Container delle card in orizzontale */
