@@ -5,9 +5,10 @@ import java.util.Date;
 public class User {
 
     private String id;
-    private String name;
+    private String firstName;
+    private String lastName;
     private String email;
-    private Date Dob;
+    private Date dob;
     private String password;
 
     // Getter e setter per id
@@ -19,13 +20,27 @@ public class User {
         this.id = id;
     }
 
-    // Getter e setter per name
-    public String getName() {
-        return name;
+    // Getter e setter per firstName
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    // Getter e setter per lastName
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    // Getter per name che concatena firstName e lastName
+    public String getName() {
+        return (firstName + " " + lastName);
     }
 
     // Getter e setter per email
@@ -46,10 +61,21 @@ public class User {
         this.password = password;
     }
 
+    // Getter e setter per dob
     public Date getDob() {
-        return Dob;
+        return dob;
     }
+
     public void setDob(Date dob) {
-        this.Dob = dob;
+        this.dob = dob;
+    }
+
+    // Modifica del setName per separare il nome e il cognome
+    public void setName(String name) {
+        if (name != null && name.contains(" ")) {
+            String[] parts = name.split(" ", 2); // Separare il nome in due parti (nome e cognome)
+            this.firstName = parts[0];
+            this.lastName = parts[1];
+        }
     }
 }

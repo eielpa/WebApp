@@ -2,18 +2,24 @@
     <a routerLink="/" class="btn-home">Torna alla Home</a>
     <div class="login-form">
         <h2>{{ title }}</h2>
-        <form>
+        <form (submit)="login()">
             <div class="input-group">
-                <label for="username">ID Utente</label>
-                <input type="text" id="username" name="username" required />
+                <label for="email">Email <span>*</span></label>
+                <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        [(ngModel)]="email"
+                        required />
             </div>
+
             <div class="input-group">
-                <label for="password">Password</label>
+                <label for="password">Password <span>*</span></label>
                 <div class="password-container">
                     <input
-                            type="password"
                             id="password"
                             name="password"
+                            [(ngModel)]="password"
                             required
                             [type]="passwordVisible ? 'text' : 'password'"
                             (keydown)="preventCopyPaste($event)"
@@ -21,8 +27,12 @@
                     <span class="eye-icon" (click)="togglePasswordVisibility()">👁️</span>
                 </div>
             </div>
+
             <button type="submit" class="btn">Accedi</button>
+
+            <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
         </form>
+
         <p><a routerLink="/recupero-password" class="password-recovery-link">Password dimenticata?</a></p>
         <p><a routerLink="/registration" class="registration-link">Iscriviti</a></p>
     </div>

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { RegistrationService, User } from '../services/registration.service'; // Importa il servizio
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -11,41 +12,36 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent {
-  user = {
+  user: User = {
     id: '',
     firstName: '',
     lastName: '',
-    birthDate: '',
     email: '',
-    password: ''
+    password: '',
+    dob: ''
   };
 
   registrationMessage: string = ''; // Messaggio di feedback per l'utente
 
-  constructor(private http: HttpClient) {}
+  constructor(private registrationService: RegistrationService, private router: Router) {} // Usa il RegistrationService
 
   onSubmit() {
-    const requestBody = {
-      id: this.user.id,
-      name: `${this.user.firstName} ${this.user.lastName}`, // Backend usa `name`
-      dob: this.user.birthDate,
-      email: this.user.email,
-      password: this.user.password
-    };
-
-    this.http.post('http://localhost:8080/auth/register', requestBody, { responseType: 'text' })
-        .subscribe({
-          next: (response) => {
-            if (response === 'USER_SAVED') {
-              this.registrationMessage = 'Registrazione completata con successo!';
-            } else {
-              this.registrationMessage = `Errore: ${response}`;
-            }
-          },
-          error: (error) => {
-            this.registrationMessage = 'Errore durante la registrazione. Riprova.';
-            console.error('Errore:', error);
-          }
-        });
+    this.registrationService.registerUser(this.user).subscribe({
+      next: (response) => {
+        console.log(response);
+        if (response.equals("USER_SAVED")) {
+          alert('Registrazione completata con successo! Ora verrai reindirizzato alla pagina di login.');
+          this.router.navigate(['/login']);
+          this.registrationMessage = 'Registrazione completata con successo!';
+        } else {
+          this.registrationMessage = `Errore: ${response}`;
+        }
+      },
+      error: (error) => {
+        // Gestisce gli errori HTTP
+        this.registrationMessage = 'Errore durante la registrazione. Riprova.';
+        console.error('Errore:', error);
+      }
+    });
   }
 }

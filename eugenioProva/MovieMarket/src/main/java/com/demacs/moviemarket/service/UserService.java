@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     public String registerUser(User user) {
+        //System.out.println(user.getName());
         if (DBManager.getInstance().getConnection() == null) return "SERVICE_UNAVAILABLE";
 
         if (user.getName() == null || user.getName().trim().isEmpty()) return "EMPTY_ATTR";

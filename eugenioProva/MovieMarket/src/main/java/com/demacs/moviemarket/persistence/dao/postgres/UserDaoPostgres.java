@@ -94,7 +94,7 @@ public class UserDaoPostgres implements UserDao {
     @Override
     public Boolean insert(User user) {
         if (findById(user.getId()) == null) {
-            String insertStr = "INSERT INTO users (id, name, email, password, data_di_nascita) VALUES (?, ?, ?, ?, ?)";
+            String insertStr = "INSERT INTO users (id, name, email, password, dob) VALUES (?, ?, ?, ?, ?)";
 
             try (PreparedStatement st = conn.prepareStatement(insertStr)) {
                 st.setString(1, user.getId());
@@ -115,7 +115,7 @@ public class UserDaoPostgres implements UserDao {
 
     @Override
     public void update(User user) {
-        String updateStr = "UPDATE users SET name = ?, email = ?, password = ?, data_di_nascita = ? WHERE id = ?";
+        String updateStr = "UPDATE users SET name = ?, email = ?, password = ?, dob = ? WHERE id = ?";
         try (PreparedStatement st = conn.prepareStatement(updateStr)) {
             st.setString(1, user.getName());
             st.setString(2, user.getEmail());

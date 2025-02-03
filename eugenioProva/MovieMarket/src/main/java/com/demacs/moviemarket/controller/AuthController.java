@@ -30,6 +30,7 @@ public class AuthController {
         if ("USER_SAVED".equals(result)) {
             return new ResponseEntity<>("Registration successful", HttpStatus.CREATED);
         } else {
+
             return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
         }
     }

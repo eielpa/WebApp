@@ -6,12 +6,13 @@ import { RouterLink, Router } from '@angular/router';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { MovieCardComponent } from '../moviecard/moviecard.component';
 import {MovieCardTopRatedComponent} from "../moviecard-toprated/moviecard-toprated.component";
+import {MovieCardLargeComponent} from "../moviecard-large/moviecard-large.component";
 
 @Component({
   selector: 'app-home',
-  imports: [
-    RouterLink, CommonModule, NavbarComponent, MovieCardComponent, MovieCardTopRatedComponent
-  ],
+    imports: [
+        RouterLink, CommonModule, NavbarComponent, MovieCardComponent, MovieCardTopRatedComponent, MovieCardLargeComponent
+    ],
   templateUrl: './home.component.html',
   standalone: true,
   styleUrls: ['./home.component.css']
@@ -21,7 +22,8 @@ export class HomeComponent implements OnInit {
   recentMovies: any[] = []; // Lista dei film recenti
   topRatedMovies: any[] = []; // Lista dei film con il rating più alto
   categories: any[] = [];  // Lista delle categorie
-  selectedCategoryId: number = 0;  // Categoria selezionata
+  movies: any [] = [];
+
 
   constructor(
       private movieService: MovieService,
@@ -44,6 +46,14 @@ export class HomeComponent implements OnInit {
     this.categoryService.getAllCategories().subscribe((categories) => {
       this.categories = categories;
     });
+
+    this.movieService.getAllMovies().subscribe((data) => {
+      this.movies = data;
+    });
+  }
+
+  goToMovieDetails(movieId: number) {
+    this.router.navigate(['/movie', movieId]);
   }
 
   // Gestisce il cambiamento della categoria selezionata

@@ -56,22 +56,22 @@ public class DBManager {
 
     // 🔹 Correggo i DAO: passo una Connection, non un DBManager!
     public MovieDao getMovieDao() {
-        return new MovieDaoPostgres((DBManager) getConnection());
+        return new MovieDaoPostgres(getInstance());
     }
 
     public CategoryDao getCategoryDao() {
-        return new CategoryDaoPostgres((DBManager) getConnection());
+        return new CategoryDaoPostgres(getInstance());
     }
 
     public DownloadDao getDownloadDao() {
-        return new DownloadDaoPostgres((DBManager) getConnection());
+        return new DownloadDaoPostgres(getInstance());
     }
 
     public PersonalLibraryDao getPersonalLibraryDao() {
-        return new PersonalLibraryDaoPostgres((DBManager) getConnection());
+        return new PersonalLibraryDaoPostgres(getInstance());
     }
 
     public UserDao getUserDao() {
-        return new UserDaoPostgres((DBManager) getConnection());
+        return new UserDaoPostgres(getInstance());
     }
 }
