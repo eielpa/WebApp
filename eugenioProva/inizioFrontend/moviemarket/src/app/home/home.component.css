@@ -1,15 +1,15 @@
 :host {
   display: block;
-  background-color: #001a17; /* Verde petrolio molto scuro, quasi nero */
+  background-color: #001a17;
   color: #fff;
   min-height: 100vh;
 }
 
 .hero {
-  height: 80vh;
+  height: 70vh; /* Ridotto per alzare l'elemento */
   display: flex;
   align-items: center;
-  padding: 50px;
+  padding: 30px; /* Ridotto */
   color: white;
 }
 
@@ -18,7 +18,7 @@
 }
 
 .play-btn, .info-btn {
-  padding: 10px 15px;
+  padding: 8px 12px; /* Ridotto per compattezza */
   border: none;
   cursor: pointer;
 }
@@ -33,60 +33,55 @@
   color: white;
 }
 
-/* Wrapper per ogni sezione con frecce */
 .movie-list-wrapper {
   position: relative;
   display: flex;
   align-items: center;
   overflow: hidden;
   width: 100%;
-  margin-top: 50px; /* Distanza superiore per far "scendere" le card */
+  margin-top: 30px; /* Ridotto per avvicinare le sezioni */
 }
 
 .movie-section {
-  margin: 30px 0;
-  padding-top: 50px; /* Assicura che ci sia spazio sopra le card */
+  margin: 20px 0; /* Ridotto */
+  padding-top: 30px; /* Ridotto */
 }
 
-/* Container delle card in orizzontale */
 .movie-list {
   display: flex;
   flex-wrap: nowrap;
-  gap: 15px;
+  gap: 10px; /* Ridotto */
   overflow-x: auto;
   scroll-behavior: smooth;
-  padding: 10px;
-  /* Nasconde la scrollbar */
-  scrollbar-width: none; /* Firefox */
+  padding: 5px; /* Ridotto */
+  scrollbar-width: none;
 }
 .movie-list::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
+  display: none;
 }
 
-/* Pulsanti freccia */
 .arrow {
-  background-color: rgba(0, 0, 0, 0.5); /* Sfondo trasparente scuro per visibilità */
+  background-color: rgba(0, 0, 0, 0.5);
   border: none;
-  font-size: 3.5rem;
+  font-size: 3rem; /* Ridotto */
   cursor: pointer;
   color: white;
   position: absolute;
-  z-index: 20;  /* Assicurati che le frecce siano sopra le card */
-  top: 50%;
+  z-index: 20;
+  top: 45%; /* Abbassato leggermente per adattarsi */
   transform: translateY(-50%);
   user-select: none;
-  padding: 10px; /* Aumenta l'area cliccabile */
-  transition: background-color 0.3s ease, opacity 0.3s ease; /* Transizione per effetto hover */
-  opacity: 0; /* Nasconde le frecce di default */
+  padding: 8px; /* Ridotto */
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
 }
 
-/* Mostra le frecce al passaggio del mouse sopra il wrapper */
 .movie-list-wrapper:hover .arrow {
   opacity: 1;
 }
 
 .arrow:hover {
-  background-color: rgba(0, 0, 0, 0.7); /* Cambia colore al passaggio del mouse */
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .arrow.left {
@@ -95,4 +90,24 @@
 
 .arrow.right {
   right: 0;
+}
+
+.movie-list.featured-carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  gap: 40px;
+  padding: 15px;
+  width: 100%;
+}
+
+
+.movie-list.featured-carousel > app-moviecardfilmhome {
+  scroll-snap-align: center;
+  flex: 0 0 100%;
+}
+
+.movie-list.featured-carousel > app-moviecardfilmhome .movie-card {
+  width: 18%; /* Ridotto per dare più spazio sopra */
 }

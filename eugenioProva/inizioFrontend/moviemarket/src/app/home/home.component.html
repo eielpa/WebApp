@@ -1,13 +1,13 @@
-<!--<div class="movie-carousel">
-    <div class="movie-card-large" *ngFor="let movie of movies" (click)="goToMovieDetails(movie.id)">
- <div class="movie-background" [style.backgroundImage]="'url(' + movie.imageUrl + ')'"></div>
-        <div class="movie-overlay">
-            <h1>{{ movie.title }}</h1>
-            <p><strong>Rating:</strong> {{ movie.rating }}</p>
-            <p>{{ movie.description }}</p>
+<!-- Sezione In Evidenza con visualizzazione 1 film alla volta -->
+<div class="movie-section">
+    <div class="movie-list-wrapper">
+        <button class="arrow left" (click)="scroll(featuredList, 'left')">&#10094;</button>
+        <div class="movie-list featured-carousel" #featuredList>
+            <app-moviecardfilmhome *ngFor="let movie of recentMovies" [movie]="movie"></app-moviecardfilmhome>
         </div>
+        <button class="arrow right" (click)="scroll(featuredList, 'right')">&#10095;</button>
     </div>
-</div> -->
+</div>
 
 <!-- Sezione film recenti -->
 <div class="movie-section">
@@ -32,5 +32,3 @@
         <button class="arrow right" (click)="scroll(movieListTop, 'right')">&#10095;</button>
     </div>
 </div>
-
-
