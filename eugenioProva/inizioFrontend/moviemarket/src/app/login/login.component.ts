@@ -40,8 +40,9 @@ export class LoginComponent {
     }
 
     this.loginService.login(this.email, this.password).subscribe({
-      next: (sessionId) => {
-        sessionStorage.setItem('sessionId', sessionId);
+      next: (response) => {
+        sessionStorage.setItem('sessionId', response.sessionId);
+        sessionStorage.setItem('isAdmin', response.isAdmin.toString());
         this.router.navigate(['']);
       },
       error: (err) => {
@@ -49,4 +50,5 @@ export class LoginComponent {
       }
     });
   }
+
 }

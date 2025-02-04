@@ -1,0 +1,22 @@
+<h1>CIAO</h1>
+
+<form (ngSubmit)="submitForm()">
+    <label for="title">Titolo:</label>
+    <input id="title" [(ngModel)]="movie.title" name="title" required />
+
+    <label for="description">Descrizione:</label>
+    <textarea id="description" [(ngModel)]="movie.description" name="description" required></textarea>
+
+    <label for="releaseYear">Anno di Uscita:</label>
+    <input id="releaseYear" type="number" [(ngModel)]="movie.releaseYear" name="releaseYear" required />
+
+    <label for="category">Categoria:</label>
+    <select id="category" [(ngModel)]="movie.categoryId" name="category" required>
+        <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+    </select>
+
+    <label for="rating">Valutazione (0-5):</label>
+    <input id="rating" type="number" [(ngModel)]="movie.rating" name="rating" min="0" max="5" />
+
+    <button type="submit">Aggiungi Film</button>
+</form>

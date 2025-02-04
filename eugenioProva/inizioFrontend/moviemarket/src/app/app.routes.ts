@@ -7,6 +7,7 @@ import {RegistrationComponent} from "./registration/registration.component";
 import { PersonalLibraryComponent } from './personal-library/personal-library.component';
 import { MovieSpecificComponent} from "./movie-specific/movie-specific.component";
 import { RecuperoPasswordComponent} from "./passwordrecovery/passwordrecovery.component";
+import {AggiungiFilmComponent} from "./aggiungi-film/aggiungi-film.component";
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -17,5 +18,6 @@ export const routes: Routes = [
   { path: 'recupero-password', component: RecuperoPasswordComponent },
   { path: 'registration', component: RegistrationComponent },
   { path: 'personal-library', component: PersonalLibraryComponent },
+  { path: 'add-movie', component: AggiungiFilmComponent },
 
 ];

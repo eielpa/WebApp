@@ -10,6 +10,7 @@ public class User {
     private String email;
     private Date dob;
     private String password;
+    private Boolean admin;
 
     // Getter e setter per id
     public String getId() {
@@ -78,4 +79,13 @@ public class User {
             this.lastName = parts[1];
         }
     }
+
+    public Boolean getAdmin() {
+        return admin;
+    }
+    public void setAdmin(Boolean admin) {
+        this.admin = admin;
+    }
+
+
 }

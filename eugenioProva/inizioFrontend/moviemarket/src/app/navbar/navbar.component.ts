@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { CategoryService } from '../services/category.service';
 import {Observable} from "rxjs";
+import {LoginService, UserInfo} from "../services/login.service";
 
 @Component({
   selector: 'app-navbar',
@@ -15,10 +16,16 @@ export class NavbarComponent implements OnInit {
   categories: any[] = [];
   isDropdownOpen = false;
   categoryName: string = '';
+  userNickname: string | null = null;
 
+  // Variabili per gestire le info utente
+  userInfo: UserInfo | null = null;
+  nickname: string = '';
+  isAdmin: boolean = false; // Flag per mostrare il pulsante "Aggiungi Film"
 
   constructor(
       private categoryService: CategoryService,
+      private loginService: LoginService,
       private router: Router
   ) {}
 
@@ -27,6 +34,23 @@ export class NavbarComponent implements OnInit {
     this.categoryService.getAllCategories().subscribe((categories) => {
       this.categories = categories;
     });
+
+    // Recupera le informazioni utente se loggato
+    if (this.isLoggedIn()) {
+      this.loginService.getUserNickname().subscribe({
+        next: (nickname) => this.userNickname = nickname,
+        error: () => this.userNickname = null
+      });
+
+      // Recupera lo stato admin
+      this.loginService.getUserInfo().subscribe({
+        next: (userInfo) => {
+          this.nickname = userInfo.id;
+          this.isAdmin = userInfo.isAdmin;
+        },
+        error: () => this.isAdmin = false
+      });
+    }
   }
 
   // Alterna la visibilità del dropdown
