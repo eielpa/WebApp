@@ -1,5 +1,3 @@
-<h1>CIAO</h1>
-
 <form (ngSubmit)="submitForm()">
     <label for="title">Titolo:</label>
     <input id="title" [(ngModel)]="movie.title" name="title" required />
@@ -19,4 +17,15 @@
     <input id="rating" type="number" [(ngModel)]="movie.rating" name="rating" min="0" max="5" />
 
     <button type="submit">Aggiungi Film</button>
+</form>
+
+<!-- Form per la rimozione del film -->
+<form (ngSubmit)="removeMovie()">
+    <label for="movieId">ID Film:</label>
+    <input id="movieId" type="number" [(ngModel)]="movieToDelete.id" name="movieId" required />
+
+    <label for="movieName">Nome Film:</label>
+    <input id="movieName" [(ngModel)]="movieToDelete.name" name="movieName" required />
+
+    <button type="submit">Rimuovi Film</button>
 </form>

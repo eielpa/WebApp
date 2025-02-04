@@ -27,6 +27,8 @@ export class AggiungiFilmComponent implements OnInit {
     categoryId: null,
     rating: null
   };
+
+  movieToDelete: { id: number | null; name: string } = { id: null, name: '' };
   categories: Category[] = [];
 
   constructor(
@@ -74,5 +76,22 @@ export class AggiungiFilmComponent implements OnInit {
         this.movie.releaseYear !== null &&  // Verifica che l'anno di uscita non sia null
         this.movie.categoryId !== null  // Verifica che la categoria non sia null
     );
+  }
+
+  removeMovie(): void {
+    if (this.movieToDelete.id !== null && this.movieToDelete.name.trim() !== '') {
+      this.movieService.deleteMovie(this.movieToDelete.id).subscribe({
+        next: () => {
+          alert('Film rimosso con successo!');
+          this.router.navigate(['/films']);
+        },
+        error: (err) => {
+          alert('Errore nella rimozione del film');
+          console.error(err);
+        }
+      });
+    } else {
+      alert('Inserisci un ID e un nome validi per rimuovere il film.');
+    }
   }
 }

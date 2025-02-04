@@ -38,7 +38,11 @@ export class MovieService {
 
     addMovie(movie: any): Observable<any> {
         const headers = new HttpHeaders().set('Content-Type', 'application/json');
-        return this.http.post('http://localhost:8080/movies/addMovie', movie, { headers });
+        return this.http.post("http://localhost:8080/movies/addMovie", movie, { headers });
+    }
+
+    deleteMovie(id: number): Observable<void> {
+        return this.http.delete<void>("http://localhost:8080/movies/" + id);
     }
 
 
