@@ -40,11 +40,13 @@ public class MovieController {
     }
 
     // Endpoint per creare un nuovo film
-    @PostMapping
-    public ResponseEntity<Movie> createMovie(@RequestBody Movie movie) {
+    @PostMapping("/addMovie")
+    public ResponseEntity<Movie>createMovie(@RequestBody Movie movie) {
+        System.out.println("Ricevuto film: " + movie.getTitle() + ", " + movie.getDescription());
         movieService.save(movie);
         return new ResponseEntity<>(movie, HttpStatus.CREATED);
     }
+
 
     // Endpoint per aggiornare un film
     @PutMapping("/{id}")

@@ -16,7 +16,13 @@
         </li>
 
         <li><a routerLink="/films">Film</a></li>
-        <li><a routerLink="/premium">Premium</a></li>
+        <!-- Se l'utente è un admin, mostra il pulsante "Aggiungi Film" -->
+        <ng-container *ngIf="isAdmin">
+
+            <button class="add-movie-btn" routerLink="/add-movie">Aggiungi Film</button>
+
+        </ng-container>
+
     </ul>
     <div class="actions">
         <!-- Mostra il pulsante Accedi se l'utente non è loggato -->
@@ -24,6 +30,7 @@
 
         <!-- Se l'utente è loggato mostra il pulsante Libreria Personale e Logout -->
         <ng-container *ngIf="isLoggedIn()">
+            <span class="nickname">Ciao, {{ nickname }}</span>
             <button class="library-btn" routerLink="/personal-library">Libreria Personale</button>
             <button class="logout-btn" (click)="logout()">Logout</button>
         </ng-container>

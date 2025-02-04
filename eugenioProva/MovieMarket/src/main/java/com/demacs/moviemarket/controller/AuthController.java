@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -41,16 +43,45 @@ public class AuthController {
         String password = req.getParameter("password");
 
         User user = userService.loginUser(email, password);
-        if (user != null) {
-            HttpSession session = req.getSession();
-            session.setAttribute("user", user);
-            session.setAttribute("sessionId", session.getId());
-            req.getServletContext().setAttribute(session.getId(), session);
-            return new ResponseEntity<>(session.getId(), HttpStatus.OK);
-        } else {
+
+        if (user == null) {
             return new ResponseEntity<>("Invalid credentials", HttpStatus.UNAUTHORIZED);
         }
+
+        if(email.equals("admin@gmail.com") && password.equals("admin")) {
+            user.setAdmin(true);
+        }
+        else {
+            user.setAdmin(false);
+        }
+
+        HttpSession session = req.getSession();
+        session.setAttribute("user", user);
+        session.setAttribute("sessionId", session.getId());
+        req.getServletContext().setAttribute(session.getId(), session);
+
+        return ResponseEntity.ok().body("{\"sessionId\":\"" + session.getId() + "\", \"isAdmin\": " + user.getAdmin() + "}");
     }
+
+    @GetMapping("/userInfo")
+    public ResponseEntity<?> getUserInfo(HttpServletRequest req, @RequestParam String sessionId) {
+        HttpSession session = (HttpSession) req.getServletContext().getAttribute(sessionId);
+
+        if (session != null) {
+            User user = (User) session.getAttribute("user");
+            if (user != null) {
+                // Creiamo un oggetto JSON con id e isAdmin
+                Map<String, Object> userInfo = new HashMap<>();
+                userInfo.put("id", user.getId());
+                userInfo.put("isAdmin", user.getAdmin()); // Assicurati che User abbia questo metodo
+
+                return new ResponseEntity<>(userInfo, HttpStatus.OK);
+            }
+        }
+        return new ResponseEntity<>("User not found", HttpStatus.UNAUTHORIZED);
+    }
+
+
 
     @GetMapping("/checkLogin")
     public ResponseEntity<Boolean> checkLoggedIn(HttpServletRequest req, @RequestParam String sessionId) {

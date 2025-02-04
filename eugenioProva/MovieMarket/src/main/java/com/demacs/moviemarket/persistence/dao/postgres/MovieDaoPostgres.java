@@ -104,6 +104,7 @@ public class MovieDaoPostgres implements MovieDao {
             st.setString(2, movie.getDescription());
             st.setInt(3, movie.getReleaseYear());
             st.setInt(4, movie.getCategoryId());
+
             if (movie.getRating() != null) {
                 st.setInt(5, movie.getRating());
             } else {

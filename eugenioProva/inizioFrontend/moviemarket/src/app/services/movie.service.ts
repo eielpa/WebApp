@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -35,4 +35,15 @@ export class MovieService {
     getMostRecentMovies(limit: number): Observable<any[]> {
         return this.http.get<any[]>("http://localhost:8080/movies/recent/" + limit);
     }
+
+    addMovie(movie: any): Observable<any> {
+        const headers = new HttpHeaders().set('Content-Type', 'application/json');
+        return this.http.post("http://localhost:8080/movies/addMovie", movie, { headers });
+    }
+
+    deleteMovie(id: number): Observable<void> {
+        return this.http.delete<void>("http://localhost:8080/movies/" + id);
+    }
+
+
 }

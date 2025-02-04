@@ -6,14 +6,12 @@ import { RouterLink, Router } from '@angular/router';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { MovieCardComponent } from '../moviecard/moviecard.component';
 import {MovieCardTopRatedComponent} from "../moviecard-toprated/moviecard-toprated.component";
-import { MoviecardfilmhomeComponent } from '../moviecardfilmhome/moviecardfilmhome.component';
-
 
 @Component({
   selector: 'app-home',
-  imports: [
-    RouterLink, CommonModule, NavbarComponent, MovieCardComponent, MovieCardTopRatedComponent, MoviecardfilmhomeComponent
-  ],
+    imports: [
+        RouterLink, CommonModule, NavbarComponent, MovieCardComponent, MovieCardTopRatedComponent
+    ],
   templateUrl: './home.component.html',
   standalone: true,
   styleUrls: ['./home.component.css']
@@ -36,7 +34,6 @@ export class HomeComponent implements OnInit {
     // Carica i film recenti
     this.movieService.getMostRecentMovies(10).subscribe((movies) => {
       this.recentMovies = movies;
-      console.log(this.recentMovies);
     });
 
     // Carica i film con il rating più alto
