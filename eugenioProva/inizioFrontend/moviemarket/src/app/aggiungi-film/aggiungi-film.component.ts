@@ -80,18 +80,29 @@ export class AggiungiFilmComponent implements OnInit {
 
   removeMovie(): void {
     if (this.movieToDelete.id !== null && this.movieToDelete.name.trim() !== '') {
-      this.movieService.deleteMovie(this.movieToDelete.id).subscribe({
-        next: () => {
-          alert('Film rimosso con successo!');
-          this.router.navigate(['/films']);
+      this.movieService.getMovieById(this.movieToDelete.id).subscribe({
+        next: (movie) => {
+          if (movie.title === this.movieToDelete.name) {
+            this.movieService.deleteMovie(this.movieToDelete.id).subscribe({
+              next: () => {
+                alert('Film rimosso con successo!');
+              },
+              error: (err) => {
+                alert('Errore nella rimozione del film');
+                console.error(err);
+              }
+            });
+          } else {
+            alert('Errore: il titolo non corrisponde all\'ID fornito.');
+          }
         },
-        error: (err) => {
-          alert('Errore nella rimozione del film');
-          console.error(err);
+        error: () => {
+          alert('Errore: nessun film trovato con questo ID.');
         }
       });
     } else {
-      alert('Inserisci un ID e un nome validi per rimuovere il film.');
+      alert('Inserisci un ID e un nome validi.');
     }
   }
+
 }

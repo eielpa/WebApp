@@ -1,2 +1,11 @@
-<h1>{{ movieTitle }}</h1>
-<p>{{ movieDescription }}</p>
+<div *ngIf="movie; else errorTemplate">
+    <h1>{{ movie.title }}</h1>
+    <p><strong>Descrizione:</strong> {{ movie.description }}</p>
+    <p><strong>Anno di uscita:</strong> {{ movie.releaseYear }}</p>
+    <p><strong>Rating:</strong> {{ movie.rating ?? 'Nessun rating' }}</p>
+    <p><strong>Data di aggiunta:</strong> {{ movie.addedDate }}</p>
+</div>
+
+<ng-template #errorTemplate>
+    <p>{{ errorMessage }}</p>
+</ng-template>

@@ -1,25 +1,36 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute} from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from "@angular/router";
+import { MovieService } from '../services/movie.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-movie-specific',
-  imports: [],
-  templateUrl: './movie-specific.component.html',
   standalone: true,
-  styleUrl: './movie-specific.component.css'
+  imports: [CommonModule],
+  templateUrl: './movie-specific.component.html',
+  styleUrls: ['./movie-specific.component.css']
 })
+export class MovieSpecificComponent implements OnInit {
+  movie: any = null;  // Contiene i dettagli del film
+  errorMessage: string = '';
 
-export class MovieSpecificComponent {
-  movieTitle: string = '';
-  movieDescription: string = '';
-
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private movieService: MovieService) {}
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      this.movieTitle = params.get('title') || 'Film non trovato';
+      const movieTitle = params.get('title');  // Assicurati che il parametro sia 'title'
+      if (movieTitle) {
+        this.loadMovieDetails(movieTitle);  // Passa il titolo come stringa
+      } else {
+        this.errorMessage = 'Film non trovato';
+      }
     });
+  }
 
-    this.movieDescription = history.state.description || 'Descrizione non disponibile';
+  private loadMovieDetails(title: string) {  // Modifica il tipo del parametro in stringa
+    this.movieService.getMovieByTitle(title).subscribe({
+      next: (data) => this.movie = data,
+      error: () => this.errorMessage = 'Errore nel caricamento del film'
+    });
   }
 }

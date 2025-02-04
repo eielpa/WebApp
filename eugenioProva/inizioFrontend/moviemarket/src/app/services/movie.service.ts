@@ -41,9 +41,16 @@ export class MovieService {
         return this.http.post("http://localhost:8080/movies/addMovie", movie, { headers });
     }
 
-    deleteMovie(id: number): Observable<void> {
+    deleteMovie(id: number | null): Observable<void> {
         return this.http.delete<void>("http://localhost:8080/movies/" + id);
     }
+
+    // Recupera un film specifico per ID
+    getMovieByTitle(title: string): Observable<any> {
+        return this.http.get<any>("http://localhost:8080/movies/getMovieByTitle/" + title);
+    }
+
+
 
 
 }
