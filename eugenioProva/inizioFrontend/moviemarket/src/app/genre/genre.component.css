@@ -1,121 +1,42 @@
-:host {
-    display: block;
-    background-color: #000; /* Sfondo nero */
-    color: #fff;           /* Testo chiaro */
-    min-height: 100vh;     /* Assicura che il componente occupi almeno l'altezza intera della viewport */
-    padding-top: 50px;     /* Aggiungi padding superiore per spostare il contenuto verso il basso */
-}
-
-.hero {
-    height: 80vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 50px;
-    text-align: center;  /* Centra il contenuto */
+/* Container principale della pagina genere */
+.genre-page {
+    padding: 80px;
+    /* Ispirato al background dell'auth-container */
+    background: linear-gradient(135deg, #001a17, #004d40);
     color: white;
-    background: linear-gradient(to right, #000, #222); /* Aggiunto gradiente per maggiore profondità */
+    min-height: 120vh;
+    font-family: Arial, sans-serif;
 }
 
-.hero-content {
-    max-width: 600px;
-    padding: 20px;
-}
-
-.play-btn, .info-btn {
-    padding: 12px 18px;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    border-radius: 5px; /* Bordo arrotondato per i pulsanti */
-    transition: background-color 0.3s ease, transform 0.3s ease; /* Aggiunto effetto di transizione */
-}
-
-.play-btn {
-    background: #00bfae; /* Colore verde brillante per il pulsante play */
-    color: black;
-}
-
-.info-btn {
-    background: #555; /* Colore più scuro per il pulsante info */
+/* Titolo della pagina */
+.genre-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2rem;
     color: white;
 }
 
-/* Wrapper per ogni sezione con frecce */
-.movie-list-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-    width: 100%; /* Assicurati che il wrapper occupi tutta la larghezza disponibile */
-    padding: 20px 0; /* Aggiunto un po' di spazio sopra e sotto */
-    margin-top: 50px; /* Sposta la sezione dei film più in basso */
-}
-
-/* Sezione film */
-.movie-section {
-    margin-top: 50px; /* Aggiungi margine sopra la sezione dei film */
-    margin-bottom: 50px; /* Aggiungi margine sotto la sezione dei film */
-}
-
-/* Container delle card in orizzontale */
+/* Contenitore delle card dei film */
 .movie-list {
     display: flex;
-    flex-wrap: nowrap;
-    gap: 20px;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    padding: 10px;
-    scrollbar-width: none; /* Firefox */
+    flex-wrap: wrap;          /* Le card vanno a capo se lo spazio non basta */
+    gap: 20px;                /* Spaziatura tra le card */
+    justify-content: center;  /* Centra le card nella riga */
 }
 
-.movie-list::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera */
-}
-
-/* Pulsanti freccia */
-.arrow {
-    background-color: rgba(0, 0, 0, 0.5); /* Sfondo trasparente scuro per visibilità */
-    border: none;
-    font-size: 3.5rem;
-    cursor: pointer;
+/* (Opzionale) Stili per ciascuna card, se non presenti in app-moviecard */
+app-moviecard {
+    /* Impostazioni per dare una base al design: */
+    background-color: rgba(255, 255, 255, 0.1);  /* Trasparenza ispirata all'auth-wrapper */
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    padding: 20px;
     color: white;
-    position: absolute;
-    z-index: 20;  /* Assicurati che le frecce siano sopra le card */
-    top: 50%;
-    transform: translateY(-50%);
-    user-select: none;
-    padding: 15px; /* Aumentata l'area cliccabile */
-    transition: background-color 0.3s ease, opacity 0.3s ease; /* Transizione per effetto hover */
-    opacity: 0; /* Nasconde le frecce di default */
-}
-
-.movie-list-wrapper:hover .arrow {
-    opacity: 1; /* Mostra le frecce al passaggio del mouse sopra il wrapper */
-}
-
-.arrow:hover {
-    background-color: rgba(0, 0, 0, 0.7); /* Cambia colore al passaggio del mouse */
-}
-
-.arrow.left {
-    left: 0;
-}
-
-.arrow.right {
-    right: 0;
-}
-
-/* Miglioramenti visivi generali per la lista di film */
-.movie-card {
-    width: 250px;
-    background-color: #333;
-    border-radius: 10px;
-    padding: 15px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.movie-card:hover {
-    transform: scale(1.05); /* Leggero ingrandimento al passaggio del mouse */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+/* Effetto hover per dare interattività */
+app-moviecard:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.6);
 }

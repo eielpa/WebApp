@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WishlistService, WishlistItem } from '../services/wishlist.service';
+import {MovieCardComponent} from "../moviecard/moviecard.component";
 
 @Component({
   selector: 'app-wishlist',
   standalone: true,
-  imports: [CommonModule],
+    imports: [CommonModule, MovieCardComponent],
   templateUrl: './wishlist.component.html',
   styleUrls: ['./wishlist.component.css']
 })
@@ -38,4 +39,5 @@ export class WishlistComponent implements OnInit {
     alert("Elemento rimosso correttamente!");
     window.location.reload();
   }
+
 }

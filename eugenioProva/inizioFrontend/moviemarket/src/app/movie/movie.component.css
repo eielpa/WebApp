@@ -2,34 +2,22 @@
     display: block;
     background-color: #001a17; /* Verde petrolio molto scuro, quasi nero */
     color: #fff;
-    min-height: 100vh;
-    padding-top: 58px;
+    min-height: 150vh;
+    width: 99%;
+    padding-top: 40px;
 }
 
 /* Wrapper per ogni sezione con frecce */
 .movie-list-wrapper {
     position: relative;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-    width: 100%; /* Assicurati che il wrapper occupi tutta la larghezza disponibile */
-    padding: 0 10px; /* Spazio laterale */
-}
-
-/* Sezione film */
-.movie-section {
-    margin: 30px 0;
-    position: relative;
-    background-color: #00221a; /* Aggiornato per avere uno sfondo più scuro, simile ma diverso */
-    padding: 20px 0;
-    border-radius: 10px;
+    width: 98%; /* Assicurati che il wrapper occupi tutta la larghezza disponibile */
 }
 
 /* Container delle card in orizzontale */
 .movies-row {
     display: flex;
     flex-wrap: nowrap;
-    gap: 20px;
+    gap: 30px;
     overflow-x: auto;
     scroll-behavior: smooth;
     padding: 10px;
@@ -43,35 +31,47 @@
 
 /* Pulsanti freccia */
 .arrow {
-    background-color: rgba(0, 0, 0, 0.5); /* Sfondo trasparente scuro per visibilità */
-    border: none;
-    font-size: 3.5rem;
-    cursor: pointer;
-    color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     position: absolute;
-    z-index: 20;  /* Assicurati che le frecce siano sopra le card */
     top: 50%;
     transform: translateY(-50%);
-    user-select: none;
-    padding: 10px;
-    transition: background-color 0.3s ease, opacity 0.3s ease;
-    opacity: 0; /* Nasconde le frecce di default */
+    background: #001a17;
+    border: none;
+    color: #fff;
+    font-size: 2.5rem;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 20; /* Frecce sopra le card */
+    display: flex;
+    align-items: center;   /* Allinea verticalmente */
+    justify-content: center; /* Allinea orizzontalmente */
+    transition: transform 0.3s ease, background 0.3s ease;
 }
 
+/* Rendi visibili le frecce quando la lista è visibile */
 .movie-list-wrapper:hover .arrow {
-    opacity: 1; /* Mostra le frecce al passaggio del mouse */
+    opacity: 1; /* Frecce visibili al passaggio del mouse sulla lista */
+}
+
+/* Modifica l'opacità per le frecce quando non sono visibili */
+.arrow {
+    opacity: 0; /* Le frecce sono invisibili di default */
+    transition: opacity 0.3s ease;
 }
 
 .arrow:hover {
-    background-color: rgba(0, 0, 0, 0.7); /* Cambia colore al passaggio del mouse */
+    background: #00b894;
+    opacity: 1; /* Le frecce diventano visibili al passaggio del mouse */
 }
 
 .arrow.left {
-    left: 10px; /* Aggiungi spazio per il posizionamento */
+    left: 10px;
 }
 
 .arrow.right {
-    right: 10px; /* Aggiungi spazio per il posizionamento */
+    right: 10px;
 }
 
 /* Sezione genere */

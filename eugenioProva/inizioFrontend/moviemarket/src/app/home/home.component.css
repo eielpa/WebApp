@@ -2,50 +2,22 @@
     display: block;
     background-color: #001a17;
     color: #fff;
-    min-height: 100vh;
-  }
-
-  .hero {
-    height: 70vh; /* Ridotto per alzare l'elemento */
-    display: flex;
-    align-items: center;
-    padding: 30px; /* Ridotto */
-    color: white;
-  }
-
-  .hero-content {
-    max-width: 600px;
-  }
-
-  .play-btn, .info-btn {
-    padding: 8px 12px; /* Ridotto per compattezza */
-    border: none;
-    cursor: pointer;
-  }
-
-  .play-btn {
-    background: white;
-    color: black;
-  }
-
-  .info-btn {
-    background: gray;
-    color: white;
+    min-height: 130vh;
   }
 
   .movie-list-wrapper {
     position: relative;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-    width: 100%;
-    margin-top: 30px; /* Ridotto per avvicinare le sezioni */
+    margin-top: 50px; /* Ridotto per avvicinare le sezioni */
   }
 
   .movie-section {
-    margin: 20px 0; /* Ridotto */
-    padding-top: 30px; /* Ridotto */
+    padding-top: 90px; /* Ridotto */
   }
+
+  .movie-section h2 {
+    padding-left: 20px; /* Aggiungi un po' di spazio a sinistra */
+  }
+
 
   .movie-list {
     display: flex;
@@ -60,37 +32,52 @@
     display: none;
   }
 
+  /* Pulsanti freccia */
   .arrow {
-    background-color: rgba(0, 0, 0, 0.5);
-    border: none;
-    font-size: 3rem; /* Ridotto */
-    cursor: pointer;
-    color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     position: absolute;
-    z-index: 20;
-    top: 45%; /* Abbassato leggermente per adattarsi */
+    top: 50%;
     transform: translateY(-50%);
-    user-select: none;
-    padding: 8px; /* Ridotto */
-    transition: background-color 0.3s ease, opacity 0.3s ease;
-    opacity: 0;
+    background: #001a17;
+    border: none;
+    color: #fff;
+    font-size: 2.5rem;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 20; /* Frecce sopra le card */
+    display: flex;
+    align-items: center;   /* Allinea verticalmente */
+    justify-content: center; /* Allinea orizzontalmente */
+    transition: transform 0.3s ease, background 0.3s ease;
   }
 
+
+  /* Rendi visibili le frecce quando la lista è visibile */
   .movie-list-wrapper:hover .arrow {
-    opacity: 1;
+    opacity: 1; /* Frecce visibili al passaggio del mouse sulla lista */
+  }
+
+  /* Modifica l'opacità per le frecce quando non sono visibili */
+  .arrow {
+    opacity: 0; /* Le frecce sono invisibili di default */
+    transition: opacity 0.3s ease;
   }
 
   .arrow:hover {
-    background-color: rgba(0, 0, 0, 0.7);
+    background: #00b894;
+    opacity: 1; /* Le frecce diventano visibili al passaggio del mouse */
   }
 
   .arrow.left {
-    left: 0;
+    left: 10px;
   }
 
   .arrow.right {
-    right: 0;
+    right: 10px;
   }
+
 
   .movie-list.featured-carousel {
     display: flex;

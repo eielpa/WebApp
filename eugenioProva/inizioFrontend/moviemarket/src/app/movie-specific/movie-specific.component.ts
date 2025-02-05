@@ -4,6 +4,7 @@ import { MovieService } from "../services/movie.service";
 import { CommonModule } from "@angular/common";
 import { MovieCardComponent } from "../moviecard/moviecard.component";
 import { TMDbService } from "../services/tmdb.service";
+import {LoginService} from "../services/login.service";
 
 @Component({
   selector: 'app-movie-specific',
@@ -24,7 +25,8 @@ export class MovieSpecificComponent implements OnInit {
       private route: ActivatedRoute,
       private movieService: MovieService,
       private tmdbService: TMDbService,
-      private router: Router
+      private router: Router,
+      private loginService: LoginService // aggiunto per il controllo login
   ) {}
 
   ngOnInit() {
@@ -94,6 +96,16 @@ export class MovieSpecificComponent implements OnInit {
   }
 
   pay(movieTitle: string | null) {
+    // Verifica se l'utente non è loggato
+    if (!sessionStorage.getItem('sessionId')) {
+      alert("fai login per effettuare l'acquisto del film: " + movieTitle);
+      // Se non è loggato, reindirizza alla pagina di login
+      this.router.navigate(['/auth']);
+      return;
+    }
+
+    // Se l'utente è loggato, procedi con il checkout
     this.movieService.checkout(movieTitle);
   }
+
 }
