@@ -15,13 +15,13 @@ export interface UserInfo {
 export class LoginService {
     constructor(private http: HttpClient) {}
 
-    login(email: string, password: string): Observable<{ sessionId: string, isAdmin: boolean }> {
+    login(email: string, password: string): Observable<{ sessionId: string, isAdmin: boolean , nickname: string}> {
         const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
         const body = new URLSearchParams();
         body.set('email', email);
         body.set('password', password);
 
-        return this.http.post<{ sessionId: string, isAdmin: boolean }>(
+        return this.http.post<{ sessionId: string, isAdmin: boolean , nickname: string}>(
             "http://localhost:8080/auth/login",
             body.toString(),
             { headers }

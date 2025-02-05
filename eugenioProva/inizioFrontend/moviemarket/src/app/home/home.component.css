@@ -1,113 +1,114 @@
-:host {
-  display: block;
-  background-color: #001a17;
-  color: #fff;
-  min-height: 100vh;
-}
+  :host {
+    display: block;
+    background-color: #001a17;
+    color: #fff;
+    min-height: 100vh;
+  }
 
-.hero {
-  height: 70vh; /* Ridotto per alzare l'elemento */
-  display: flex;
-  align-items: center;
-  padding: 30px; /* Ridotto */
-  color: white;
-}
+  .hero {
+    height: 70vh; /* Ridotto per alzare l'elemento */
+    display: flex;
+    align-items: center;
+    padding: 30px; /* Ridotto */
+    color: white;
+  }
 
-.hero-content {
-  max-width: 600px;
-}
+  .hero-content {
+    max-width: 600px;
+  }
 
-.play-btn, .info-btn {
-  padding: 8px 12px; /* Ridotto per compattezza */
-  border: none;
-  cursor: pointer;
-}
+  .play-btn, .info-btn {
+    padding: 8px 12px; /* Ridotto per compattezza */
+    border: none;
+    cursor: pointer;
+  }
 
-.play-btn {
-  background: white;
-  color: black;
-}
+  .play-btn {
+    background: white;
+    color: black;
+  }
 
-.info-btn {
-  background: gray;
-  color: white;
-}
+  .info-btn {
+    background: gray;
+    color: white;
+  }
 
-.movie-list-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-  width: 100%;
-  margin-top: 30px; /* Ridotto per avvicinare le sezioni */
-}
+  .movie-list-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    width: 100%;
+    margin-top: 30px; /* Ridotto per avvicinare le sezioni */
+  }
 
-.movie-section {
-  margin: 20px 0; /* Ridotto */
-  padding-top: 30px; /* Ridotto */
-}
+  .movie-section {
+    margin: 20px 0; /* Ridotto */
+    padding-top: 30px; /* Ridotto */
+  }
 
-.movie-list {
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 10px; /* Ridotto */
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  padding: 5px; /* Ridotto */
-  scrollbar-width: none;
-}
-.movie-list::-webkit-scrollbar {
-  display: none;
-}
+  .movie-list {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 10px; /* Ridotto */
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 5px; /* Ridotto */
+    scrollbar-width: none;
+  }
+  .movie-list::-webkit-scrollbar {
+    display: none;
+  }
 
-.arrow {
-  background-color: rgba(0, 0, 0, 0.5);
-  border: none;
-  font-size: 3rem; /* Ridotto */
-  cursor: pointer;
-  color: white;
-  position: absolute;
-  z-index: 20;
-  top: 45%; /* Abbassato leggermente per adattarsi */
-  transform: translateY(-50%);
-  user-select: none;
-  padding: 8px; /* Ridotto */
-  transition: background-color 0.3s ease, opacity 0.3s ease;
-  opacity: 0;
-}
+  .arrow {
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    font-size: 3rem; /* Ridotto */
+    cursor: pointer;
+    color: white;
+    position: absolute;
+    z-index: 20;
+    top: 45%; /* Abbassato leggermente per adattarsi */
+    transform: translateY(-50%);
+    user-select: none;
+    padding: 8px; /* Ridotto */
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+  }
 
-.movie-list-wrapper:hover .arrow {
-  opacity: 1;
-}
+  .movie-list-wrapper:hover .arrow {
+    opacity: 1;
+  }
 
-.arrow:hover {
-  background-color: rgba(0, 0, 0, 0.7);
-}
+  .arrow:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+  }
 
-.arrow.left {
-  left: 0;
-}
+  .arrow.left {
+    left: 0;
+  }
 
-.arrow.right {
-  right: 0;
-}
+  .arrow.right {
+    right: 0;
+  }
 
-.movie-list.featured-carousel {
-  display: flex;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  gap: 40px;
-  padding: 15px;
-  width: 100%;
-}
+  .movie-list.featured-carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    gap: 40px;
+    padding: 15px;
+    width: 100%;
+  }
 
 
-.movie-list.featured-carousel > app-moviecardfilmhome {
-  scroll-snap-align: center;
-  flex: 0 0 100%;
-}
+  .movie-list.featured-carousel > app-moviecardfilmhome {
+    scroll-snap-align: center;
+    flex: 0 0 100%;
+  }
 
-.movie-list.featured-carousel > app-moviecardfilmhome .movie-card {
-  width: 18%; /* Ridotto per dare più spazio sopra */
-}
+  .movie-list.featured-carousel > app-moviecardfilmhome .movie-card {
+    width: 18%; /* Ridotto per dare più spazio sopra */
+  }
+

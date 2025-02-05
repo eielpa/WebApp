@@ -1,5 +1,6 @@
 <div class="movie-card" (click)="goToMovieDetails()">
     <div class="card-header">
+        <img *ngIf="movieImage" [src]="movieImage" alt="{{ movie.title }}" class="movie-image">
         <h3>{{ movie.title }}</h3>
         <p class="rating"><strong>Rating: </strong>{{ movie.rating }}</p>
     </div>

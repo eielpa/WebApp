@@ -1,4 +1,13 @@
+<app-navbar (searchEvent)="onSearch($event)"></app-navbar>
 
+<div class="movie-section" *ngIf="filteredMovies.length > 0">
+    <h2>Risultati della ricerca</h2>
+    <div class="movie-list-wrapper">
+        <div class="movie-list">
+            <app-moviecard *ngFor="let movie of filteredMovies" [movie]="movie"></app-moviecard>
+        </div>
+    </div>
+</div>
 
 <!-- Sezione film recenti -->
 <div class="movie-section">
@@ -23,5 +32,8 @@
         <button class="arrow right" (click)="scroll(movieListTop, 'right')">&#10095;</button>
     </div>
 </div>
+
+
+
 
 

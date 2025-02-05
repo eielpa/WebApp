@@ -5,13 +5,12 @@ import { CommonModule } from '@angular/common';
 import { RouterLink, Router } from '@angular/router';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { MovieCardComponent } from '../moviecard/moviecard.component';
-import {MovieCardTopRatedComponent} from "../moviecard-toprated/moviecard-toprated.component";
+import { MovieCardTopRatedComponent } from "../moviecard-toprated/moviecard-toprated.component";
 
 @Component({
   selector: 'app-home',
-    imports: [
-        RouterLink, CommonModule, NavbarComponent, MovieCardComponent, MovieCardTopRatedComponent
-    ],
+  imports: [
+    RouterLink, CommonModule, NavbarComponent, MovieCardComponent, MovieCardTopRatedComponent],
   templateUrl: './home.component.html',
   standalone: true,
   styleUrls: ['./home.component.css']
@@ -22,7 +21,9 @@ export class HomeComponent implements OnInit {
   topRatedMovies: any[] = []; // Lista dei film con il rating più alto
   categories: any[] = [];  // Lista delle categorie
   movies: any [] = [];
-
+  filteredMovies: any[] = [];
+  searchText: string = '';
+  searchQuery: string = '';
 
   constructor(
       private movieService: MovieService,
@@ -51,6 +52,18 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  // 🔍 Funzione di ricerca
+  onSearch(searchText: string) {
+    this.searchText = searchText.toLowerCase(); // Converte in minuscolo
+    if (this.searchText.trim() === '') {
+      this.filteredMovies = []; // Se la barra è vuota, mostra i film normali
+    } else {
+      this.filteredMovies = [...this.recentMovies, ...this.topRatedMovies].filter(movie =>
+          movie.title.toLowerCase().includes(this.searchText)
+      );
+    }
+  }
+
   goToMovieDetails(movieId: number) {
     this.router.navigate(['/movie', movieId]);
   }
@@ -68,4 +81,5 @@ export class HomeComponent implements OnInit {
     } else {
       list.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     }
-  }}
+  }
+}

@@ -13,7 +13,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/movies")
 public class MovieController {
-
     private final MovieService movieService;
 
     @Autowired
@@ -29,9 +28,40 @@ public class MovieController {
     }
 
     // Endpoint per ottenere un film specifico per ID
-    @GetMapping("/{id}")
+    @GetMapping("getMovie/{id}")
     public ResponseEntity<Movie> getMovieById(@PathVariable int id) {
         Movie movie = movieService.findById(id);
+        if (movie != null) {
+            return new ResponseEntity<>(movie, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/getMovieByTitle/{title}")
+    public ResponseEntity<Movie> getMovieByTitle(@PathVariable String title) {
+        Movie movie = movieService.findByTitle(title);
+        if (movie != null) {
+            return new ResponseEntity<>(movie, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    // Nuovo endpoint per ottenere solo il titolo di un film tramite ID
+    @GetMapping("/getMovieTitle/{id}")
+    public ResponseEntity<String> getMovieTitleById(@PathVariable int id) {
+        Movie movie = movieService.findById(id);
+        if (movie != null) {
+            return new ResponseEntity<>(movie.getTitle(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("getTitle/search")
+    public ResponseEntity<Movie> searchMovieByTitle(@RequestParam("title") String title) {
+        Movie movie = movieService.findByTitle(title);
         if (movie != null) {
             return new ResponseEntity<>(movie, HttpStatus.OK);
         } else {

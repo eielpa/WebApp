@@ -1,9 +1,10 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import {Component, EventEmitter, HostListener, OnInit, Output} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { CategoryService } from '../services/category.service';
-import {Observable} from "rxjs";
-import {LoginService, UserInfo} from "../services/login.service";
+import { Observable } from "rxjs";
+import { LoginService, UserInfo } from "../services/login.service";
+import { MovieService } from "../services/movie.service";
 
 @Component({
   selector: 'app-navbar',
@@ -13,20 +14,26 @@ import {LoginService, UserInfo} from "../services/login.service";
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  @Output() searchEvent = new EventEmitter<string>();
+
+  onSearch(event: Event) {
+    const searchText = (event.target as HTMLInputElement).value;
+    this.searchEvent.emit(searchText); // Invia il testo della ricerca
+  }
+
   categories: any[] = [];
   isDropdownOpen = false;
-  categoryName: string = '';
   userNickname: string | null = null;
-
-  // Variabili per gestire le info utente
-  userInfo: UserInfo | null = null;
-  nickname: string = '';
+  nickname: string | null = '';
   isAdmin: boolean = false; // Flag per mostrare il pulsante "Aggiungi Film"
+  // Aggiungi una proprietà per tenere traccia della query di ricerca, se necessario
+  searchQuery: string = '';
 
   constructor(
       private categoryService: CategoryService,
       private loginService: LoginService,
-      private router: Router
+      private router: Router,
+      private movieService: MovieService
   ) {}
 
   ngOnInit(): void {
@@ -35,22 +42,6 @@ export class NavbarComponent implements OnInit {
       this.categories = categories;
     });
 
-    // Recupera le informazioni utente se loggato
-    if (this.isLoggedIn()) {
-      this.loginService.getUserNickname().subscribe({
-        next: (nickname) => this.userNickname = nickname,
-        error: () => this.userNickname = null
-      });
-
-      // Recupera lo stato admin
-      this.loginService.getUserInfo().subscribe({
-        next: (userInfo) => {
-          this.nickname = userInfo.id;
-          this.isAdmin = userInfo.isAdmin;
-        },
-        error: () => this.isAdmin = false
-      });
-    }
   }
 
   // Alterna la visibilità del dropdown
@@ -78,12 +69,15 @@ export class NavbarComponent implements OnInit {
 
   // Verifica se l'utente è loggato (presenza di un token/sessionId)
   isLoggedIn(): boolean {
+    this.nickname=sessionStorage.getItem("userNickname");
     return !!sessionStorage.getItem('sessionId');
   }
 
   // Esegue il logout: rimuove il token e reindirizza alla pagina di login
   logout(): void {
     sessionStorage.removeItem('sessionId');
-    this.router.navigate(['/login']);
+    sessionStorage.removeItem('isAdmin');
+    sessionStorage.removeItem('userNickname');
+    this.router.navigate(['/auth']);
   }
 }

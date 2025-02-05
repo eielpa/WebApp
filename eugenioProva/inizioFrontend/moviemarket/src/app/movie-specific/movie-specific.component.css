@@ -1,0 +1,140 @@
+:host {
+    display: block;
+    background-color: #001a17;  /* Colore di sfondo scuro */
+    color: #fff;  /* Colore del testo bianco */
+    min-height: 100vh;  /* Imposta l'altezza minima della pagina */
+    padding: 0; /* Rimuove il padding, così l'immagine occupa tutta l'area */
+}
+
+.hero {
+    height: 100vh;  /* Imposta l'altezza della sezione a 100% della viewport */
+    width: 100%;  /* Imposta la larghezza della sezione a 100% */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-size: cover; /* Copre tutta l'area */
+    background-position: center; /* Centra l'immagine */
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    border-radius: 0;  /* Rimuove il bordo arrotondato per evitare ritagli */
+    margin-bottom: 0;  /* Rimuove il margine */
+    position: relative;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Oscura l'immagine per migliorare il contrasto */
+    border-radius: 0;
+}
+
+.hero-content {
+    max-width: 800px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    padding: 20px;
+}
+
+
+
+
+
+h1 {
+    font-size: 3rem;  /* Grandezza del titolo */
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #fff;  /* Colore bianco per il titolo */
+}
+
+p {
+    font-size: 1.2rem;
+    color: #ccc;  /* Colore chiaro per la descrizione */
+    line-height: 1.6;
+    max-width: 700px;
+    margin: 0 auto;  /* Centra il paragrafo */
+}
+
+.info-btn, .play-btn {
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    margin-top: 15px;
+    border-radius: 5px;
+}
+
+.play-btn {
+    background: #f1c40f;  /* Colore giallo per il bottone play */
+    color: black;
+}
+
+.info-btn {
+    background: #34495e;  /* Colore grigio scuro per il bottone info */
+    color: white;
+    margin-left: 10px;
+}
+
+.info-btn:hover, .play-btn:hover {
+    opacity: 0.8;  /* Leggera opacità al passaggio del mouse */
+}
+
+.movie-section {
+    margin-top: 50px;
+}
+
+.movie-list-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.movie-list {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding: 10px;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+}
+
+.movie-list::-webkit-scrollbar {
+    display: none;
+}
+
+.arrow {
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    font-size: 2.5rem;
+    cursor: pointer;
+    color: white;
+    position: absolute;
+    z-index: 10;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 8px;
+    opacity: 0;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+}
+
+.movie-list-wrapper:hover .arrow {
+    opacity: 1;
+}
+
+.arrow:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.arrow.left {
+    left: 10px;
+}
+
+.arrow.right {
+    right: 10px;
+}

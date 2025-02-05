@@ -30,7 +30,7 @@
     flex: 0 0 auto;
     width: 200px;
     height: 180px;
-    padding: 10px;
+    padding: 20px 10px; /* Aumentato il padding per dare più spazio al titolo */
     border: 1px solid #ddd;
     border-radius: 15px; /* Bordi arrotondati per un look più morbido */
     background-color: #fff;
@@ -54,6 +54,11 @@
 }
 
 /* Intestazione della card: titolo e rating */
+.card-header {
+    position: relative; /* Aggiungi position relativa per gestire meglio il z-index */
+}
+
+/* Titolo della card */
 .card-header h3 {
     margin: 0;
     font-size: 1.2rem;
@@ -62,6 +67,7 @@
     text-overflow: ellipsis;
     color: #333; /* Colore del titolo scuro */
     font-family: 'Cinzel', serif; /* Font elegante */
+    z-index: 2; /* Assicura che il titolo stia sopra gli altri elementi */
 }
 
 /* Rating nascosto di default */
@@ -124,4 +130,13 @@
     -webkit-text-fill-color: transparent;
     text-shadow: 1px 1px 5px rgba(0, 77, 64, 0.5); /* Effetto glow leggero */
     z-index: 2;
+}
+
+/* Immagine della card */
+.movie-image {
+    width: 100%;
+    height: 120px; /* Limita l'altezza dell'immagine */
+    border-radius: 8px;
+    object-fit: cover;
+    margin-bottom: 10px; /* Aggiungi margine per separare l'immagine dal titolo */
 }

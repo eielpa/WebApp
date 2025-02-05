@@ -1,23 +1,22 @@
-import { Routes } from '@angular/router';
-import { HomeComponent} from './home/home.component';
-import { LoginComponent} from './login/login.component';
-import { GenreComponent} from './genre/genre.component';
-import { MoviesComponent } from "./movie/movie.component";
-import {RegistrationComponent} from "./registration/registration.component";
-import { PersonalLibraryComponent } from './personal-library/personal-library.component';
-import { MovieSpecificComponent} from "./movie-specific/movie-specific.component";
-import { RecuperoPasswordComponent} from "./passwordrecovery/passwordrecovery.component";
-import {AggiungiFilmComponent} from "./aggiungi-film/aggiungi-film.component";
+  import { Routes } from '@angular/router';
+  import { HomeComponent} from './home/home.component';
+  import { GenreComponent} from './genre/genre.component';
+  import { MoviesComponent } from "./movie/movie.component";
+  import { PersonalLibraryComponent } from './personal-library/personal-library.component';
+  import { MovieSpecificComponent} from "./movie-specific/movie-specific.component";
+  import { RecuperoPasswordComponent} from "./passwordrecovery/passwordrecovery.component";
+  import { AggiungiFilmComponent } from "./aggiungi-film/aggiungi-film.component";
+  import { AuthComponent } from "./auth/auth.component";
+  import { WishlistComponent } from "./wishlist/wishlist.component";
 
-export const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'login', component: LoginComponent},
-  { path: 'genre/:name', component: GenreComponent },
-  { path: 'films', component: MoviesComponent },
-  { path: 'movie/:title', component: MovieSpecificComponent },
-  { path: 'recupero-password', component: RecuperoPasswordComponent },
-  { path: 'registration', component: RegistrationComponent },
-  { path: 'personal-library', component: PersonalLibraryComponent },
-  { path: 'add-movie', component: AggiungiFilmComponent },
-
-];
+  export const routes: Routes = [
+    { path: '', component: HomeComponent },
+    { path: 'genre/:name', component: GenreComponent },
+    { path: 'films', component: MoviesComponent },
+    { path: 'movie/:title', component: MovieSpecificComponent },
+    { path: 'recupero-password', component: RecuperoPasswordComponent },
+    { path: 'auth', component: AuthComponent },
+    { path: 'personal-library', component: PersonalLibraryComponent },
+    { path: 'add-movie', component: AggiungiFilmComponent },
+    { path: 'wishlist', component: WishlistComponent },
+  ];

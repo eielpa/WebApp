@@ -1,0 +1,66 @@
+<div class="auth-container">
+    <div class="auth-wrapper">
+        <!-- Form di login -->
+        <ng-container *ngIf="isLoginMode; else registerForm">
+            <div class="auth-form login" [@fadeInOut]>
+                <form (submit)="login()">
+                    <h2>Accedi</h2>
+                    <div class="input-group">
+                        <label for="login-email">Email <span>*</span></label>
+                        <input type="email" id="login-email" [(ngModel)]="email" name="loginEmail" required />
+                    </div>
+                    <div class="input-group">
+                        <label for="login-password">Password <span>*</span></label>
+                        <div class="password-container">
+                            <input id="login-password" [(ngModel)]="password" name="loginPassword" required
+                                   [type]="passwordVisible ? 'text' : 'password'" (keydown)="preventCopyPaste($event)" />
+                            <span class="eye-icon" (click)="togglePasswordVisibility()">👁</span>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn">Accedi</button>
+                    <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+                    <p class="switch-mode" (click)="toggleMode()">Non hai un account? Registrati</p>
+                </form>
+            </div>
+        </ng-container>
+        <!-- Template per il form di registrazione -->
+        <ng-template #registerForm>
+            <div class="auth-form register" [@fadeInOut]>
+                <form (submit)="register()">
+                    <h2>Registrati</h2>
+                    <div class="input-group">
+                        <label for="register-id">ID Utente <span>*</span></label>
+                        <input type="text" id="register-id" [(ngModel)]="user.id" name="registerId" required />
+                    </div>
+                    <div class="input-group">
+                        <label for="register-firstName">Nome <span>*</span></label>
+                        <input type="text" id="register-firstName" [(ngModel)]="user.firstName" name="registerFirstName" required />
+                    </div>
+                    <div class="input-group">
+                        <label for="register-lastName">Cognome <span>*</span></label>
+                        <input type="text" id="register-lastName" [(ngModel)]="user.lastName" name="registerLastName" required />
+                    </div>
+                    <div class="input-group">
+                        <label for="register-dob">Data di Nascita <span>*</span></label>
+                        <input type="date" id="register-dob" [(ngModel)]="user.dob" name="registerDob" required />
+                    </div>
+                    <div class="input-group">
+                        <label for="register-email">Email <span>*</span></label>
+                        <input type="email" id="register-email" [(ngModel)]="user.email" name="registerEmail" required />
+                    </div>
+                    <div class="input-group">
+                        <label for="register-password">Password <span>*</span></label>
+                        <div class="password-container">
+                            <input id="register-password" [(ngModel)]="user.password" name="registerPassword" required
+                                   [type]="regPasswordVisible ? 'text' : 'password'" />
+                            <span class="eye-icon" (click)="toggleRegPasswordVisibility()">👁</span>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn">Registrati</button>
+                    <p *ngIf="registrationMessage" class="error-message">{{ registrationMessage }}</p>
+                    <p class="switch-mode" (click)="toggleMode()">Hai già un account? Accedi</p>
+                </form>
+            </div>
+        </ng-template>
+    </div>
+</div>

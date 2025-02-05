@@ -22,15 +22,22 @@
             <button class="add-movie-btn" routerLink="/add-movie">Aggiungi Film</button>
 
         </ng-container>
-
     </ul>
+
+    <!-- Barra di ricerca -->
+    <div class="search-bar">
+        <input type="text" (input)="onSearch($event)" placeholder="Cerca un film..." />
+
+    </div>
+
     <div class="actions">
         <!-- Mostra il pulsante Accedi se l'utente non è loggato -->
-        <button *ngIf="!isLoggedIn()" class="login-btn" routerLink="/login">Accedi</button>
+        <button *ngIf="!isLoggedIn()" class="login-btn" routerLink="/auth">Accedi</button>
 
         <!-- Se l'utente è loggato mostra il pulsante Libreria Personale e Logout -->
         <ng-container *ngIf="isLoggedIn()">
             <span class="nickname">Ciao, {{ nickname }}</span>
+            <button class="wishlist-btn" routerLink="/wishlist">Wishlist</button>
             <button class="library-btn" routerLink="/personal-library">Libreria Personale</button>
             <button class="logout-btn" (click)="logout()">Logout</button>
         </ng-container>

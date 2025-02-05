@@ -60,7 +60,11 @@ public class AuthController {
         session.setAttribute("sessionId", session.getId());
         req.getServletContext().setAttribute(session.getId(), session);
 
-        return ResponseEntity.ok().body("{\"sessionId\":\"" + session.getId() + "\", \"isAdmin\": " + user.getAdmin() + "}");
+        return ResponseEntity.ok().body(
+                "{\"sessionId\":\"" + session.getId() +
+                        "\", \"isAdmin\": " + user.getAdmin() +
+                        ", \"nickname\": \"" + user.getId() + "\"}"
+        );
     }
 
     @GetMapping("/userInfo")
