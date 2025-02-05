@@ -32,10 +32,6 @@ public class MovieService {
         movieDao.save(movie);
     }
 
-    public Movie findByTitle(String title) {
-        return movieDao.findByTitle(title);
-    }
-
     public void update(Movie movie) {
         movieDao.update(movie);
     }

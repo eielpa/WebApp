@@ -38,16 +38,6 @@ public class MovieController {
         }
     }
 
-    @GetMapping("/getMovieByTitle/{title}")
-    public ResponseEntity<Movie> getMovieByTitle(@PathVariable String title) {
-        Movie movie = movieService.findByTitle(title);
-        if (movie != null) {
-            return new ResponseEntity<>(movie, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
     // Nuovo endpoint per ottenere solo il titolo di un film tramite ID
     @GetMapping("/getMovieTitle/{id}")
     public ResponseEntity<String> getMovieTitleById(@PathVariable int id) {
