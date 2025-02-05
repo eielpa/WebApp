@@ -124,5 +124,15 @@ public class MovieController {
         return new ResponseEntity<>(movies, HttpStatus.OK);
     }
 
+    @GetMapping("/getMovieByTitle/{title}")
+    public ResponseEntity<Movie> getMovieByTitle(@PathVariable String title) {
+        Movie movie = movieService.findByTitle(title);
+        if (movie != null) {
+            return new ResponseEntity<>(movie, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
 
 }
