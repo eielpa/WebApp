@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MovieService } from "../services/movie.service";
 import { CommonModule } from "@angular/common";
 import { MovieCardComponent } from "../moviecard/moviecard.component";
@@ -12,32 +12,54 @@ import { TMDbService } from "../services/tmdb.service";
   styleUrls: ['./movie-specific.component.css'],
   imports: [CommonModule, MovieCardComponent]
 })
-export class MovieSpecificComponent {
+export class MovieSpecificComponent implements OnInit {
   movieTitle: string | null = '';
   movieDescription: string = '';
-  movieImage: string = ''; // 🔹 Aggiunto per l'immagine
+  movieImage: string = ''; // URL dell'immagine
   categoryMovieId: number | null | undefined;
   relatedMovies: any[] = [];
   userId: string | null = null;
 
-  constructor(private route: ActivatedRoute, private movieService: MovieService, private tmdbService: TMDbService) {}
+  constructor(
+      private route: ActivatedRoute,
+      private movieService: MovieService,
+      private tmdbService: TMDbService,
+      private router: Router
+  ) {}
 
   ngOnInit() {
+    // Recupera il titolo dal parametro della route
     this.route.paramMap.subscribe(params => {
       this.movieTitle = params.get('title');
-      this.userId=sessionStorage.getItem('userNickname');
+      this.userId = sessionStorage.getItem('userNickname');
 
       if (this.movieTitle) {
-        this.tmdbService.getMovieImage(this.movieTitle).subscribe(imageUrl => {
-          this.movieImage = imageUrl;
-          const heroElement = document.querySelector('.hero') as HTMLElement;
-          if (heroElement) {
-            heroElement.style.backgroundImage = `url(${imageUrl})`;
-          }
-        });
+        // Se è presente l'immagine nello state, usala direttamente
+        if (history.state && history.state.imageUrl) {
+          this.movieImage = history.state.imageUrl;
+        } else {
+          // Altrimenti, richiama il servizio per ottenerla
+          this.tmdbService.getMovieImage(this.movieTitle).subscribe(imageUrl => {
+            this.movieImage = imageUrl;
+          });
+        }
 
+
+
+        // Se è presente la descrizione nello state, usala direttamente
+        if (history.state && history.state.description) {
+          this.movieDescription = history.state.description;
+        } else {
+          this.movieDescription = 'Descrizione non disponibile';
+        }
+
+        // Chiamata sempre al servizio per recuperare i dati del film (per ottenere almeno il categoryId)
         this.movieService.getMoviesByTitle(this.movieTitle).subscribe(movie => {
           if (movie) {
+            // Se non era presente la descrizione nello state, la aggiorniamo con quella recuperata
+            if (!(history.state && history.state.description)) {
+              this.movieDescription = movie.description || 'Descrizione non disponibile';
+            }
             this.categoryMovieId = movie.categoryId;
             if (this.categoryMovieId !== null && this.categoryMovieId !== undefined) {
               this.getRelatedMovies(this.categoryMovieId);
@@ -46,24 +68,20 @@ export class MovieSpecificComponent {
         });
       }
     });
-
-    this.movieDescription = history.state.description || 'Descrizione non disponibile';
   }
+
 
 
   getRelatedMovies(categoryId: number) {
     this.movieService.getMoviesByCategory(categoryId).subscribe(movies => {
+      // Escludi il film corrente dalla lista dei film correlati
       this.relatedMovies = movies.filter(m => m.title !== this.movieTitle);
     });
   }
 
   scroll(list: HTMLElement, direction: string) {
     const scrollAmount = 300;
-    if (direction === 'left') {
-      list.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-    } else {
-      list.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-    }
+    list.scrollBy({ left: direction === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' });
   }
 
   addToWishlist() {

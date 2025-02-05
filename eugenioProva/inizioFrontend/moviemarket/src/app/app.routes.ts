@@ -5,7 +5,6 @@
   import { PersonalLibraryComponent } from './personal-library/personal-library.component';
   import { MovieSpecificComponent} from "./movie-specific/movie-specific.component";
   import { RecuperoPasswordComponent} from "./passwordrecovery/passwordrecovery.component";
-  import { AggiungiFilmComponent } from "./aggiungi-film/aggiungi-film.component";
   import { AuthComponent } from "./auth/auth.component";
   import { WishlistComponent } from "./wishlist/wishlist.component";
 
@@ -17,6 +16,5 @@
     { path: 'recupero-password', component: RecuperoPasswordComponent },
     { path: 'auth', component: AuthComponent },
     { path: 'personal-library', component: PersonalLibraryComponent },
-    { path: 'add-movie', component: AggiungiFilmComponent },
     { path: 'wishlist', component: WishlistComponent },
   ];

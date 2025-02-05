@@ -6,20 +6,28 @@
     padding: 0; /* Rimuove il padding, così l'immagine occupa tutta l'area */
 }
 
+:host {
+    display: block;
+    background-color: #001a17;  /* Colore di sfondo scuro */
+    color: #fff;  /* Colore del testo bianco */
+    min-height: 100vh;  /* Imposta l'altezza minima della pagina */
+    padding: 0; /* Rimuove il padding, così l'immagine occupa tutta l'area */
+}
+
 .hero {
-    height: 100vh;  /* Imposta l'altezza della sezione a 100% della viewport */
-    width: 100%;  /* Imposta la larghezza della sezione a 100% */
+    height: 100vh;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     color: white;
-    background-size: cover; /* Copre tutta l'area */
-    background-position: center; /* Centra l'immagine */
+    background-size: contain;  /* Visualizza l'intera immagine */
+    background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    border-radius: 0;  /* Rimuove il bordo arrotondato per evitare ritagli */
-    margin-bottom: 0;  /* Rimuove il margine */
+    border-radius: 0;
+    margin-bottom: 0;
     position: relative;
 }
 
@@ -29,7 +37,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Oscura l'immagine per migliorare il contrasto */
+    background: rgba(0, 0, 0, 0.5);
     border-radius: 0;
 }
 
@@ -38,52 +46,48 @@
     text-align: center;
     position: relative;
     z-index: 1;
-    padding: 20px;
 }
 
-
-
+/* Altre regole (h1, p, .info-btn, etc.) rimangono invariate */
 
 
 h1 {
-    font-size: 3rem;  /* Grandezza del titolo */
+    font-size: 3rem;
     font-weight: bold;
     margin-bottom: 15px;
-    color: #fff;  /* Colore bianco per il titolo */
+    color: #fff;
 }
 
 p {
+    padding-top: 10px;
     font-size: 1.2rem;
-    color: #ccc;  /* Colore chiaro per la descrizione */
+    color: #ccc;
     line-height: 1.6;
     max-width: 700px;
-    margin: 0 auto;  /* Centra il paragrafo */
 }
 
-.info-btn, .play-btn {
-    padding: 10px 20px;
+/* Pulsanti Play e Info con stile simile al pulsante Accedi */
+.info-btn {
+    padding: 12px 35px ;
     border: none;
     cursor: pointer;
     font-size: 1.2rem;
-    margin-top: 15px;
     border-radius: 5px;
-}
-
-.play-btn {
-    background: #f1c40f;  /* Colore giallo per il bottone play */
-    color: black;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
 }
 
 .info-btn {
-    background: #34495e;  /* Colore grigio scuro per il bottone info */
+    background-color: #34495e;
     color: white;
     margin-left: 10px;
 }
 
-.info-btn:hover, .play-btn:hover {
-    opacity: 0.8;  /* Leggera opacità al passaggio del mouse */
+.info-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(0,191,174,0.6), 0 0 15px rgba(0,255,255,0.4);
 }
 
+/* Sezione Film */
 .movie-section {
     margin-top: 50px;
 }
