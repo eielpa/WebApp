@@ -94,18 +94,4 @@ export class MovieSpecificComponent implements OnInit {
       error: () => console.error('Errore nell\'aggiunta alla wishlist')
     });
   }
-
-  pay(movieTitle: string | null) {
-    // Verifica se l'utente non è loggato
-    if (!sessionStorage.getItem('sessionId')) {
-      alert("fai login per effettuare l'acquisto del film: " + movieTitle);
-      // Se non è loggato, reindirizza alla pagina di login
-      this.router.navigate(['/auth']);
-      return;
-    }
-
-    // Se l'utente è loggato, procedi con il checkout
-    this.movieService.checkout(movieTitle);
-  }
-
 }

@@ -18,9 +18,9 @@ import { NavbarComponent } from "../navbar/navbar.component";
   styleUrls: ['./genre.component.css']
 })
 export class GenreComponent implements OnInit {
-  genre: string | null = null; // Mantieni 'null' per garantire che non sia una stringa vuota
+  genre: string | null = null; // Il nome del genere
   movies: any[] = [];
-  selectedCategoryId: number | null | undefined;
+  selectedCategoryId: number | null = null;
 
   constructor(
       private route: ActivatedRoute,
@@ -30,17 +30,18 @@ export class GenreComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-      this.selectedCategoryId = Number(params.get('name')); // Recupera l'ID dalla rotta
+      // Recupera l'ID dalla rotta (nota: qui usiamo l'id e non il "name")
+      this.selectedCategoryId = Number(params.get('name'));
 
       if (this.selectedCategoryId) {
         // Recupera il nome del genere dalla categoria
         this.categoryService.getCategoryNameById(this.selectedCategoryId).subscribe((categoryName: string) => {
-          this.genre = categoryName;  // Assegna il nome del genere
+          this.genre = categoryName;
         });
 
-        // Recupera i film per categoria
+        // Recupera i film per la categoria
         this.movieService.getMoviesByCategory(this.selectedCategoryId).subscribe((data: any) => {
-          this.movies = data;  // Assegna i film recuperati
+          this.movies = data;
         });
       }
     });

@@ -21,6 +21,11 @@ public class MovieDaoProxy implements MovieDao {
     }
 
     @Override
+    public List<Movie> findByUserNickname(String nickname) {
+        return movieDao.findByUserNickname(nickname);
+    }
+
+    @Override
     public List<Movie> findAll() {
         return movieDao.findAll();
     }
@@ -41,8 +46,8 @@ public class MovieDaoProxy implements MovieDao {
     }
 
     @Override
-    public void save(Movie movie) {
-        movieDao.save(movie);
+    public boolean save(Movie movie) {
+        return movieDao.save(movie);
     }
 
     @Override

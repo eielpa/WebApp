@@ -92,7 +92,66 @@
     text-stroke: 1px rgba(0, 191, 174, 1); /* Effetto di contorno luminoso */
 }
 
+/* Responsività per schermi più piccoli */
+@media (max-width: 1024px) {
+    /* Ridurre la dimensione del titolo per tablet e schermi più piccoli */
+    .genre-section h2 {
+        font-size: 1.5rem;
+        margin-left: 20px;
+    }
 
-.genre-section h2:hover {
-    color: #00bfae; /* Cambia colore al passaggio del mouse */
+    /* Adattare la larghezza delle frecce per schermi più piccoli */
+    .arrow {
+        font-size: 2rem;
+        width: 45px;
+        height: 45px;
+    }
+
+    /* Aumentare la distanza tra i film su schermi più piccoli */
+    .movies-row {
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Mantenere il layout orizzontale anche su schermi piccoli */
+    .movies-row {
+        flex-wrap: nowrap;  /* Mantieni le card in una sola riga */
+        gap: 15px;
+    }
+
+    /* Adattare la larghezza delle card per schermi più piccoli */
+    app-moviecard {
+        width: 45%; /* Le card occupano il 45% dello spazio disponibile */
+        max-width: 250px; /* Evita che le card siano troppo larghe */
+    }
+
+    .arrow {
+        font-size: 1.8rem;
+        width: 40px;
+        height: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Ulteriore adattamento per schermi molto piccoli */
+    .genre-section h2 {
+        font-size: 1.2rem;
+        margin-left: 15px;
+    }
+
+    .movies-row {
+        gap: 10px;
+    }
+
+    app-moviecard {
+        width: 100%; /* Le card occupano tutta la larghezza su schermi molto piccoli */
+        max-width: 250px; /* Evita che le card siano troppo larghe */
+    }
+
+    .arrow {
+        font-size: 1.5rem;
+        width: 35px;
+        height: 35px;
+    }
 }

@@ -1,47 +1,40 @@
 package com.demacs.moviemarket.controller;
 
-import com.demacs.moviemarket.persistence.model.Download;
-import com.demacs.moviemarket.service.DownloadService;
-import org.springframework.http.HttpStatus;
+import com.demacs.moviemarket.service.PersonalLibraryService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("/api/downloads")
+@RequestMapping("/download")
+@CrossOrigin(origins = "http://localhost:4200")
 public class DownloadController {
 
-    private final DownloadService downloadService;
-
-    public DownloadController(DownloadService downloadService) {
-        this.downloadService = downloadService;
-    }
-
-    @GetMapping("/{id}")
-    public Download getDownload(@PathVariable int id) {
-        return downloadService.findById(id);
-    }
+    @Autowired
+    private PersonalLibraryService personalLibraryService;
 
     @GetMapping
-    public List<Download> getAllDownloads() {
-        return downloadService.findAll();
-    }
+    public ResponseEntity<Resource> downloadMovie(@RequestParam String userId, @RequestParam String movieId) {
+        // Registra il download inserendo una nuova riga nel DB
+        personalLibraryService.recordDownload(userId, movieId);
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public void createDownload(@RequestBody Download download) {
-        downloadService.save(download);
-    }
+        // Carica il file dalla cartella resources/static
+        Resource resource = new ClassPathResource("static/provaFilm.txt");
+        if (!resource.exists()) {
+            return ResponseEntity.notFound().build();
+        }
 
-    @PutMapping("/{id}")
-    public void updateDownload(@PathVariable int id, @RequestBody Download download) {
-        download.setId(id);  // Set the ID to ensure it updates the correct download
-        downloadService.update(download);
-    }
+        // Prepara le intestazioni per forzare il download
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=provaFilm.txt");
 
-    @DeleteMapping("/{id}")
-    public void deleteDownload(@PathVariable int id) {
-        Download download = downloadService.findById(id);
-        downloadService.delete(download);
+        return ResponseEntity.ok()
+                .headers(headers)
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .body(resource);
     }
 }

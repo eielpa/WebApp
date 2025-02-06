@@ -1,35 +1,9 @@
-/* Wrapper per ogni sezione con frecce */
-.movie-list-wrapper {
-    position: relative !important;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-    width: 100%; /* Assicurati che il wrapper occupi tutta la larghezza disponibile */
-}
-
-/* Sezione film */
-.movie-section {
-    margin: 40px 0;
-    position: relative;
-}
-
-/* Container delle card in orizzontale */
-.movie-list {
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 25px;
-    overflow-x: auto;
-    padding: 10px;
-    transition: transform 0.3s ease;
-    justify-content: center;
-}
-
 /* Card */
 .movie-card {
     position: relative;
     flex: 0 0 auto;
-    width: 200px;
-    height: 180px;
+    width: 250px;  /* Aumentato per schermi grandi */
+    height: 220px; /* Aumentato per schermi grandi */
     padding: 0; /* Rimuovi padding per fare spazio all'immagine */
     border: 1px solid #ddd;
     border-radius: 15px;
@@ -64,67 +38,62 @@
     transform: scale(1.05);
 }
 
-/* Footer della card: contiene il titolo e rating */
+/* Footer con titolo, inizialmente nascosto */
 .card-footer {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: rgba(0, 0, 0, 0.9); /* Sfondo più scuro per una migliore visibilità */
+    background-color: rgba(0, 0, 0, 0.7); /* Sfondo scuro per il footer */
     color: #fff;
-    padding: 10px;
-    max-height: 0; /* Inizialmente è completamente nascosto */
-    overflow: hidden;
+    padding: 15px;
+    text-align: center;
     opacity: 0; /* Rende il footer invisibile */
-    transition: max-height 0.3s ease, padding 0.3s ease, opacity 0.3s ease; /* Aggiunta transizione per l'opacità */
+    max-height: 0; /* Inizialmente è completamente nascosto */
+    overflow: hidden; /* Nasconde il contenuto in eccesso */
+    transition: opacity 0.3s ease, max-height 0.3s ease; /* Transizione per l'animazione */
     z-index: 2; /* Assicura che il footer stia sopra l'immagine */
 }
 
-/* Mostra il footer con il titolo e il rating al passaggio del mouse */
+/* Mostra il footer con il titolo al passaggio del mouse */
 .movie-card:hover .card-footer {
-    max-height: 80px; /* Al passaggio del mouse, il footer si espande */
-    padding: 10px;
     opacity: 1; /* Il footer diventa visibile */
+    max-height: 100px; /* Altezza massima espandibile */
 }
 
 /* Titolo del footer */
-.card-footer h3 {
-    margin: 0;
-    font-size: 1.2rem;
-    font-family: 'Cinzel', serif;
-    z-index: 2;
-}
-
-/* Rating nel footer */
-.card-footer .rating {
-    margin-top: 5px;
-    font-size: 1rem;
-    color: #ddd; /* Colore del rating più chiaro quando il footer è visibile */
-}
-
-/* Sezione del titolo nella card */
-.card-left {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.2rem;
+.card-footer h5 {
+    font-size: 1.4rem; /* Aumentato per migliorare la visibilità */
     font-weight: bold;
-    color: black;
-    z-index: 2;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Ombra per migliorare il contrasto */
+    word-wrap: break-word; /* Rende il titolo a capo se troppo lungo */
+    white-space: normal; /* Consente il wrapping del testo */
+    line-height: 1.2; /* Spazio tra le righe, se necessario */
+    margin: 0; /* Rimuove il margine per evitare spazi indesiderati */
 }
 
-/* Sezione del numero nella card */
-.card-right {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    font-size: 2.5rem;
-    color: #000;
-    font-weight: bold;
-    font-family: 'Cinzel', serif;
-    background: linear-gradient(to bottom, #004d40, #000); /* Gradiente verde scuro → nero */
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 1px 1px 5px rgba(0, 77, 64, 0.5); /* Effetto glow leggero */
-    z-index: 2;
+/* Media Queries per Responsività */
+
+/* Media query per dispositivi con schermi più piccoli */
+@media (max-width: 768px) {
+    .movie-card {
+        width: 200px; /* Ridurre la larghezza delle card su schermi piccoli */
+        height: 180px; /* Ridurre l'altezza */
+    }
+
+    .card-footer h5 {
+        font-size: 1.2rem; /* Ridurre la dimensione del titolo */
+    }
+}
+
+/* Media query per dispositivi con schermi ancora più piccoli */
+@media (max-width: 576px) {
+    .movie-card {
+        width: 150px; /* Ridurre ulteriormente la larghezza */
+        height: 150px; /* Ridurre l'altezza */
+    }
+
+    .card-footer h5 {
+        font-size: 1rem; /* Ulteriore riduzione della dimensione del titolo */
+    }
 }

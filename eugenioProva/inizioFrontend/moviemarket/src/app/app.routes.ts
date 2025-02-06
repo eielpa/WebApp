@@ -7,6 +7,8 @@
   import { RecuperoPasswordComponent} from "./passwordrecovery/passwordrecovery.component";
   import { AuthComponent } from "./auth/auth.component";
   import { WishlistComponent } from "./wishlist/wishlist.component";
+  import { AggiungiFilmComponent } from "./aggiungi-film/aggiungi-film.component";
+  import {PaymentSuccessComponent} from "./payment-success/payment-success.component";
 
   export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -17,4 +19,6 @@
     { path: 'auth', component: AuthComponent },
     { path: 'personal-library', component: PersonalLibraryComponent },
     { path: 'wishlist', component: WishlistComponent },
+    { path: 'add-movie', component: AggiungiFilmComponent },
+    { path: 'payment-success', component: PaymentSuccessComponent },
   ];

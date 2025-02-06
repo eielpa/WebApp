@@ -20,6 +20,11 @@ export class MovieService {
         return this.http.get<any>("http://localhost:8080/movies/getMovieByTitle/" + title);
     }
 
+    // Recupera un film specifico per ID
+    getMovieById(id: number): Observable<any> {
+        const url = `${this.apiUrl}/${id}` ;
+        return this.http.get<any>(url);
+    }
 
     // Recupera i film per rating
     getMoviesByRating(rating: number): Observable<any[]> {
@@ -41,7 +46,11 @@ export class MovieService {
         return this.http.post("http://localhost:8080/movies/addMovie", movie, { headers });
     }
 
-    deleteMovie(id: number): Observable<void> {
+    addMovieToLibrary(userNickname: string, movieTitle: string): Observable<any> {
+        return this.http.post<any>("http://localhost:8080/personal-library/add", { userNickname, movieTitle });
+    }
+
+    deleteMovie(id: number | null): Observable<void> {
         return this.http.delete<void>("http://localhost:8080/movies/" + id);
     }
 
@@ -50,11 +59,16 @@ export class MovieService {
         return this.http.get<any[]>("http://localhost:8080/movies/search?title=" + encodeURIComponent(query));
     }
 
-    async checkout(movieName: string | null) {
+    async checkout(movieTitle: string, idProva: number) {
         const stripe = await loadStripe('pk_test_51Qojg0FLbKZK8agR33P77Etv4O3BWAfcMCmNMrSgjM6Q7dHrj3DhmH6aoDaGPuCmBK6ZfiAjUFD7vlAfFEUrT2v400GcB9tAMV'); // Sostituisci con la tua chiave pubblica di Stripe
         const userId = sessionStorage.getItem('userNickname');
 
-        this.http.post<{ checkoutUrl: string }>("http://localhost:8080/stripe/create-checkout-session", { productName: movieName, userNickname: userId })
+        // Includi idProva nel payload inviato al backend
+        this.http.post<{ checkoutUrl: string }>("http://localhost:8080/stripe/create-checkout-session", {
+            productName: movieTitle,
+            userNickname: userId,
+            idProva: idProva
+        })
             .subscribe(response => {
                 if (response.checkoutUrl) {
                     window.location.href = response.checkoutUrl; // Reindirizza al pagamento

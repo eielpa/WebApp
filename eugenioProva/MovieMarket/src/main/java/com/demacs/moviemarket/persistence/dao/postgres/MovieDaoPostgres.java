@@ -69,6 +69,40 @@ public class MovieDaoPostgres implements MovieDao {
     }
 
     @Override
+    public List<Movie> findByUserNickname(String nickname) {
+        List<Movie> movies = new ArrayList<>();
+        // La query adesso fa join solo con personal_library.
+        // Poiché movie_id è un varchar e m.id è un intero, effettuiamo il cast di m.id in varchar.
+        String query = """
+        SELECT m.* 
+        FROM movies m
+        JOIN personal_library pl ON CAST(m.id AS VARCHAR) = pl.movie_id
+        WHERE pl.user_id = ?
+    """;
+
+        try (PreparedStatement st = conn.prepareStatement(query)) {
+            st.setString(1, nickname);
+            ResultSet rs = st.executeQuery();
+
+            while (rs.next()) {
+                Movie movie = new Movie();
+                movie.setId(rs.getInt("id"));
+                movie.setTitle(rs.getString("title"));
+                movie.setDescription(rs.getString("description"));
+                movie.setReleaseYear(rs.getInt("release_year"));
+                movie.setCategoryId(rs.getInt("category_id"));
+                movie.setRating(rs.getObject("rating") != null ? ((Number) rs.getObject("rating")).intValue() : null);
+                movie.setAddedDate(rs.getTimestamp("added_date").toLocalDateTime());
+                movies.add(movie);
+            }
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+
+        return movies;
+    }
+
+    @Override
     public List<Movie> findAll() {
         List<Movie> movies = new ArrayList<>();
         String query = "SELECT * FROM movies";
@@ -95,7 +129,12 @@ public class MovieDaoPostgres implements MovieDao {
 
 
     @Override
-    public void save(Movie movie) {
+    public boolean save(Movie movie) {
+        if (existsByTitle(movie.getTitle())) {
+            System.out.println("Errore: il titolo del film esiste già!");
+            return false;
+        }
+
         String insertStr = "INSERT INTO movies (title, description, release_year, category_id, rating) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement st = conn.prepareStatement(insertStr)) {
             st.setString(1, movie.getTitle());
@@ -104,14 +143,33 @@ public class MovieDaoPostgres implements MovieDao {
             st.setInt(4, movie.getCategoryId());
 
             if (movie.getRating() != null) {
-                st.setInt(5, movie.getRating());
+                st.setDouble(5, movie.getRating());
             } else {
                 st.setNull(5, Types.INTEGER);
             }
             st.executeUpdate();
+            return true;
+
+
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+            return false;
+        }
+    }
+
+    private boolean existsByTitle(String title) {
+        String query = "SELECT COUNT(*) FROM movies WHERE title = ?";
+        try (PreparedStatement st = conn.prepareStatement(query)) {
+            st.setString(1, title);
+            try (ResultSet rs = st.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            }
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
+        return false;
     }
 
 

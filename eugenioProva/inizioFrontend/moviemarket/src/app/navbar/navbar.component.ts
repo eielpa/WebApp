@@ -1,10 +1,9 @@
-import {Component, EventEmitter, HostListener, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { CategoryService } from '../services/category.service';
-import { Observable } from "rxjs";
-import { LoginService, UserInfo } from "../services/login.service";
-import { MovieService } from "../services/movie.service";
+import { LoginService } from '../services/login.service';
+import { MovieService } from '../services/movie.service';
 
 @Component({
   selector: 'app-navbar',
@@ -14,20 +13,14 @@ import { MovieService } from "../services/movie.service";
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  @Output() searchEvent = new EventEmitter<string>();
-
-  onSearch(event: Event) {
-    const searchText = (event.target as HTMLInputElement).value;
-    this.searchEvent.emit(searchText); // Invia il testo della ricerca
-  }
-
   categories: any[] = [];
-  isDropdownOpen = false;
-  userNickname: string | null = null;
+  isDropdownOpen = false; // Stato per il controllo dell'apertura del dropdown
+  isMenuOpen = false; // Controlla l'apertura del menu su dispositivi mobili
   nickname: string | null = '';
-  isAdmin: boolean = false; // Flag per mostrare il pulsante "Aggiungi Film"
-  // Aggiungi una proprietà per tenere traccia della query di ricerca, se necessario
-  searchQuery: string = '';
+  isAdmin: boolean = false;
+  userNickname: string | null = '';
+
+  @Output() searchEvent = new EventEmitter<string>();
 
   constructor(
       private categoryService: CategoryService,
@@ -42,6 +35,30 @@ export class NavbarComponent implements OnInit {
       this.categories = categories;
     });
 
+    // Recupera le informazioni utente se loggato
+    if (this.isLoggedIn()) {
+      this.loginService.getUserNickname().subscribe({
+        next: (nickname) => this.userNickname = nickname,
+        error: () => this.userNickname = null
+      });
+
+      // Recupera lo stato admin
+      this.loginService.getUserInfo().subscribe({
+        next: (userInfo) => {
+          this.nickname = userInfo.id;
+          sessionStorage.setItem('userNickname', this.nickname);
+          this.isAdmin = userInfo.isAdmin;
+        },
+        error: () => this.isAdmin = false
+      });
+    }
+  }
+
+  onSearch(event: Event) {
+
+    const searchText = (event.target as HTMLInputElement).value;
+    this.router.navigate(['']);
+    this.searchEvent.emit(searchText);
   }
 
   // Alterna la visibilità del dropdown
@@ -49,35 +66,49 @@ export class NavbarComponent implements OnInit {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
 
+  // Alterna la visibilità del menu mobile
+  toggleMenu(): void {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
   @HostListener('document:click', ['$event'])
   clickOut(event: MouseEvent) {
     const clickedInside = (event.target as HTMLElement).closest('.navbar');
     if (!clickedInside) {
-      this.isDropdownOpen = false; // Chiudi il menu se clicchi fuori
+      this.isDropdownOpen = false;
+      this.isMenuOpen = false; // Chiude anche il menu mobile se si clicca fuori
     }
   }
 
-  // Viene invocato al click su una categoria: naviga alla pagina del genere
+  // Naviga alla pagina del genere selezionato e chiude il menu
   onCategoryChange(categoryId: number): void {
     this.categoryService.setSelectedCategory(categoryId);
-    console.log(this.categoryService.getCategoryNameById(categoryId));
-
     this.router.navigate(['/genre', categoryId]);
-    // Chiude il dropdown dopo la selezione
     this.isDropdownOpen = false;
+    this.isMenuOpen = false;
   }
 
   // Verifica se l'utente è loggato (presenza di un token/sessionId)
   isLoggedIn(): boolean {
-    this.nickname=sessionStorage.getItem("userNickname");
     return !!sessionStorage.getItem('sessionId');
   }
 
-  // Esegue il logout: rimuove il token e reindirizza alla pagina di login
+  // Vai alla pagina della Wishlist
+  goToWishlist(): void {
+    this.router.navigate(['/wishlist']);
+  }
+
+// Vai alla pagina della Libreria
+  goToLibrary(): void {
+    this.router.navigate(['/personal-library']);
+  }
+
+// Esegui il logout
   logout(): void {
-    sessionStorage.removeItem('sessionId');
-    sessionStorage.removeItem('isAdmin');
     sessionStorage.removeItem('userNickname');
+    sessionStorage.removeItem('sessionId');
+    sessionStorage.setItem('isAdmin', String(false));
     this.router.navigate(['/auth']);
   }
+
 }

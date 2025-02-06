@@ -28,10 +28,6 @@ public class MovieService {
         return movieDao.findAll();
     }
 
-    public void save(Movie movie) {
-        movieDao.save(movie);
-    }
-
     public void update(Movie movie) {
         movieDao.update(movie);
     }
@@ -51,4 +47,6 @@ public class MovieService {
     public List<Movie> findMostRecent(int limit) {
         return movieDao.findMostRecent(limit);
     }
+
+    public boolean save(Movie movie) { return movieDao.save(movie); }
 }

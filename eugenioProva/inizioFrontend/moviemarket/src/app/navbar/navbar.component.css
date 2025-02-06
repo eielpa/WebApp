@@ -1,183 +1,188 @@
-/* Navbar */
+/* Navbar con sfumatura dal nero al verde scuro */
 .navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1000;
-  width: 98%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: linear-gradient(to top, #000, #001a17); /* Nero → Verde petrolio */
-  padding: 10px 20px;
-  color: white;
+  background: linear-gradient(to top, #000000, #001a17); /* dal nero al verde scuro */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background 0.4s ease-in-out; /* Transizione graduale */
 }
 
-.navbar .logo {
-  font-size: 24px;
+/* Navbar Brand */
+.navbar-brand {
+  font-size: 1.8rem;
   font-weight: bold;
   color: white;
+  transition: color 0.3s ease;
 }
 
-/* Menu principale */
-.menu {
-  display: flex;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  align-items: center;
-}
-
-.menu li {
+/* Link del menu */
+.navbar-nav .nav-link {
+  font-size: 1.1rem;
   margin-right: 20px;
-  display: flex;
-  align-items: center;
-}
-
-/* Link nel menu principale */
-.menu a {
   color: white;
-  text-decoration: none;
-  padding: 10px 15px;
-  font-size: 16px;
-  transition: color 0.3s ease, transform 0.3s ease, text-shadow 0.3s ease, -webkit-text-stroke 0.3s ease;
+  transition: color 0.3s ease, transform 0.3s ease;
 }
 
-.menu a:hover {
-  transform: translateY(-3px);
-  color: #00bfae; /* Colore più vivace al passaggio */
-  text-shadow: 0 4px 6px rgba(0,191,174,0.6), 0 0 10px rgba(0,255,255,0.8);
-  -webkit-text-stroke: 1px rgba(0,191,174,1);
+/* Hover sugli item del menu */
+.navbar-nav .nav-link:hover {
+  color: #00bfae; /* Verde chiaro per il hover */
+  transform: translateY(-2px);
 }
 
-/* Dropdown Generi */
-.dropdown {
-  position: relative;
+/* Dropdown */
+.navbar-nav .dropdown-menu {
+  background: linear-gradient(to top, #000000, #001a17); /* Sfondo simile alla navbar */
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Aggiunto un po' di ombra per un effetto di profondità */
+  max-height: 300px; /* Limita l'altezza del menu */
+  overflow-y: auto; /* Aggiunge la barra di scorrimento */
 }
 
-.dropdown a {
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  font-size: 16px;
-  padding: 10px 15px;
-  transition: color 0.3s ease, text-shadow 0.3s ease, -webkit-text-stroke 0.3s ease;
+/* Elementi del dropdown */
+.navbar-nav .dropdown-item {
+  color: #adb5bd; /* Colore grigio chiaro per i testi */
+  padding: 10px 20px; /* Spaziatura migliorata */
+  transition: all 0.3s ease; /* Transizione per hover */
 }
 
-.dropdown .arrow {
+/* Hover sui dropdown items */
+.navbar-nav .dropdown-item:hover {
+  background-color: #00bfae; /* Colore verde per il hover */
+  color: white; /* Colore bianco per il testo */
+  transform: translateY(-2px); /* Leggera animazione di spostamento */
+}
+
+/* Freccetta personalizzata per il dropdown */
+.navbar-nav .dropdown-toggle {
+  position: relative; /* Necessario per posizionare la freccetta */
+  padding-right: 15px; /* Per fare spazio alla freccetta */
+}
+
+/* Rimuovi la freccetta di Bootstrap */
+.navbar-nav .dropdown-toggle::after {
+  display: none; /* Disabilita la freccetta di Bootstrap */
+}
+
+/* Freccetta personalizzata */
+.navbar-nav .dropdown-toggle .dropdown-arrow {
+  display: none; /* Nascondi la freccetta di default */
   margin-left: 5px;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  opacity: 0;
+  font-size: 0.9rem; /* Riduce la dimensione della freccetta */
+  color: #00bfae; /* Colore verde per la freccetta */
 }
 
-/* La freccia rimane fissa verso il basso e appare al passaggio del mouse */
-.dropdown:hover .arrow {
-  opacity: 1;
-  transform: translateY(3px);
+/* Mostra la freccetta solo quando il mouse è sopra l'elemento */
+.navbar-nav .dropdown:hover .dropdown-arrow {
+  display: inline-block; /* Mostra la freccetta solo al passaggio del mouse */
+  font-size: 0.8rem; /* Ulteriore riduzione della dimensione della freccetta */
+  margin-left: 3px; /* Riduce la distanza tra il testo e la freccetta */
 }
 
-/* Effetto hover per il testo del dropdown */
-.dropdown a:hover {
-  color: #00bfae;
-  text-shadow: 0 4px 6px rgba(0,191,174,0.6), 0 0 10px rgba(0,255,255,0.8);
-  -webkit-text-stroke: 1px rgba(0,191,174,1);
+/* Mobile: nascondi freccetta nel menu mobile */
+@media (max-width: 768px) {
+  /* La freccetta non sarà visibile sui dispositivi mobili */
+  .navbar-nav .dropdown-toggle .dropdown-arrow {
+    display: none !important; /* La freccetta non apparirà mai su mobile */
+  }
 }
 
-/* Dropdown menu */
-.dropdown-menu {
-  display: none;
-  position: absolute;
-  background-color: #000;
-  border: 1px solid #001a17;
-  list-style: none;
-  margin: 0;
-  padding: 10px 0;
-  z-index: 999;
-  top: 100%; /* Posiziona il menu subito sotto il bottone */
-  left: 0;
-  width: 200px;
-  max-height: 300px; /* Altezza massima: se superata viene attivato lo scroll */
-  overflow-y: auto; /* Scroll verticale se necessario */
-  border-radius: 5px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  opacity: 0;
-  transform: translateY(-10px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
+/* Barra di ricerca */
+.search-bar input {
+  padding: 10px;
+  border-radius: 25px;
+  border: 1px solid #003300;
+  font-size: 1rem;
+  transition: all 0.3s ease;
 }
 
-.dropdown-menu.open {
-  display: block;
-  opacity: 1;
-  transform: translateY(0);
+.search-bar input:focus {
+  outline: none;
+  border-color: #00bfae;
+  box-shadow: 0 0 5px rgba(0, 191, 174, 0.5);
 }
 
-/* Stili per le voci del dropdown (collegamenti) */
-.dropdown-menu li a {
-  display: block; /* Ogni link occupa una riga intera */
-  padding: 15px;
-  font-size: 18px; /* Dimensione del testo aumentata */
-  color: white;
-  text-decoration: none;
-  transition: background-color 0.2s, padding-left 0.2s, color 0.3s ease, text-shadow 0.3s ease, -webkit-text-stroke 0.3s ease;
+/* Button effetti */
+.btn-primary,
+.btn-outline-light,
+.btn-outline-danger {
+  padding: 8px 20px; /* Spaziatura più ampia per un look più elegante */
+  border-radius: 30px; /* Bordi arrotondati */
+  font-size: 1rem; /* Dimensione del font coerente con la navbar */
+  transition: all 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Aggiunto effetto di ombra sui pulsanti */
 }
 
-.dropdown-menu li a:not(:last-child) {
-  margin-bottom: 10px;
+.btn-primary:hover,
+.btn-outline-light:hover,
+.btn-outline-danger:hover {
+  transform: translateY(-3px); /* Spostamento leggero verso l'alto */
+  box-shadow: 0 6px 12px rgba(0, 191, 174, 0.3); /* Maggiore ombra per enfatizzare l'hover */
 }
 
-.dropdown-menu li a:hover {
-  background-color: #001a17;
-  padding-left: 20px;
-  color: #00bfae;
-  text-shadow: 0 4px 6px rgba(0,191,174,0.6), 0 0 10px rgba(0,255,255,0.8);
-  -webkit-text-stroke: 1px rgba(0,191,174,1);
-}
-
-/* Stili per la barra di ricerca */
-.search-bar {
-  margin: 0 20px;
-}
-
-.search-bar input[type="text"] {
-  padding: 8px 12px;
+/* Card (contenuti dei film) */
+.card {
   border: none;
-  border-radius: 4px;
-  font-size: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  transition: all 0.3s ease;
 }
 
-/* Personalizzazione dello scrollbar (solo per browser WebKit: Chrome, Safari, Edge) */
-.dropdown-menu::-webkit-scrollbar {
-  width: 8px;
+/* Hover sulle card */
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
-.dropdown-menu::-webkit-scrollbar-track {
-  background: #111;
-  border-radius: 5px;
+/* Responsività */
+/* Responsività */
+@media screen and (max-width: 768px) {
+  .navbar-nav .nav-link {
+    font-size: 1rem;
+  }
+
+  .navbar-brand {
+    font-size: 1.6rem;
+  }
+
+  .search-bar input {
+    width: 80%;
+  }
+
+  .btn {
+    padding: 8px 16px;
+  }
+
+  /* Allinea i pulsanti a destra */
+  .navbar-nav {
+    display: flex;
+    justify-content: flex-end; /* Allinea a destra */
+    width: 100%;
+  }
+
+  .navbar .btn {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
 }
 
-.dropdown-menu::-webkit-scrollbar-thumb {
-  background: #444;
-  border-radius: 5px;
+/* Responsività per i pulsanti wishlist, libreria e logout */
+@media screen and (max-width: 576px) {
+  .navbar-buttons {
+    display: flex;
+    flex-direction: column; /* Posiziona i pulsanti in colonna */
+    align-items: flex-end; /* Allinea a destra */
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .navbar-buttons .btn {
+    margin: 5px 0; /* Distanza tra i pulsanti */
+    width: 100%; /* Per fare in modo che i pulsanti occupino tutta la larghezza */
+  }
+
+  /* Modifica la barra di ricerca per evitare sovrapposizioni */
+  .search-bar {
+    width: 100%;
+  }
 }
 
-.dropdown-menu::-webkit-scrollbar-thumb:hover {
-  background: #666;
-}
 
-/* Azioni (Login) */
-.actions .login-btn {
-  background-color: #001a17;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-}
 
-.actions .login-btn:hover {
-  background-color: #001a17; /* Leggermente più chiaro */
-  transform: scale(1.05); /* Leggero ingrandimento */
-  /* Effetto glow per lo sfondo, che richiama lo stile della navbar senza cambiare il colore del testo */
-  box-shadow: 0 0 10px rgba(0,191,174,0.6), 0 0 15px rgba(0,255,255,0.4);
-}

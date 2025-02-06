@@ -89,7 +89,9 @@
     background: linear-gradient(45deg, #001a17, #004d40);
 }
 
-/* Sezione FILM CORRELATI migliorata */
+/* ===================== */
+/* Sezione FILM CORRELATI */
+/* ===================== */
 .movie-section {
     padding: 50px 30px;
     background: #111;
@@ -129,7 +131,6 @@
 }
 
 /* Pulsanti freccia */
-/* Pulsanti freccia */
 .arrow {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     position: absolute;
@@ -143,13 +144,12 @@
     height: 55px;
     border-radius: 50%;
     cursor: pointer;
-    z-index: 20; /* Frecce sopra le card */
+    z-index: 20;
     display: flex;
-    align-items: center;   /* Allinea verticalmente */
-    justify-content: center; /* Allinea orizzontalmente */
+    align-items: center;
+    justify-content: center;
     transition: transform 0.3s ease, background 0.3s ease;
 }
-
 
 /* Rendi visibili le frecce quando la lista è visibile */
 .movie-list-wrapper:hover .arrow {
@@ -173,4 +173,86 @@
 
 .arrow.right {
     right: 10px;
+}
+
+/* ===================== */
+/* Responsività e media queries */
+/* ===================== */
+
+/* Hero Section */
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2.5rem; /* Ridurre la dimensione su schermi piccoli */
+    }
+
+    .hero-content p {
+        font-size: 1.2rem; /* Ridurre la dimensione su schermi piccoli */
+    }
+
+    .hero {
+        height: 80vh; /* Ridurre l'altezza per dispositivi più piccoli */
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-content h1 {
+        font-size: 1.8rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+
+    .hero {
+        height: 70vh;
+    }
+}
+
+/* Film Correlati */
+@media (max-width: 768px) {
+    .movie-section h2 {
+        font-size: 2rem;
+    }
+
+    .movie-list {
+        gap: 5px; /* Ridurre lo spazio tra i film */
+    }
+
+    .arrow {
+        font-size: 2rem; /* Ridurre la dimensione delle frecce */
+    }
+}
+
+@media (max-width: 576px) {
+    .movie-section h2 {
+        font-size: 1.5rem;
+    }
+
+    .movie-list {
+        gap: 2px;
+    }
+
+    .arrow {
+        font-size: 1.5rem; /* Ancora più piccole le frecce su dispositivi molto piccoli */
+    }
+}
+
+/* Pulsanti nella Hero */
+@media (max-width: 576px) {
+    .info-btn {
+        font-size: 1rem;
+        padding: 12px 24px;
+        margin: 10px 5px;
+    }
+
+    .hero-content {
+        padding: 10px;
+    }
+}
+
+/* Pulsanti all'interno della Hero centrati */
+.hero-content .d-flex {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
 }

@@ -14,6 +14,7 @@
         <tr *ngFor="let item of wishlist">
             <td>{{ item.movieId }}</td>
             <td>
+                <button (click)="pay(item.movieId, item.id)">Acquista</button>
                 <button (click)="remove(item.id)">Rimuovi</button>
             </td>
         </tr>

@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,22 +33,25 @@ public class StripeController {
         String productName = (String) request.get("productName");
         String userNickname = (String) request.get("userNickname");
 
-        // Log per debug
-        System.out.println("Product: " + productName);
-        System.out.println("User Nickname: " + userNickname);
+        // Recupera l'id come oggetto Number e convertilo in stringa
+        Object idProvaObj = request.get("idProva");
+        int idProva = (int) request.get("idProva");
 
-        // Impostazione dei parametri della sessione di checkout
+        String encodedProductName = URLEncoder.encode(productName, StandardCharsets.UTF_8);
+        String encodedUserNickname = URLEncoder.encode(userNickname, StandardCharsets.UTF_8);
+
+        // Imposta i parametri della sessione di checkout
         SessionCreateParams params = SessionCreateParams.builder()
                 .setMode(SessionCreateParams.Mode.PAYMENT)
-                // Importante: indirizza al backend per gestire il successo del pagamento
-                .setSuccessUrl("http://localhost:8080/stripe/payment-success?movie=" + productName + "&user=" + userNickname)
-                .setCancelUrl("http://localhost:4200/payment-failure")
+                // Includi idProva nella successUrl se necessario:
+                .setSuccessUrl("http://localhost:4200/payment-success?movie=" + encodedProductName
+                        + "&user=" + encodedUserNickname + "&idProva=" + idProva)
                 .addLineItem(
                         SessionCreateParams.LineItem.builder()
                                 .setPriceData(
                                         SessionCreateParams.LineItem.PriceData.builder()
                                                 .setCurrency("eur")
-                                                .setUnitAmount(1000L) // Prezzo in centesimi (es. 10,00 EUR)
+                                                .setUnitAmount(1000L)
                                                 .setProductData(
                                                         SessionCreateParams.LineItem.PriceData.ProductData.builder()
                                                                 .setName(productName)
@@ -66,16 +71,4 @@ public class StripeController {
         return response;
     }
 
-    /**
-     * Al completamento del pagamento, aggiunge il film alla libreria e reindirizza l'utente.
-     */
-    @GetMapping("/payment-success")
-    public RedirectView paymentSuccess(@RequestParam("movie") String movieTitle, @RequestParam("user") String userNickname) {
-        // Aggiungi il film alla libreria dell'utente
-        //personalLibraryService.addMovieToLibrary(userNickname, movieTitle);
-
-        RedirectView redirectView = new RedirectView();
-        redirectView.setUrl("http://localhost:4200/personal-library");
-        return redirectView;
-    }
 }

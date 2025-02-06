@@ -28,7 +28,7 @@ public class MovieController {
     }
 
     // Endpoint per ottenere un film specifico per ID
-    @GetMapping("getMovie/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Movie> getMovieById(@PathVariable int id) {
         Movie movie = movieService.findById(id);
         if (movie != null) {
@@ -49,6 +49,8 @@ public class MovieController {
         }
     }
 
+
+
     @GetMapping("getTitle/search")
     public ResponseEntity<Movie> searchMovieByTitle(@RequestParam("title") String title) {
         Movie movie = movieService.findByTitle(title);
@@ -59,12 +61,15 @@ public class MovieController {
         }
     }
 
-    // Endpoint per creare un nuovo film
     @PostMapping("/addMovie")
-    public ResponseEntity<Movie>createMovie(@RequestBody Movie movie) {
+    public ResponseEntity<Boolean> createMovie(@RequestBody Movie movie) {
         System.out.println("Ricevuto film: " + movie.getTitle() + ", " + movie.getDescription());
-        movieService.save(movie);
-        return new ResponseEntity<>(movie, HttpStatus.CREATED);
+
+        if (movieService.save(movie)) {
+            return new ResponseEntity<>(true, HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+        }
     }
 
 

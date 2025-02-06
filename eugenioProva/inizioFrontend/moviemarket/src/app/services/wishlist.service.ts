@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 export interface WishlistItem {
     id: number;
     userId: string;
-    movieId: number;
+    movieId: string;
 }
 
 @Injectable({
@@ -13,20 +13,15 @@ export interface WishlistItem {
 })
 export class WishlistService {
     private baseUrl = 'http://localhost:8080/wishlist';
+    removeId: number = 0;
 
     constructor(private http: HttpClient) { }
 
-    // Aggiunge un film alla wishlist usando il sessionId come userId
-    addToWishlist(movieId: number): Observable<WishlistItem> {
-        const userId = sessionStorage.getItem('sessionId');
-        if (!userId) {
-            throw new Error('Utente non autenticato.');
-        }
-
-        return this.http.post<WishlistItem>(`${this.baseUrl}/add?userId=${userId}&movieId=${movieId}`, {});
+    setRemoveId(id: number) {
+        this.removeId = id;
     }
 
-    removeFromWishlist(id: number): Observable<string> {
+    removeFromWishlist(id: number | null | undefined): Observable<string> {
         return this.http.delete<string>(`${this.baseUrl}/remove/${id}`);
     }
 

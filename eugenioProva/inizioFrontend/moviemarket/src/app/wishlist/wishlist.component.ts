@@ -1,20 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WishlistService, WishlistItem } from '../services/wishlist.service';
-import {MovieCardComponent} from "../moviecard/moviecard.component";
+import {MovieService} from "../services/movie.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-wishlist',
   standalone: true,
-    imports: [CommonModule, MovieCardComponent],
+  imports: [CommonModule],
   templateUrl: './wishlist.component.html',
   styleUrls: ['./wishlist.component.css']
 })
 export class WishlistComponent implements OnInit {
   wishlist: WishlistItem[] = [];
   errorMessage: string = '';
+  movieTitle: string | null = '';
+  idRemove: number | null = null;
 
-  constructor(private wishlistService: WishlistService) { }
+  constructor(private wishlistService: WishlistService, private movieService: MovieService, private router: Router) { }
 
   ngOnInit(): void {
     this.loadWishlist();
@@ -40,4 +43,7 @@ export class WishlistComponent implements OnInit {
     window.location.reload();
   }
 
+  pay(movieId: string, id: number) {
+    this.movieService.checkout(movieId, id);
+  }
 }
