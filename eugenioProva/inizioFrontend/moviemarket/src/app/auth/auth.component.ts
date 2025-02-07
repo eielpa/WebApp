@@ -139,4 +139,9 @@ export class AuthComponent implements AfterViewInit {
       }
     });
   }
+
+
+  recoverPassword() {
+    this.router.navigate(["/recupero-password"]);
+  }
 }

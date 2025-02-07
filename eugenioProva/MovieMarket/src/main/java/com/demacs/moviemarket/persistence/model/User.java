@@ -11,6 +11,8 @@ public class User {
     private Date dob;
     private String password;
     private Boolean admin;
+    private String passwordResetToken;
+
 
     // Getter e setter per id
     public String getId() {
@@ -88,4 +90,11 @@ public class User {
     }
 
 
+    public String getPasswordResetToken() {
+        return passwordResetToken;
+    }
+
+    public void setPasswordResetToken(String passwordResetToken) {
+        this.passwordResetToken = passwordResetToken;
+    }
 }

@@ -3,10 +3,15 @@ package com.demacs.moviemarket.service;
 import com.demacs.moviemarket.persistence.DBManager;
 import com.demacs.moviemarket.persistence.model.User;
 import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.demacs.moviemarket.persistence.dao.UserDao;
 
 @Service
 public class UserService {
+
+    @Autowired
+    private UserDao userDao;
 
     public String registerUser(User user) {
         //System.out.println(user.getName());
@@ -37,5 +42,20 @@ public class UserService {
             return user;
         }
         return null;
+    }
+
+    public User getUserByEmail(String email) {
+        return userDao.findByEmail(email);
+    }
+
+    // Metodo per aggiornare la password
+    public boolean updatePassword(String email, String newPassword) {
+        User user = userDao.findByEmail(email);
+        if (user != null) {
+            user.setPassword(newPassword);  // Assicurati che il set della password funzioni correttamente
+            userDao.update(user);
+            return true;
+        }
+        return false;
     }
 }

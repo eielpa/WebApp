@@ -107,6 +107,7 @@ export class NavbarComponent implements OnInit {
   logout(): void {
     sessionStorage.removeItem('userNickname');
     sessionStorage.removeItem('sessionId');
+    console.log(sessionStorage.getItem('isAdmin'));
     sessionStorage.setItem('isAdmin', String(false));
     this.router.navigate(['/auth']);
   }

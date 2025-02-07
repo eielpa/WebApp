@@ -1,4 +1,4 @@
-<div class="auth-container d-flex justify-content-center align-items-center">
+<main class="auth-container d-flex justify-content-center align-items-center">
     <div class="auth-wrapper p-4 rounded shadow-sm">
         <!-- Form di login -->
         <ng-container *ngIf="isLoginMode; else registerForm">
@@ -20,6 +20,7 @@
                     <button type="submit" class="btn btn-primary w-100">Accedi</button>
                     <p *ngIf="errorMessage" class="error-message text-danger mt-3">{{ errorMessage }}</p>
                     <p class="switch-mode text-center mt-3" (click)="toggleMode()">Non hai un account? Registrati</p>
+                    <p class="switch-mode text-center mt-3" (click)="recoverPassword()">Hai dimenticato la password?</p>
                 </form>
             </div>
         </ng-container>
@@ -63,4 +64,4 @@
             </div>
         </ng-template>
     </div>
-</div>
+</main>

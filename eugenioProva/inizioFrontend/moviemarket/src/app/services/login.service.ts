@@ -13,6 +13,9 @@ export interface UserInfo {
     providedIn: 'root'
 })
 export class LoginService {
+
+    private apiUrl = 'http://localhost:8080/auth'; // URL del backend
+
     constructor(private http: HttpClient) {}
 
     login(email: string, password: string): Observable<{ sessionId: string, isAdmin: boolean , nickname: string}> {
@@ -54,7 +57,14 @@ export class LoginService {
         );
     }
 
+    getUserByEmail(email: string): Observable<any> {
+        return this.http.get<any>(`${this.apiUrl}/getUserByEmail?email=${email}`);
+    }
 
+    // Metodo per aggiornare la password
+    updatePassword(email: string, newPassword: string): Observable<any> {
+        return this.http.post(`${this.apiUrl}/updatePassword`, { email, newPassword });
+    }
 
 
 

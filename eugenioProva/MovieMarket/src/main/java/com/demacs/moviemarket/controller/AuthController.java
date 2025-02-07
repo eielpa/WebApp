@@ -104,4 +104,30 @@ public class AuthController {
             return new ResponseEntity<>("No active session", HttpStatus.BAD_REQUEST);
         }
     }
+
+    @GetMapping("/getUserByEmail")
+    public ResponseEntity<?> getUserByEmail(@RequestParam String email) {
+        User user = userService.getUserByEmail(email);
+
+        if (user != null) {
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PostMapping("/updatePassword")
+    public ResponseEntity<String> updatePassword(@RequestBody Map<String, String> payload) {
+        String email = payload.get("email");
+        String newPassword = payload.get("newPassword");
+        // Chiamata al servizio per aggiornare la password dell'utente
+        boolean updated = userService.updatePassword(email, newPassword);
+
+        if (updated) {
+            return new ResponseEntity<>("Password aggiornata con successo", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Errore nell'aggiornamento della password", HttpStatus.BAD_REQUEST);
+        }
+    }
+
 }

@@ -90,7 +90,7 @@ export class MovieSpecificComponent implements OnInit {
     if (!this.movieTitle || !this.userId) return;
 
     this.movieService.addToWishlist(this.userId, this.movieTitle).subscribe({
-      next: () => console.log('Film aggiunto alla wishlist'),
+      next: () => alert(`${this.movieTitle} è stato aggiunto alla tua wishlist!`),
       error: () => console.error('Errore nell\'aggiunta alla wishlist')
     });
   }

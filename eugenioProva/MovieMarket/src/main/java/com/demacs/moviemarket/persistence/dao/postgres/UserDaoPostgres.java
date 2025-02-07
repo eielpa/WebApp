@@ -139,4 +139,9 @@ public class UserDaoPostgres implements UserDao {
             exception.printStackTrace();
         }
     }
+
+    @Override
+    public void savePassword(String password) {
+
+    }
 }
