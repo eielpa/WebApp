@@ -14,9 +14,8 @@ export class DownloadService {
 
     async downloadMovie(userId: string, movieId: string): Promise<void> {
         try {
-            // Componi l'URL con i parametri di query
             const urlWithParams = `${this.downloadUrl}?userId=${encodeURIComponent(userId)}&movieId=${encodeURIComponent(movieId)}`;
-            // Utilizziamo lastValueFrom per ottenere il blob dalla chiamata HTTP
+
             const blob = await lastValueFrom(
                 this.http.get(urlWithParams, { responseType: 'blob' })
             );

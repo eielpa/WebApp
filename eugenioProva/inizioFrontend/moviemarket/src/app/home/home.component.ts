@@ -52,7 +52,6 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  // 🔍 Funzione di ricerca
   onSearch(searchText: string) {
     this.searchText = searchText.toLowerCase(); // Converte in minuscolo
     if (this.searchText.trim() === '') {
@@ -62,16 +61,6 @@ export class HomeComponent implements OnInit {
           movie.title.toLowerCase().includes(this.searchText)
       );
     }
-  }
-
-  goToMovieDetails(movieId: number) {
-    this.router.navigate(['/movie', movieId]);
-  }
-
-  // Gestisce il cambiamento della categoria selezionata
-  onCategoryChange(event: any): void {
-    const selectedCategoryId = event.target.value;
-    this.router.navigate(['/genre', selectedCategoryId]); // Naviga alla pagina del genere
   }
 
   scroll(list: HTMLElement, direction: string) {

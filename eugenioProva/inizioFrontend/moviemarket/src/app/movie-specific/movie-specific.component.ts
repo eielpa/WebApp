@@ -26,7 +26,6 @@ export class MovieSpecificComponent implements OnInit {
       private movieService: MovieService,
       private tmdbService: TMDbService,
       private router: Router,
-      private loginService: LoginService // aggiunto per il controllo login
   ) {}
 
   ngOnInit() {
@@ -45,8 +44,6 @@ export class MovieSpecificComponent implements OnInit {
             this.movieImage = imageUrl;
           });
         }
-
-
 
         // Se è presente la descrizione nello state, usala direttamente
         if (history.state && history.state.description) {
@@ -72,8 +69,6 @@ export class MovieSpecificComponent implements OnInit {
     });
   }
 
-
-
   getRelatedMovies(categoryId: number) {
     this.movieService.getMoviesByCategory(categoryId).subscribe(movies => {
       // Escludi il film corrente dalla lista dei film correlati
@@ -87,7 +82,13 @@ export class MovieSpecificComponent implements OnInit {
   }
 
   addToWishlist() {
-    if (!this.movieTitle || !this.userId) return;
+    if (!this.movieTitle) return;
+
+    if(!this.userId){
+      alert("Non sei loggato, verrai reindirizzato alla schermata di login");
+      this.router.navigate(['/auth']);
+      return;
+    }
 
     this.movieService.addToWishlist(this.userId, this.movieTitle).subscribe({
       next: () => alert(`${this.movieTitle} è stato aggiunto alla tua wishlist!`),

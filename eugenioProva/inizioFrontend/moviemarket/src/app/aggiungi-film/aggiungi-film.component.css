@@ -48,7 +48,6 @@ h1 {
 .movie-form.add {
     border-top: 5px solid #00b894;
 }
-
 .movie-form.remove {
     border-top: 5px solid #00b894;
 }
@@ -68,7 +67,7 @@ label {
     display: block;
 }
 
-/* Stile per input, textarea e select: sfondo scuro invece di bianco */
+/* Stile per input, textarea e select (regola di base) */
 input[type="text"],
 input[type="number"],
 textarea,
@@ -85,16 +84,7 @@ select {
     box-sizing: border-box;
 }
 
-/* Focus: evidenzia l'input con bordo e sfondo leggermente più scuro */
-input[type="text"]:focus,
-input[type="number"]:focus,
-textarea:focus,
-select:focus {
-    border: 1px solid #00b894;
-    background: rgba(0, 0, 0, 0.5);
-}
-
-/* Consente il ridimensionamento verticale per le textarea */
+/* Abilita il ridimensionamento verticale per le textarea */
 textarea {
     resize: vertical;
 }
@@ -138,6 +128,36 @@ button:active {
 
 .switch-mode:hover {
     color: #009974;
+}
+
+/* Aggiungiamo regole specifiche per .form-control e .form-select per garantire lo stesso comportamento */
+
+/* Per gli input e textarea che usano .form-control (es. Titolo e Descrizione) */
+input.form-control,
+textarea.form-control {
+    background: rgba(0, 0, 0, 0.3) !important;
+    color: white !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    transition: border 0.3s ease, background 0.3s ease !important;
+}
+
+input.form-control:focus,
+textarea.form-control:focus {
+    border: 1px solid #00b894 !important;
+    background: rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Per il select che usa .form-select */
+select.form-select {
+    background: rgba(0, 0, 0, 0.3) !important;
+    color: white !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    transition: border 0.3s ease, background 0.3s ease !important;
+}
+
+select.form-select:focus {
+    border: 1px solid #00b894 !important;
+    background: rgba(0, 0, 0, 0.5) !important;
 }
 
 /* Responsività per schermi più piccoli */
