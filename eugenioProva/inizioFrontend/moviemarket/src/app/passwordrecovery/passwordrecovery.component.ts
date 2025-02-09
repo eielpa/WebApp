@@ -39,11 +39,14 @@ export class RecuperoPasswordComponent {
     if (this.newPassword) {
       this.loginService.updatePassword(this.email, this.newPassword).subscribe({
         next: (response) => {
-          console.log("Password aggiornata con successo");
-          // Puoi mostrare un messaggio di successo o reindirizzare
+          // Mostra un alert di successo
+          alert("Password aggiornata con successo!");
+          // Reindirizza alla pagina di accesso (es. /auth)
+          this.router.navigate(['/auth']);
         },
         error: (err) => {
           console.error("Errore nell'aggiornamento della password", err);
+          alert("Errore nell'aggiornamento della password. Riprova.");
         }
       });
     } else {

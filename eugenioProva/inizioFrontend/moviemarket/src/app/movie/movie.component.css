@@ -3,14 +3,14 @@
     background-color: #001a17; /* Verde petrolio molto scuro, quasi nero */
     color: #fff;
     min-height: 150vh;
-    width: 99%;
+    width: 100%;
     padding-top: 40px;
 }
 
 /* Wrapper per ogni sezione con frecce */
 .movie-list-wrapper {
     position: relative;
-    width: 98%; /* Assicurati che il wrapper occupi tutta la larghezza disponibile */
+    width: 100%; /* Assicurati che il wrapper occupi tutta la larghezza disponibile */
 }
 
 /* Container delle card in orizzontale */

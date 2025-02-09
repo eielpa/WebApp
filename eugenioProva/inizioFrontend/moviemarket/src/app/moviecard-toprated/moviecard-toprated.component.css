@@ -34,34 +34,31 @@
     height: 100%; /* Occupa tutta la metà destra */
     background-color: #003d33; /* Colore di base per il lato destro */
     display: flex;
-    justify-content: right;
+    justify-content: flex-end;
     align-items: center;
-    font-size: 8rem; /* Imposta la dimensione del numero */
-    font-weight: bold;
+    /* Il font-size sarà impostato direttamente sul tag <h3> */
     background: linear-gradient(to bottom, #004d40, black); /* Gradiente verde scuro → nero */
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 1px 1px 2px rgba(0, 77, 64, 0.5); /* Effetto glow verde */
     z-index: 2;
 }
 
+/* Numero nella parte destra (ora targettizzato su <h3>) */
+.movie-card .card-right h3 {
+    font-size: 8rem; /* Modifica questo valore per cambiare la grandezza */
+    font-weight: bold;
+    background: black;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0;
+}
+
 /* Titolo nella parte sinistra */
-.movie-card .card-left h3 {
+.movie-card .card-left p {
     font-size: 1.2rem;
     font-weight: bold;
     color: #fff;
     text-align: center;
     margin: 0;
     flex-grow: 1; /* Permette al titolo di adattarsi */
-}
-
-/* Numero nella parte destra */
-.movie-card .card-right p {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: black;
-    text-align: center;
-    margin: 0;
 }
 
 /* Al passaggio del mouse, nascondi la numerazione e il titolo */
@@ -118,17 +115,7 @@
     opacity: 1;
 }
 
-/* Ottimizzazione per la visualizzazione dei numeri sulla parte destra */
-.movie-card .card-right p {
-    font-size: 4rem;
-    font-weight: bold;
-    background: linear-gradient(to bottom, #004d40, #000);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 1px 1px 5px rgba(0, 77, 64, 0.5);
-}
-
-/* Transizione per l'ingrandimento delle card */
+/* (Opzionale) Transizione per l'ingrandimento delle card */
 .movie-card:hover {
     transform: scale(1.1);
 }
