@@ -63,9 +63,7 @@ export class LoginService {
 
     // Metodo per aggiornare la password
     updatePassword(email: string, newPassword: string): Observable<any> {
-        return this.http.post(`${this.apiUrl}/updatePassword`, { email, newPassword });
+        return this.http.post(`${this.apiUrl}/updatePassword`, { email, newPassword }, { responseType: 'text' });
     }
-
-
 
 }

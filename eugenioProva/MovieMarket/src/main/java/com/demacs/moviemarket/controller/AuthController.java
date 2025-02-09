@@ -117,17 +117,20 @@ public class AuthController {
     }
 
     @PostMapping("/updatePassword")
-    public ResponseEntity<String> updatePassword(@RequestBody Map<String, String> payload) {
+    public ResponseEntity<Map<String, String>> updatePassword(@RequestBody Map<String, String> payload) {
         String email = payload.get("email");
         String newPassword = payload.get("newPassword");
-        // Chiamata al servizio per aggiornare la password dell'utente
-        boolean updated = userService.updatePassword(email, newPassword);
 
-        if (updated) {
-            return new ResponseEntity<>("Password aggiornata con successo", HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("Errore nell'aggiornamento della password", HttpStatus.BAD_REQUEST);
-        }
+        User user = userService.getUserByEmail(email);
+
+        user.setPassword(newPassword);
+
+        userService.updatePassword(email, newPassword);
+
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Password aggiornata con successo");
+        return new ResponseEntity<>(response, HttpStatus.OK);
+
     }
 
 }
